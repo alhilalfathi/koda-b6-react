@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
-import { MainDiv } from "./pages/Register";
 import "./assets/css/style.css"
+import { RegisterPage } from "./pages/Register";
 
 
 
@@ -9,6 +9,4 @@ const root = createRoot(el)
 
 
 
-
-
-root.render(<MainDiv />)
+root.render(<RegisterPage />)
