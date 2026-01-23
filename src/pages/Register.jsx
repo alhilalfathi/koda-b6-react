@@ -1,5 +1,5 @@
-import { InputDiv } from "../component/InputDiv"
-import { MainDiv } from "../component/MainDiv"
+import { InputDiv } from "../component/InputDiv";
+import { MainDiv } from "../component/MainDiv";
 import { IoPersonOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 import { GoKey } from "react-icons/go";
