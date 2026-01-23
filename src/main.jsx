@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./assets/css/style.css"
-import { RegisterPage } from "./pages/Register";
+import { Router } from "./Router";
+
 
 
 
@@ -9,4 +10,4 @@ const root = createRoot(el)
 
 
 
-root.render(<RegisterPage />)
+root.render(<Router/>)
