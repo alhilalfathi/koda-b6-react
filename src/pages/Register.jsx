@@ -6,11 +6,12 @@ import { GoKey } from "react-icons/go";
 import { ButtonDiv } from "../component/buttonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
 import { FiEye } from "react-icons/fi";
+import registerImage from "../assets/img/Rectangle289.png"
 
 export const RegisterPage = ()=>{
 
     return (
-        <MainDiv img={"src/assets/img/Rectangle289.png"} imgname={"main-image"} title={"Register"} desctitle={"Fill out the form correctly"}>
+        <MainDiv img={registerImage} imgname={"main-image"} title={"Register"} desctitle={"Fill out the form correctly"}>
             <InputDiv type={"text"} id={"name"} name={"name"} icon={<IoPersonOutline />} placeholder={"Enter Your Full Name"}>Full Name</InputDiv>
             <InputDiv type={"email"} id={"email"} name={"email"} icon={<HiOutlineMail />} placeholder={"Enter Your Email"}>Email</InputDiv>
             <InputDiv type={"password"} id={"password"} name={"password"} icon={<GoKey />} placeholder={"Enter Your Password"} eye={<FiEye />}>Password</InputDiv>
