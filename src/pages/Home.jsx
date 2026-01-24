@@ -1,8 +1,13 @@
+import { HomeHeader } from "../component/HomeHeader";
 import { HomeNav } from "../component/HomeNav";
 
 
 export const HomePage = ()=>{
     return(
-        <HomeNav />
+        <div>
+            <HomeNav />
+            <HomeHeader />
+            
+        </div>
     )
 }
