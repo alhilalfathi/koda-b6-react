@@ -6,12 +6,12 @@ import { ButtonDiv } from "../component/buttonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
 import { Link } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
-
+import loginImage from "../assets/img/Rectangle289-1.png"
 
 
 export const LoginPage = ()=>{
     return(
-        <MainDiv img={"src/assets/img/Rectangle289-1.png"} imgname={"main-image"} title={"Login"} desctitle={"Fill out the form correctly"}>
+        <MainDiv img={loginImage} imgname={"main-image"} title={"Login"} desctitle={"Fill out the form correctly"}>
             <InputDiv type={"email"} id={"email"} name={"email"} icon={<HiOutlineMail />} placeholder={"Enter Your Email"}>Email</InputDiv>
             <InputDiv type={"password"} id={"password"} name={"password"} icon={<GoKey />} placeholder={"Enter Your Password"} eye={<FiEye />}>Password</InputDiv>
             <Link className="text-orange-600 flex justify-end" to="/forgot-password">Forgot Password?</Link>
