@@ -19,7 +19,7 @@ export const HomeNav = ()=>{
                     <img className="w-6 h-6" src="src/assets/img/Search.png"  alt="logo-search"/>
                     <img className="w-6 h-6" src="src/assets/img/ShoppingCart.png"  alt="logo-keranjang"/>
                 <Link className="w-24 h-10 border flex items-center justify-center" to="/login">SignIn</Link>
-                <Link className="w-24 h-10 bg-orange-600 flex items-center justify-center" to="/register">Sign Up</Link>
+                <Link className="w-24 h-10 bg-[#FF8906] flex items-center justify-center" to="/register">Sign Up</Link>
             </div>
             {/* hamburger menu  */}
             <div className="md:hidden flex items-center">
