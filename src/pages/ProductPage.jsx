@@ -15,7 +15,7 @@ export const ProductPage = () => {
         </div>
 
         <div className="flex justify-between items-center px-20">
-            <h2 className="text-4xl">Today <span className="text-orange-900">Promo</span></h2>
+            <h2 className="text-4xl font-bold">Today <span className="text-orange-900">Promo</span></h2>
             <div className="flex gap-4 py-6">
                     <button className="w-12 h-12 bg-zinc-400 rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</button>
                     <button className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</button>
@@ -59,7 +59,7 @@ export const ProductPage = () => {
         {/* content  */}
         <div>
             <div className="mx-20">
-                <h2 className="text-4xl mb-8">Our <span className="text-orange-900">Product</span></h2>
+                <h2 className="text-4xl mb-8 font-bold">Our <span className="text-orange-900">Product</span></h2>
             </div>
             <div className="flex mx-20 gap-15">
                 <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex flex-col gap-3">
