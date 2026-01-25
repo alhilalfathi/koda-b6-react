@@ -2,7 +2,7 @@
 
 export const Footer = () => {
   return (
-    <div className="flex px-20 py-10 gap-40">
+    <div className="flex px-20 py-10 gap-40 bg-[#F8F8F8]">
         <div className="w-78 flex flex-col gap-4 justify-center" >
             <img src="src/assets/img/Frame12.png" alt="logo coffee shop"/>
             <p>Coffee Shop is a store that sells some good meals, and especially coffee. We provide high quality beans</p>
