@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export const NavDiv = () => {
   return (
-    <div className="w-full h-16 flex justify-between bg-black px-4 md:px-10">
+    <div className="w-full h-16 flex justify-between bg-black px-4 md:px-20">
             {/* left navbar  */}
             <div className="flex items-center gap-6">
                 <div >
