@@ -11,7 +11,7 @@ export const HomePage = ()=>{
             <HomeNav />
 
             <HomeHeader />
-            
+
             <section className="flex flex-col md:flex-row">
                         {/* header */}
                 <div className="w-full md:w-1/2 px-6 md:px-20 py-10">
@@ -44,10 +44,10 @@ export const HomePage = ()=>{
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
                             <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-orange-600 mb-2">IDR 20.000</h3>
+                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-orange-600 rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-orange-600 rounded">
+                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
+                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -60,10 +60,10 @@ export const HomePage = ()=>{
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
                             <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-orange-600 mb-2">IDR 20.000</h3>
+                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-orange-600 rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-orange-600 rounded">
+                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
+                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -76,10 +76,10 @@ export const HomePage = ()=>{
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
                             <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-orange-600 mb-2">IDR 20.000</h3>
+                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-orange-600 rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-orange-600 rounded">
+                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
+                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -92,10 +92,10 @@ export const HomePage = ()=>{
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
                             <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-orange-600 mb-2">IDR 20.000</h3>
+                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-orange-600 rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-orange-600 rounded">
+                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
+                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -121,13 +121,13 @@ export const HomePage = ()=>{
                     </div>
                     <div className="text-white">
                         <p className="pb-4">TESTIMONIAL</p>
-                        <h2 className="text-3xl border border-black border-l-orange-600 pl-4 py-4">Viezh Robert</h2>
-                        <p className="text-orange-600 pt-4">Manager Coffe Shop</p>
+                        <h2 className="text-3xl border border-black border-l-[#FF8906] pl-4 py-4">Viezh Robert</h2>
+                        <p className="text-[#FF8906] pt-4">Manager Coffe Shop</p>
                         <p className="w-128 py-4">“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!</p>
                         <div><img src="src/assets/img/Frame41.png" alt="41"/></div>
                         <div className="flex gap-4 py-6">
                             <div className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</div>
-                            <div className="w-12 h-12 bg-orange-600 rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</div>
+                            <div className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</div>
                         </div>
                         <div><img src="src/assets/img/Group1300.png" alt="1300"/></div>
                     </div>
