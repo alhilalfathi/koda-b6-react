@@ -14,7 +14,7 @@ export const Product = () => {
             <img src="src/assets/img/Frame41-gray.png" alt="stars icon" />
             <div className="flex gap-2 items-center">
                 <del className="text-red-600 ">IDR 20.000</del>
-                <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR 20.000</h3>
+                <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR 10.000</h3>
             </div>
             <div className="flex gap-3">
                 <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
