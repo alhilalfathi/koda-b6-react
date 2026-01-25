@@ -3,6 +3,8 @@ import { RegisterPage } from "./pages/Register";
 import { LoginPage } from "./pages/Login";
 import { HomePage } from "./pages/Home";
 import { ForgotPass } from "./pages/ForgotPassword";
+import { ChatPage } from "./pages/Chat";
+import { ProductPage } from "./pages/ProductPage";
 
 
 const router = createBrowserRouter([
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
     {
         path: "/forgot-password",
         element: <ForgotPass />
+    },
+    {
+        path: "/product",
+        element: <ProductPage />
+    },
+    {
+        path: "/chat",
+        element: <ChatPage />
     }
 ])
 
