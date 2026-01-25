@@ -5,6 +5,7 @@ import mainImg from "../assets/img/Rectangle287.png"
 export const HomeHeader = () => {
   return (
     <div className="flex flex-col lg:flex-row">
+        {/* content  */}
         <main className="w-full lg:w-1/2 h-auto bg-zinc-950">
             <div className="text-white px-6 py-20 lg:px-30 lg:py-40">
                 <h1 className="font-bold text-3xl lg:text-5xl mb-6 lg:mb-10">Start Your Day with Coffee and Good Meals</h1>
@@ -30,6 +31,7 @@ export const HomeHeader = () => {
             
         </main>
 
+        {/* side image  */}
         <aside className="hidden lg:block lg:w-1/2">
             <img src={mainImg} alt="main-img" />
         </aside>
