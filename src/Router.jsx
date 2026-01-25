@@ -5,6 +5,7 @@ import { HomePage } from "./pages/Home";
 import { ForgotPass } from "./pages/ForgotPassword";
 import { ChatPage } from "./pages/Chat";
 import { ProductPage } from "./pages/ProductPage";
+import { DetailProduct } from "./pages/DetailProduct";
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     {
         path: "/chat",
         element: <ChatPage />
+    },
+    {
+        path: "/detail-product",
+        element: <DetailProduct />
     }
 ])
 
