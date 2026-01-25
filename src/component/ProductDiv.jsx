@@ -11,6 +11,7 @@ export const Product = () => {
         <div className="w-88 bg-white absolute top-80 left-5 px-4 py-2" >
             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
             <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
+            <img src="src/assets/img/Frame41-gray.png" alt="stars icon" />
             <div className="flex gap-2 items-center">
                 <del className="text-red-600 ">IDR 20.000</del>
                 <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR 20.000</h3>
