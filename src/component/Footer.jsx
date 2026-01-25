@@ -10,7 +10,7 @@ export const Footer = () => {
         </div>
         <ul className="flex flex-col gap-4">
             <li className="font-bold">Product</li>
-            <li>Our Ptroduct</li>
+            <li>Our Product</li>
             <li>Pricing</li>
             <li>Locations</li>
             <li>Countries</li>
