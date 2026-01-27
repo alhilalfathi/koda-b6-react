@@ -6,6 +6,7 @@ import { ForgotPass } from "./pages/ForgotPassword";
 import { ChatPage } from "./pages/Chat";
 import { ProductPage } from "./pages/ProductPage";
 import { DetailProduct } from "./pages/DetailProduct";
+import { HistoryOrder } from "./pages/HistoryOrder";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: "/detail-product",
         element: <DetailProduct />
+    },
+    {
+        path: "/history-order",
+        element: <HistoryOrder />
     }
 ])
 
