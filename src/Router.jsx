@@ -7,6 +7,7 @@ import { ChatPage } from "./pages/Chat";
 import { ProductPage } from "./pages/ProductPage";
 import { DetailProduct } from "./pages/DetailProduct";
 import { HistoryOrder } from "./pages/HistoryOrder";
+import { CheckoutProduct } from "./pages/CheckoutProduct";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
         path: "/history-order",
         element: <HistoryOrder />
+    },
+    {
+        path: "/checkout",
+        element: <CheckoutProduct />
     }
 ])
 
