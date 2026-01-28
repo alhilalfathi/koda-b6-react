@@ -30,7 +30,7 @@ const ProductDiv = () => {
                 <span className="flex gap-3 justify-center items-center">
                     <img src="src/assets/img/u_process.png"/> Status
                 </span>
-                <p >On Progress</p>
+                <p className="bg-orange-300 py-3 px-2 rounded-2xl">On Progress</p>
             </div>
         </div>
     )
