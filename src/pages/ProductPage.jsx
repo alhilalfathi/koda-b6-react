@@ -10,7 +10,7 @@ export const ProductPage = () => {
     <div>
         <NavDiv />
         {/* header  */}
-        <div className="bg-[url('/src/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-20 ">
+        <div className="bg-[url('/src/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-4 md:px-20 ">
             <h1 className="text-white font-bold text-5xl w-220">We Provide Good Coffee and Healthy Meals</h1>
         </div>
 
@@ -60,9 +60,10 @@ export const ProductPage = () => {
         <div>
             <div className="mx-20">
                 <h2 className="text-4xl mb-8 font-bold">Our <span className="text-orange-900">Product</span></h2>
+                <button className="bg-black text-white p-2 mb-10 w-full md:hidden">Filter</button>
             </div>
             <div className="flex mx-20 gap-15">
-                <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex flex-col gap-3">
+                <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex flex-col hidden md:block gap-3">
                     <div className="flex justify-between">
                         <h2>Filter</h2>
                         <h2>Reset Filter</h2>
@@ -96,7 +97,7 @@ export const ProductPage = () => {
                     <button className="bg-[#FF8906] w-full h-10 text-black">Apply Filter</button>
                 </aside>
 
-                <div className=" grid grid-cols-2 gap-y-50 gap-x-10 mb-40">
+                <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
                     <Product />
                     <Product />
                     <Product />
@@ -106,7 +107,7 @@ export const ProductPage = () => {
                     
                 </div>
             </div>
-            <div className="mx-110 flex justify-end">
+            <div className="md:mx-110 flex justify-center md:justify-end my-5">
                 <Pagination />
             </div>
         </div>
