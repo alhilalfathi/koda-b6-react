@@ -14,8 +14,8 @@ export const CheckoutProduct = () => {
             <p className="bg-[#FF8906] px-3 rounded">+ Add Menu</p>
           </div>
           {/* product  */}
-          <ProductDiv />
-          <ProductDiv />
+          <ProductDiv ><img className="w-6 h-6 ml-70" src="src/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
+          <ProductDiv ><img className="w-6 h-6 ml-70" src="src/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
         </div>
         <aside className="w-1/3 ">
           <p className="text-xl">Total</p>
