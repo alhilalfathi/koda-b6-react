@@ -4,6 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import { Product } from "../component/ProductDiv";
 import cartIcon from "../assets/img/ShoppingCart-yellow.png"
 import { Pagination } from "../component/Pagination";
+import { Link } from "react-router-dom";
 
 
 export const DetailProduct = () => {
@@ -53,10 +54,10 @@ export const DetailProduct = () => {
                     
                 </div>
                 <div className="flex gap-5 my-5">
-                    <button className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer">Buy</button>
+                    <button className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer"><Link to="/detail-order">Buy</Link></button>
                     <span className="flex gap-3 w-1/2 border border-[#FF8906] p-3 justify-center rounded cursor-pointer">
                         <img src={cartIcon} alt="cart"></img>
-                        <button>Add to cart</button>
+                        <button><Link to="/checkout">Add to cart</Link></button>
                     </span>
                 </div>
             </div>
