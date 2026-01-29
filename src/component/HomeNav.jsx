@@ -16,8 +16,8 @@ export const HomeNav = ()=>{
             </div>
             {/* right navbar  */}
             <div className="hidden md:flex text-white items-center gap-6">
-                    <img className="w-6 h-6" src="src/assets/img/Search.png"  alt="logo-search"/>
-                    <img className="w-6 h-6" src="src/assets/img/ShoppingCart.png"  alt="logo-keranjang"/>
+                    <img className="w-6 h-6 cursor-pointer" src="src/assets/img/Search.png"  alt="logo-search"/>
+                    <Link to="/checkout"><img className="w-6 h-6 cursor-pointer" src="src/assets/img/ShoppingCart.png"  alt="logo-keranjang"/></Link>
                 <Link className="w-24 h-10 border flex items-center justify-center rounded" to="/login">SignIn</Link>
                 <Link className="w-24 h-10 bg-[#FF8906] flex items-center justify-center rounded" to="/register">Sign Up</Link>
             </div>
