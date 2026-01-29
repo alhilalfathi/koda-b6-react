@@ -68,8 +68,10 @@ export const ProductPage = () => {
                         <h2>Filter</h2>
                         <h2>Reset Filter</h2>
                     </div>
-                    <label for="search">Search</label>
-                    <input type="text" id="search" placeholder="Search Your Product" className="bg-white text-zinc-600 h-12 px-3"></input>
+                    <div className="flex justify-between items-center my-3">
+                        <label for="search">Search</label>
+                        <input type="text" id="search" placeholder="Search Your Product" className="bg-white text-zinc-600 h-8 px-3 rounded"></input>
+                    </div>
                     <div class="category">
                         <label>Category</label>
                         <ul>
