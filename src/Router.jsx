@@ -10,6 +10,12 @@ import { HistoryOrder } from "./pages/HistoryOrder";
 import { CheckoutProduct } from "./pages/CheckoutProduct";
 import { DetailOrder } from "./pages/DetailOrder";
 import { Profile } from "./pages/Profile";
+import { AdminPage } from "./pages/AdminPage";
+import { Dashboard } from "./pages/Dashboard";
+import { AdminProduct } from "./pages/AdminProduct";
+import { AdminOrder } from "./pages/AdminOrder";
+import { AdminUser } from "./pages/AdminUser";
+
 
 
 const router = createBrowserRouter([
@@ -56,6 +62,29 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: <Profile />
+    },
+    {
+        path: "/admin",
+        element: <AdminPage />,
+        children:[
+            {
+                path: "",
+                element: <Dashboard />
+            },
+            {
+                path: "product",
+                element: <AdminProduct />
+            },
+            {
+                path: "order",
+                element: <AdminOrder />
+            },
+            {
+                path: "users",
+                element: <AdminUser />
+            }
+            
+        ]
     }
 ])
 
