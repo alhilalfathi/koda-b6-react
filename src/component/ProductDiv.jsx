@@ -20,9 +20,11 @@ export const Product = () => {
                 <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR 10.000</h3>
             </div>
             <div className="flex gap-3">
-                <Link className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" to="/detail-product" >Buy</Link>
+                <Link className="w-full h-10 bg-[#FF8906] rounded flex items-center justify-center" to="/detail-product" >Buy</Link>
             <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                <BsCart2 />
+                <Link to="/checkout">
+                    <BsCart2 />
+                </Link>
             </div>
             </div>
         </div>
