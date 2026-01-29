@@ -11,7 +11,7 @@ export const CheckoutProduct = () => {
         <div className="w-2/3 ">
           <div className="flex justify-between text-xl">
             <p>Your Order</p>
-            <p className="bg-[#FF8906] px-3 rounded">+ Add Menu</p>
+            <p className="bg-[#FF8906] px-3 py-2 rounded cursor-pointer">+ Add Menu</p>
           </div>
           {/* product  */}
           <ProductDiv ><img className="w-6 h-6 ml-70" src="src/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
@@ -37,7 +37,7 @@ export const CheckoutProduct = () => {
               <p>Sub Total</p>
               <p>Idr.44.000</p>
             </div>
-            <button className="bg-[#FF8906] w-full rounded">Checkout</button>
+            <button className="bg-[#FF8906] w-full rounded py-2 cursor-pointer">Checkout</button>
             <p>We Accept</p>
             <div className="flex gap-3 items-center">
               <img src="src/assets/img/bri.png" alt="bri icon"/>
@@ -77,10 +77,10 @@ export const CheckoutProduct = () => {
         </div>
         <div >
           <label>Delivery</label>
-          <div className="flex gap-3 p-3">
-            <button className="border border-[#FF8906] px-3 w-60 h-10 cursor-pointer">Dine in</button>
-            <button className="border border-[#E8E8E8] px-3 w-60 h-10 cursor-pointer">Door Delivery</button>
-            <button className="border border-[#E8E8E8] px-3 w-60 h-10 cursor-pointer">Pick Up</button>
+          <div className="flex gap-5 p-3 w-[70%]">
+            <button className="border border-[#FF8906] px-3 w-55 h-10 cursor-pointer">Dine in</button>
+            <button className="border border-[#E8E8E8] px-3 w-55 h-10 cursor-pointer">Door Delivery</button>
+            <button className="border border-[#E8E8E8] px-3 w-55 h-10 cursor-pointer">Pick Up</button>
           </div>
         </div>
       </div>
