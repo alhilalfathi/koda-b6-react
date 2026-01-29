@@ -1,4 +1,4 @@
-export const ProductDiv = () => {
+export const ProductDiv = (props) => {
   return(
     <div className="flex items-center gap-5 bg-[#E8E8E84D] p-3 mt-5">
       <img src="src/assets/img/image31.png" alt="product image" className="w-40 h-40"/>
@@ -11,7 +11,7 @@ export const ProductDiv = () => {
             <span>IDR10.000</span>
           </div>
         </div>
-      <img className="w-6 h-6 ml-70" src="src/assets/img/XCircle.png" alt="delete icon"/>
+      {props.children}
     </div>
   )
 }
