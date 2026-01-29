@@ -8,11 +8,11 @@ export const Product = () => {
   return (
     <div className="flex flex-col relative">
         <div className="w-98" >
-            <img className="w-full" src={productImage} alt="product image"/>
+            <img className="md:w-full w-60" src={productImage} alt="product image"/>
             <span className="absolute top-1 left-1 bg-red-600 text-white rounded-xl w-26 flex items-center justify-center">FLASH SALE!</span>
         </div>
-        <div className="w-88 bg-white absolute top-80 left-5 px-4 py-2" >
-            <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
+        <div className="md:w-88 w-60 bg-white md:absolute md:top-80 md:left-5 md:px-4 p-2 md:py-2" >
+            <h3 className="text-xl md:text-2xl mb-2">Hazelnut Latte</h3>
             <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
             <img src={starsIcon} alt="stars icon" />
             <div className="flex gap-2 items-center">
