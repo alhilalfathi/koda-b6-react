@@ -23,7 +23,7 @@ export const AdminPage = () => {
                 </div>
             </div>
         </nav>
-        <div className="flex gap-3">
+        <div className="flex gap-5">
             <aside className="w-1/5 p-10 space-y-5 border border-white min-h-screen border-r-[#E8E8E8]">
                 <Link to="/admin" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
                     <img src={dashboardIcon} alt="dashboard icon"/>
