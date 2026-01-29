@@ -1,39 +1,48 @@
 import { Link, Outlet } from "react-router-dom"
+import coffeeShopLogo from "../assets/img/Frame12.png"
+import profilPictures from "../assets/img/Ellipse185.png"
+import searchIcon from "../assets/img/Search-gray.png"
+import cartIcon from "../assets/img/ShoppingCart-grey.png"
+import dashboardIcon from "../assets/img/u_create-dashboard.png"
+import productIcon from "../assets/img/u_glass-tea.png"
+import orderIcon from "../assets/img/Bag.png"
+import userIcon from "../assets/img/2-User.png"
+import logOutIcon from "../assets/img/Log-Out.png"
 
 
 export const AdminPage = () => {
   return (
     <div>
         <nav className="flex items-center justify-between px-20 py-5 border border-white border-b-[#E8E8E8]">
-            <img src="src/assets/img/Frame12.png" alt="logo coffee shop"/>
+            <img src={coffeeShopLogo} alt="logo coffee shop"/>
             <div class="flex items-center gap-6">
-                <img src="src/assets/img/Search-gray.png" alt="search icon"/>
-                <img src="src/assets/img/ShoppingCart-grey.png" alt="cart icon"/>
+                <img src={searchIcon} alt="search icon"/>
+                <img src={cartIcon} alt="cart icon"/>
                 <div>
-                    <img src="src/assets/img/Ellipse185.png" alt="profile pictures" className="w-8 h-8"/>
+                    <img src={profilPictures} alt="profile pictures" className="w-8 h-8"/>
                 </div>
             </div>
         </nav>
         <div className="flex gap-3">
             <aside className="w-1/5 p-10 space-y-5 border border-white min-h-screen border-r-[#E8E8E8]">
                 <Link to="/admin" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
-                    <img src="src/assets/img/u_create-dashboard.png" alt="dashboard icon"/>
+                    <img src={dashboardIcon} alt="dashboard icon"/>
                     Dashboard
                 </Link>
                 <Link to="/admin/product" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
-                    <img src="src/assets/img/u_glass-tea.png" alt="product icon"/>
+                    <img src={productIcon} alt="product icon"/>
                     Product
                 </Link>
                 <Link to="/admin/order" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
-                    <img src="src/assets/img/Bag.png" alt="order icon"/>
+                    <img src={orderIcon} alt="order icon"/>
                     Order
                 </Link>
                 <Link to="/admin/users" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
-                    <img src="src/assets/img/2-User.png" alt="user icon"/>
+                    <img src={userIcon} alt="user icon"/>
                     User
                 </Link>
-                <Link to="" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
-                    <img src="src/assets/img/Log-Out.png" alt="logout icon"/>
+                <Link to="/" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
+                    <img src={logOutIcon} alt="logout icon"/>
                     Keluar
                 </Link>
             </aside>
