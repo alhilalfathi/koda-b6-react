@@ -1,0 +1,52 @@
+ [
+            {
+                  
+                "id": 1,
+                "img" : "/assets/index/image27.png",
+                "name" : "Hazelnut Latte",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 20000,
+                "discountPrice": 10000,
+                "imgUrl1" : "/assets/index/image22.png",
+                "imgUrl2" : "/assets/index/image30.png",
+                "imgUrl3" : "/assets/index/image31.png",
+                "flashSale": true
+            },
+            {
+                "id": 2,
+                "img" : "/assets/index/image22.png",
+                "name" : "Cappucino",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 20000,
+                "discountPrice": 15000,
+                "imgUrl1" : "/assets/index/image27.png",
+                "imgUrl2" : "/assets/index/image31.png",
+                "imgUrl3" : "/assets/index/image30.png",
+                "flashSale": true
+            },
+            {
+                "id": 3,
+                "img" : "/assets/index/image30.png",
+                "name" : "Matcha Latte",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 25000,
+                "discountPrice": 20000,
+                "imgUrl1" : "/assets/index/image27.png",
+                "imgUrl2" : "/assets/index/image31.png",
+                "imgUrl3" : "/assets/index/image22.png",
+                "flashSale": true
+            },
+            {
+                "id": 4,
+                "img" : "/assets/index/image31.png",
+                "name" : "Caramel Machiato",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 20000,
+                "discountPrice": 10000,
+                "imgUrl1" : "/assets/index/image30.png",
+                "imgUrl2" : "/assets/index/image22.png",
+                "imgUrl3" : "/assets/index/image27.png",
+                "flashSale": true
+            }
+            
+        ]
