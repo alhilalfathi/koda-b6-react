@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
@@ -6,6 +7,16 @@ import { Product } from "../component/ProductDiv"
 
 
 export const ProductPage = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
+        fetch(url).then((res)=> res.json()).then((data)=>{
+            setProducts(data)
+        }).catch((err)=> console.log(err))
+
+    },[])
+
   return (
     <div>
         <NavDiv />
@@ -100,13 +111,9 @@ export const ProductPage = () => {
                 </aside>
 
                 <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    
+                    {products.map((product) => (
+                        <Product key={product.id} product={product} />
+                        ))}
                 </div>
             </div>
             <div className="md:mx-110 flex justify-center md:justify-end my-5">
