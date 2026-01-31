@@ -4,19 +4,69 @@ import { HiOutlineMail } from "react-icons/hi";
 import { GoKey } from "react-icons/go";
 import { ButtonDiv } from "../component/buttonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import loginImage from "../assets/img/Rectangle289-1.png"
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+const loginSchema = yup.object({
+    email: yup.string().required("Email must be filled").email("Email Invalid"),
+    password: yup.string().required("Password must be filled").min(8,"Password min 8 characters")
+})
 
 export const LoginPage = ()=>{
+    const {handleSubmit, register, formState: {errors}} = useForm({resolver: yupResolver(loginSchema)})
+    const navigate = useNavigate()
+    function submitForm(value){
+        const oldRegisteredUser = JSON.parse(localStorage.getItem("registeredUsers")) || []
+
+        const member = oldRegisteredUser.find(
+            (user) => user.email === value.email && user.password === value.password
+        )
+
+        if(!member){
+            alert("Wrong Email or Password")
+            return
+        }
+
+        localStorage.setItem("loggedUser",JSON.stringify(member))
+
+        alert("Login success")
+        navigate("/")
+    }
+
     return(
-        <MainDiv img={loginImage} imgname={"main-image"} title={"Login"} desctitle={"Fill out the form correctly"}>
-            <InputDiv type={"email"} id={"email"} name={"email"} icon={<HiOutlineMail />} placeholder={"Enter Your Email"}>Email</InputDiv>
-            <InputDiv type={"password"} id={"password"} name={"password"} icon={<GoKey />} placeholder={"Enter Your Password"} eye={<FiEye />}>Password</InputDiv>
-            <Link className="text-orange-600 flex justify-end" to="/forgot-password">Forgot Password?</Link>
-            <ButtonDiv>Login</ButtonDiv>
-            <LoginByDiv />
-        </MainDiv>
+        <form onSubmit={handleSubmit(submitForm)}>
+            <MainDiv img={loginImage} imgname={"main-image"} title={"Login"} desctitle={"Fill out the form correctly"}>
+                <InputDiv
+                type={"email"}
+                id={"email"}
+                name={"email"}
+                icon={<HiOutlineMail />}
+                register={register}
+                placeholder={"Enter Your Email"}>Email</InputDiv>
+                <p className="text-red-500 text-sm">{errors.email?.message}</p>
+
+                <InputDiv
+                type={"password"}
+                id={"password"}
+                name={"password"}
+                icon={<GoKey />}
+                register={register}
+                placeholder={"Enter Your Password"}
+                eye={<FiEye />}>Password</InputDiv>
+                <p className="text-red-500 text-sm">{errors.password?.message}</p>
+
+                <Link
+                className="text-orange-600 flex justify-end"
+                to="/forgot-password">Forgot Password?</Link>
+
+                <ButtonDiv type="submit">Login</ButtonDiv>
+            
+                <LoginByDiv />
+            </MainDiv>
+        </form>
     )
 }
