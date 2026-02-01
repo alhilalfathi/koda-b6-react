@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 export const DetailProduct = () => {
     const { id } = useParams()
     const [product, setProduct] = useState(null)
+    const [recom, setRecom] = useState(null)
 
     useEffect(() => {
     const url =
@@ -20,11 +21,11 @@ export const DetailProduct = () => {
 
       fetch(url).then((res) => res.json()).then((data) => {
 
-        // console.log(data)
         const selected = data.find((item) => item.id === Number(id))
-        // console.log("Selected product:", selected)
-
+        const recommendation = data.find((item) => item.id !== Number(id))
+        
         setProduct(selected)
+        setRecom(recommendation)
       }).catch((err) => {
             console.log(err)
         })
@@ -98,9 +99,9 @@ export const DetailProduct = () => {
         <div>
             <h2 className="text-4xl mb-8 mx-20 font-bold">Recommendation <span className="text-orange-900">For You</span></h2>
             <div className="flex flex-col md:flex-row gap-4 mb-20 md:mb-45 justify-center items-center">
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
+                <Product product={recom} />
+                <Product product={recom} />
+                <Product product={recom} />
             </div>
         </div>
         <div className="my-15 w-full flex justify-center">
