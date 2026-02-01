@@ -1,0 +1,30 @@
+[
+            {
+                "name" : "Viezh Robert",
+                "role" : "Manager Coffee Shop",
+                "msg" : "Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!",
+                "img" : "assets/index/Rectangle295.png"
+
+            },
+            {  
+                "name" : "Lionel Messi",
+                "role" : "Customer",
+                "msg" : "The place is good, and the coffee is perfect",
+                "img" : "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/rockcms/2025-10/251027-lionel-messi-nightly-02-cs-d18258.jpg"
+
+            },
+            {
+                "name" : "Jule Prikitiw",
+                "role" : "Customer",
+                "msg" : "I like their Matcha Latte, so delicius",
+                "img" : "https://image.idntimes.com/post/20251016/upload_7f4bed756acf50083759b0b798f32481_be385d31-8100-4b42-90b4-8280895f6b83.jpg"
+
+            },
+            {
+                "name" : "Florian Wirtz",
+                "role" : "Customer",
+                "msg" : "Cozy place, Great coffee",
+                "img" : "https://ichef.bbci.co.uk/ace/standard/1376/cpsprodpb/a8db/live/b83dbed0-483b-11f0-8824-43208431ec6a.jpg"
+
+            }
+        ]
