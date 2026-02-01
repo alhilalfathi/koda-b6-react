@@ -73,7 +73,7 @@ export const HomePage = ()=>{
                     <h1 className="text-3xl md:text-6xl font-medium text-center"> <span className="text-yellow-700">Visit Our Store</span> in the Spot on the Map Below</h1>
                     <p className="mt-10 w-128 text-center">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
                 </div>
-                <div className="flex justify-center items-center"><img className="w-300 " src="src/assets/img/HugeGlobal.png" alt="maps image" /></div>
+                <div className="flex justify-center items-center"><img className="w-300 " src="/assets/img/HugeGlobal.png" alt="maps image" /></div>
 
             </section>
 
