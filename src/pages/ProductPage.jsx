@@ -50,7 +50,7 @@ export const ProductPage = () => {
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
-                    <small>Klaim Kupon</small>
+                    <small className="text-white cursor-pointer">Klaim Kupon</small>
                 </div>
             </div>
             <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
@@ -58,7 +58,7 @@ export const ProductPage = () => {
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
-                    <small>Klaim Kupon</small>
+                    <small className="text-white cursor-pointer">Klaim Kupon</small>
                 </div>
             </div>
             <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
@@ -66,7 +66,7 @@ export const ProductPage = () => {
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
-                    <small>Klaim Kupon</small>
+                    <small className="text-white cursor-pointer">Klaim Kupon</small>
                 </div>
             </div>
             <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
@@ -74,7 +74,7 @@ export const ProductPage = () => {
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
-                    <small>Klaim Kupon</small>
+                    <small className="text-white cursor-pointer">Klaim Kupon</small>
                 </div>
             </div>
             <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
@@ -82,7 +82,7 @@ export const ProductPage = () => {
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
-                    <small>Klaim Kupon</small>
+                    <small className="text-white cursor-pointer">Klaim Kupon</small>
                 </div>
             </div>
             <div className="flex bg-[#F5C361] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
@@ -90,7 +90,7 @@ export const ProductPage = () => {
                 <div className="flex flex-col w-50">
                     <h4>Get a cup of coffe for free on sunday morning</h4>
                     <p>Only at 7 to 9 AM</p>
-                    <small>Klaim Kupon</small>
+                    <small className="text-white cursor-pointer">Klaim Kupon</small>
                 </div>
             </div>
         </div>
