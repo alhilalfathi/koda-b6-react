@@ -5,16 +5,40 @@ import checklistIcon from "/assets/img/Vector.png"
 import { BsCart2 } from "react-icons/bs";
 import { Footer } from "../component/Footer";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const HomePage = ()=>{
     const [products, setProducts] = useState([])
+    const [testi, setTesti] = useState([])
+    const [currentTesti, setCurrentTesti] = useState(0)
 
+    // fetch data product 
     useEffect(()=>{
         const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
         fetch(url).then((res)=> res.json()).then((data)=>{
             setProducts(data)
         }).catch((err)=> console.log(err))
     },[])
+
+    // fetch data testimoni 
+    useEffect(()=>{
+        const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/testimoni.json"
+        fetch(url).then((res)=> res.json()).then((data)=>{
+            setTesti(data)
+        }).catch((err)=> console.log(err))
+    },[])
+    const showedTesti = testi[currentTesti]
+
+    const nextTesti = () => {
+        setCurrentTesti((prev) => 
+            prev === testi.length-1 ? 0 : prev + 1
+        )
+    }
+    const prevTesti = () => {
+        setCurrentTesti((prev) =>
+            prev === 0 ? testi.length-1 : prev-1
+        )
+    }
     return(
         <div>
             <HomeNav />
@@ -56,9 +80,11 @@ export const HomePage = ()=>{
                                     <p className="text-sm text-stone-700 mb-2">{product.tag}</p>
                                     <h3 className="text-xl text-[#FF8906] mb-2">IDR {product.price.toLocaleString("id")}</h3>
                                     <div className="flex gap-3">
-                                        <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
+                                        <Link className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.id}`}>Buy</Link>
                                         <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                                            <BsCart2 />
+                                            <Link to="/checkout">
+                                                <BsCart2 />
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -76,24 +102,27 @@ export const HomePage = ()=>{
                 <div className="flex justify-center items-center"><img className="w-300 " src="/assets/img/HugeGlobal.png" alt="maps image" /></div>
 
             </section>
-
+                        {/* testimoni  */}
             <section>
                 <div className="flex bg-black p-20 gap-4">
-                    <div>
-                        <img src="/assets/img/Rectangle295.png" alt="295"/>
-                    </div>
-                    <div className="text-white">
-                        <p className="pb-4">TESTIMONIAL</p>
-                        <h2 className="text-3xl border border-black border-l-[#FF8906] pl-4 py-4">Viezh Robert</h2>
-                        <p className="text-[#FF8906] pt-4">Manager Coffe Shop</p>
-                        <p className="w-128 py-4">“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!</p>
-                        <div><img src="/assets/img/Frame41.png" alt="41"/></div>
-                        <div className="flex gap-4 py-6">
-                            <div className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</div>
-                            <div className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</div>
+                    {showedTesti && (
+                        <div className="flex gap-5">
+                            <div className="w-150 h-100"><img src={showedTesti.img} alt={showedTesti.name}/></div>
+                            <div className="text-white">
+                                <p className="pb-4">TESTIMONIAL</p>
+                                <h2 className="text-3xl border border-black border-l-[#FF8906] pl-4 py-4">{showedTesti.name}</h2>
+                                <p className="text-[#FF8906] pt-4">{showedTesti.role}</p>
+                                <p className="w-128 py-4">{showedTesti.msg}</p>
+                                <div><img src="/assets/img/Frame41.png" alt="stars icon"/></div>
+                                <div className="flex gap-4 py-6">
+                                    <button onClick={prevTesti} className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</button>
+                                    <button onClick={nextTesti} className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</button>
+                                </div>
+                                <div><img src="/assets/img/Group1300.png" alt="1300"/></div>
+                            </div>
                         </div>
-                        <div><img src="/assets/img/Group1300.png" alt="1300"/></div>
-                    </div>
+                    )}
+                    
                 </div>
             </section>
 
