@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <ChatPage />
     },
     {
-        path: "/detail-product",
+        path: "/detail-product/:id",
         element: <DetailProduct />
     },
     {
