@@ -55,23 +55,23 @@ export const CheckoutProduct = () => {
       <div className="ml-20 mb-10 flex flex-col gap-3">
         <h2 className="mb-5 text-xl">Payment Info & Delivery</h2>
         <div >
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-            <img src="/assets/img/mail.png" alt="email icon" class="checkout-input-icon"/>
+            <img src="/assets/img/mail.png" alt="email icon" className="checkout-input-icon"/>
             <input type="text" id="email" placeholder="Enter Your Email" className=" px-3  w-full "/>
           </div>
         </div>
         <div >
-          <label for="fullname">Full Name</label>
+          <label htmlFor="fullname">Full Name</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-            <img src="/assets/img/Profile.png" alt="name icon" class="checkout-input-icon"/>
+            <img src="/assets/img/Profile.png" alt="name icon" className="checkout-input-icon"/>
             <input type="text" id="fullname" placeholder="Enter Your Full Name" className=" px-3  w-full "/>
           </div>
         </div>
         <div >
-          <label for="address">Address</label>
+          <label htmlFor="address">Address</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-              <img src="/assets/img/Location.png" alt="address icon" class="checkout-input-icon"/>
+              <img src="/assets/img/Location.png" alt="address icon" className="checkout-input-icon"/>
               <input type="text" id="address" placeholder="Enter Your Address" className=" px-3  w-full "/>
           </div>
         </div>
