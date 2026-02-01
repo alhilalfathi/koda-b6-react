@@ -114,8 +114,8 @@ export const DetailProduct = () => {
                 <span className="bg-red-600 text-white rounded-xl w-26  flex items-center justify-center">FLASH SALE!</span>
                 <h1 className="md:text-4xl text-xl py-3">{product.name}</h1>
                 <div className="flex gap-2 items-center">
-                    <del className="text-red-600 ">{product.price}</del>
-                    <h3 className="text-xl text-[#FF8906] mb-2 pt-2">{product.discountPrice}</h3>
+                    <del className="text-red-600 ">IDR {product.price.toLocaleString("id")}</del>
+                    <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.discountPrice.toLocaleString("id")}</h3>
                 </div>
                 <img src="/assets/img/Frame41-gray.png" alt="stars icon" />
                 <div className="flex text-[#4F5665] gap-3 py-2 text-xl">
