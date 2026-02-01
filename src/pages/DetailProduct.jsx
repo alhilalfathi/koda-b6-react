@@ -4,13 +4,14 @@ import { AiFillLike } from "react-icons/ai";
 import { Product } from "../component/ProductDiv";
 import cartIcon from "/assets/img/ShoppingCart-yellow.png"
 import { Pagination } from "../component/Pagination";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 
 
 export const DetailProduct = () => {
+    const navigate = useNavigate()
     const { id } = useParams()
     const [product, setProduct] = useState(null)
     const [recom, setRecom] = useState(null)
@@ -51,6 +52,39 @@ export const DetailProduct = () => {
     }
     const handleDecrease = () => {
         setQuantity((prev)=> prev > 1 ? prev - 1 : 1)
+    }
+    const addToCart = () => {
+        const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+        if(!loggedUser){
+            return alert("You need to login")
+        }
+        const cart = JSON.parse(localStorage.getItem("cart")) || {}
+        const userCart = cart[loggedUser.email] || []
+
+        const newItem = {
+            productId: product.id,
+            name: product.name,
+            price: product.discountPrice,
+            quantity,
+            size,
+            temp,
+            img: product.img
+        }
+        const existingData = userCart.findIndex(
+            (item)=> 
+                item.productId === newItem.productId &&
+                item.size === newItem.size &&
+                item.temp === newItem.temp 
+        )
+        if (existingData !== -1){
+            userCart[existingData].quantity += quantity
+        }else {
+            userCart.push(newItem)
+        }
+        cart[loggedUser.email] = userCart
+        localStorage.setItem("cart",JSON.stringify(cart))
+        alert("Item added to cart")
+        navigate("/checkout")
     }
     
     if (!product) {
@@ -111,7 +145,7 @@ export const DetailProduct = () => {
                     <button className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer"><Link to="/detail-order">Buy</Link></button>
                     <span className="flex gap-3 w-1/2 border border-[#FF8906] p-3 justify-center rounded cursor-pointer">
                         <img src={cartIcon} alt="cart"></img>
-                        <button><Link to="/checkout">Add to cart</Link></button>
+                        <button onClick={addToCart}>Add to cart</button>
                     </span>
                 </div>
             </div>
