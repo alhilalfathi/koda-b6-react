@@ -109,7 +109,7 @@ export const ProductPage = () => {
                         onClick={()=> setSearch("")} 
                         className="cursor-pointer">Reset Filter</button>
                     </div>
-                    <div className="flex justify-between items-center my-3">
+                    <div className="flex flex-col items-start my-3">
                         <label for="search">Search</label>
                         <input 
                         type="text" 
@@ -117,7 +117,7 @@ export const ProductPage = () => {
                         placeholder="Search Your Product"
                         value={search}
                         onChange={(e)=> setSearch(e.target.value)} 
-                        className="bg-white text-zinc-600 h-8 px-3 rounded"></input>
+                        className="bg-white text-zinc-600 h-8 px-3 rounded w-full"></input>
                     </div>
                     <div class="category">
                         <label>Category</label>
