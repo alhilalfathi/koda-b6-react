@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import coffeeShopLogo from "/assets/img/Frame12.png"
 import profilPictures from "/assets/img/Ellipse185.png"
 import searchIcon from "/assets/img/Search-gray.png"
@@ -11,11 +11,17 @@ import logOutIcon from "/assets/img/Log-Out.png"
 
 
 export const AdminPage = () => {
+    const navigate = useNavigate()
+    const logoutUser = () => {
+        localStorage.removeItem("loggedUser")
+        alert("You have logged out")
+        navigate("/")
+    }
   return (
     <div>
         <nav className="flex items-center justify-between px-20 py-5 border border-white border-b-[#E8E8E8]">
             <img src={coffeeShopLogo} alt="logo coffee shop"/>
-            <div class="flex items-center gap-6">
+            <div className="flex items-center gap-6">
                 <img src={searchIcon} alt="search icon"/>
                 <img src={cartIcon} alt="cart icon"/>
                 <div>
@@ -41,10 +47,10 @@ export const AdminPage = () => {
                     <img src={userIcon} alt="user icon"/>
                     User
                 </Link>
-                <Link to="/" className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold">
+                <button onClick={logoutUser} className="flex items-center gap-3 p-3 rounded-lg text-gray-600 font-bold cursor-pointer">
                     <img src={logOutIcon} alt="logout icon"/>
                     Keluar
-                </Link>
+                </button>
             </aside>
             <div className="w-4/5">
                 <Outlet />
