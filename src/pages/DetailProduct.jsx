@@ -15,6 +15,16 @@ export const DetailProduct = () => {
     const [product, setProduct] = useState(null)
     const [recom, setRecom] = useState(null)
 
+    const [quantity, setQuantity] = useState(1)
+    const [size, setSize] = useState("Regular")
+    const [temp, setTemp] =useState("Ice")
+
+    const sizes = ["Regular", "Medium", "Large"]
+    const temps = ["Ice","Hot"]
+
+    const activeClass = "border border-[#FF8906]"
+    const inactiveClass = "border border-[#E8E8E8]  "
+
     useEffect(() => {
     const url =
       "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
@@ -26,11 +36,22 @@ export const DetailProduct = () => {
         
         setProduct(selected)
         setRecom(recommendation)
+        setQuantity(1)
+        setSize("Regular")
+        setTemp("Ice")
+
       }).catch((err) => {
             console.log(err)
         })
 
     }, [id])
+
+    const handleIncrease = () => {
+        setQuantity((prev)=> prev + 1)
+    }
+    const handleDecrease = () => {
+        setQuantity((prev)=> prev > 1 ? prev - 1 : 1)
+    }
     
     if (!product) {
         return (
@@ -70,21 +91,21 @@ export const DetailProduct = () => {
                 </div>
                 <p className="text-[#4F5665] w-80 md:w-148">Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48 hours.</p>
                 <div className="flex py-3">
-                    <button className="border border-[#FF8906] w-8 h-8">-</button>
-                    <span className="w-8 text-center border border-white border-y-zinc-300">1</span>
-                    <button className="bg-[#FF8906] w-8 h-8">+</button>
+                    <button onClick={handleDecrease} className="border border-[#FF8906] w-8 h-8">-</button>
+                    <span className="w-8 text-center border border-white border-y-zinc-300">{quantity}</span>
+                    <button onClick={handleIncrease} className="bg-[#FF8906] w-8 h-8">+</button>
                 </div>
                 <h3 className="font-bold text-xl">Choose Size</h3>
                 <div className="flex gap-5 py-3">
-                    <button className="w-1/3 h-8 border border-[#FF8906]">Regular</button>
-                    <button className="w-1/3 h-8 border border-[#E8E8E8]">Medium</button>
-                    <button className="w-1/3 h-8 border border-[#E8E8E8]">Large</button>
+                    {sizes.map((item) => (
+                        <button key={item} onClick={()=> setSize(item)} className={`w-1/3 h-8 border transition ${size === item ? activeClass : inactiveClass}`} >{item}</button>
+                    ))}
                 </div>
                 <h3 className="font-bold text-xl">Hot/Ice?</h3>
                 <div className="flex gap-5 py-3">
-                    <button className="w-1/2 h-8 border border-[#FF8906]">Ice</button>
-                    <button className="w-1/2 h-8 border border-[#E8E8E8]">Hot</button>
-                    
+                    {temps.map((item)=>(
+                        <button key={item} onClick={()=> setTemp(item)} className={`w-1/2 h-8 border rounded transition ${temp === item ? activeClass : inactiveClass}`} >{item}</button>
+                    ))}
                 </div>
                 <div className="flex gap-5 my-5">
                     <button className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer"><Link to="/detail-order">Buy</Link></button>
