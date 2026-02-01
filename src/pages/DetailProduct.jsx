@@ -85,6 +85,38 @@ export const DetailProduct = () => {
         cart[loggedUser.email] = userCart
         localStorage.setItem("cart",JSON.stringify(cart))
         alert("Item added to cart")
+    }
+    const buyProduct = () => {
+        const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+        if(!loggedUser){
+            return alert("You need to login")
+        }
+        const cart = JSON.parse(localStorage.getItem("cart")) || {}
+        const userCart = cart[loggedUser.email] || []
+
+        const newItem = {
+            productId: product.id,
+            name: product.name,
+            discountPrice: product.discountPrice,
+            price: product.price,
+            quantity,
+            size,
+            temp,
+            img: product.img
+        }
+        const existingData = userCart.findIndex(
+            (item)=> 
+                item.productId === newItem.productId &&
+                item.size === newItem.size &&
+                item.temp === newItem.temp 
+        )
+        if (existingData !== -1){
+            userCart[existingData].quantity += quantity
+        }else {
+            userCart.push(newItem)
+        }
+        cart[loggedUser.email] = userCart
+        localStorage.setItem("cart",JSON.stringify(cart))
         navigate("/checkout")
     }
     
@@ -143,9 +175,9 @@ export const DetailProduct = () => {
                     ))}
                 </div>
                 <div className="flex gap-5 my-5">
-                    <button className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer"><Link to="/detail-order">Buy</Link></button>
+                    <button onClick={buyProduct} className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer">Buy</button>
                     <span className="flex gap-3 w-1/2 border border-[#FF8906] p-3 justify-center rounded cursor-pointer">
-                        <img src={cartIcon} alt="cart"></img>
+                        <img src={cartIcon} alt="cart"/>
                         <button onClick={addToCart}>Add to cart</button>
                     </span>
                 </div>
