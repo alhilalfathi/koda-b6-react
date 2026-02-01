@@ -8,6 +8,7 @@ import { Product } from "../component/ProductDiv"
 
 export const ProductPage = () => {
     const [products, setProducts] = useState([])
+    const [search, setSearch] = useState("")
     const promoRef = useRef()
 
     useEffect(()=>{
@@ -24,6 +25,7 @@ export const ProductPage = () => {
     const scrollButtonLeft = () => {
         promoRef.current.scrollLeft -= 150
     }
+    const filteredSearch = products.filter((product)=> product.name.toLowerCase().includes(search.toLocaleLowerCase()))
 
   return (
     <div>
@@ -99,14 +101,23 @@ export const ProductPage = () => {
                 <button className="bg-black text-white p-2 mb-10 w-full md:hidden">Filter</button>
             </div>
             <div className="flex mx-20 gap-15">
+                {/* filter product  */}
                 <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex flex-col hidden md:block gap-3">
                     <div className="flex justify-between">
                         <h2>Filter</h2>
-                        <h2>Reset Filter</h2>
+                        <button 
+                        onClick={()=> setSearch("")} 
+                        className="cursor-pointer">Reset Filter</button>
                     </div>
                     <div className="flex justify-between items-center my-3">
                         <label for="search">Search</label>
-                        <input type="text" id="search" placeholder="Search Your Product" className="bg-white text-zinc-600 h-8 px-3 rounded"></input>
+                        <input 
+                        type="text" 
+                        id="search" 
+                        placeholder="Search Your Product"
+                        value={search}
+                        onChange={(e)=> setSearch(e.target.value)} 
+                        className="bg-white text-zinc-600 h-8 px-3 rounded"></input>
                     </div>
                     <div class="category">
                         <label>Category</label>
@@ -128,15 +139,15 @@ export const ProductPage = () => {
                             <li><input type="radio" name="sort"/> Cheap</li>
                         </ul>
                     </div>
-                    <div class="price-range">
+                    <div className="flex items-center gap-3 my-2">
                         <label>Range Price</label>
                         <input type="range" class="price-slider" min="0" max="100"/>
                     </div>
-                    <button className="bg-[#FF8906] w-full h-10 text-black">Apply Filter</button>
+                    <button className="bg-[#FF8906] w-full h-10 text-black cursor-pointer">Apply Filter</button>
                 </aside>
 
                 <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
-                    {products.map((product) => (
+                    {filteredSearch.map((product) => (
                         <Product key={product.id} product={product} />
                         ))}
                 </div>
