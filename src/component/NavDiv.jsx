@@ -1,3 +1,6 @@
+import logo from "../assets/img/Frame13.png"
+import searchIcon from "../assets/img/Search.png"
+import cartIcon from "../assets/img/ShoppingCart.png"
 import { Link } from "react-router-dom"
 
 export const NavDiv = () => {
@@ -6,7 +9,7 @@ export const NavDiv = () => {
             {/* left navbar  */}
             <div className="flex items-center gap-6">
                 <div >
-                    <img className="w-auto h-8" src="src/assets/img/Frame13.png" alt="logo-kopi"/>
+                    <img className="w-auto h-8" src={logo} alt="logo-kopi"/>
                 </div>
                 <ul className="text-white hidden md:flex gap-6">
                     <li><Link to="/">Home</Link></li>
@@ -15,8 +18,8 @@ export const NavDiv = () => {
             </div>
             {/* right navbar  */}
             <div className="hidden md:flex text-white items-center gap-6">
-                    <img className="w-6 h-6 cursor-pointer" src="src/assets/img/Search.png"  alt="logo-search"/>
-                    <Link to="/checkout"><img className="w-6 h-6 cursor-pointer" src="src/assets/img/ShoppingCart.png"  alt="logo-keranjang"/></Link>
+                    <img className="w-6 h-6 cursor-pointer" src={searchIcon}  alt="logo-search"/>
+                    <Link to="/checkout"><img className="w-6 h-6 cursor-pointer" src={cartIcon}  alt="logo-keranjang"/></Link>
                 <Link className="w-24 h-10 border flex items-center justify-center rounded" to="/login">SignIn</Link>
                 <Link className="w-24 h-10 bg-[#FF8906] flex items-center justify-center rounded" to="/register">Sign Up</Link>
             </div>
