@@ -64,7 +64,8 @@ export const DetailProduct = () => {
         const newItem = {
             productId: product.id,
             name: product.name,
-            price: product.discountPrice,
+            discountPrice: product.discountPrice,
+            price: product.price,
             quantity,
             size,
             temp,
