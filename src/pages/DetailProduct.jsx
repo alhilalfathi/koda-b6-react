@@ -5,29 +5,61 @@ import { Product } from "../component/ProductDiv";
 import cartIcon from "../assets/img/ShoppingCart-yellow.png"
 import { Pagination } from "../component/Pagination";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 
 
 export const DetailProduct = () => {
+    const { id } = useParams()
+    const [product, setProduct] = useState(null)
+
+    useEffect(() => {
+    const url =
+      "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
+
+      fetch(url).then((res) => res.json()).then((data) => {
+
+        // console.log(data)
+        const selected = data.find((item) => item.id === Number(id))
+        // console.log("Selected product:", selected)
+
+        setProduct(selected)
+      }).catch((err) => {
+            console.log(err)
+        })
+
+    }, [id])
+    
+    if (!product) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <p className="text-xl">Product not found</p>
+            </div>
+            )
+    }
+
+
   return (
     <div>
         <NavDiv />
         <div className="flex md:flex-row flex-col mx-20 my-10 gap-4">
             {/* side image  */}
             <div className="flex flex-col w-1/2 gap-4 ">
-                <img className=" w-full md:h-150" src="src/assets/img/image31.png" alt="product image" />
+                <img className=" w-full md:h-150" src={product.img} alt={product.name} />
                 <div className="md:flex gap-3 hidden md:items-center md:justify-center">
-                    <img className="md:w-[32%] w-15 h-15 md:h-full" src="src/assets/img/image31.png" alt="product image" />
-                    <img className="md:w-[32%] w-15 h-15 md:h-full" src="src/assets/img/image31.png" alt="product image" />
-                    <img className="md:w-[32%] w-15 h-15 md:h-full" src="src/assets/img/image31.png" alt="product image" />
+                    <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.imgUrl1} alt="product image" />
+                    <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.imgUrl2} alt="product image" />
+                    <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.imgUrl3} alt="product image" />
                 </div>
             </div>
             {/* content  */}
             <div className="w-1/2">
                 <span className="bg-red-600 text-white rounded-xl w-26  flex items-center justify-center">FLASH SALE!</span>
-                <h1 className="md:text-4xl text-xl py-3">Hazelnut Latte</h1>
+                <h1 className="md:text-4xl text-xl py-3">{product.name}</h1>
                 <div className="flex gap-2 items-center">
-                    <del className="text-red-600 ">IDR 20.000</del>
-                    <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR 10.000</h3>
+                    <del className="text-red-600 ">{product.price}</del>
+                    <h3 className="text-xl text-[#FF8906] mb-2 pt-2">{product.discountPrice}</h3>
                 </div>
                 <img src="src/assets/img/Frame41-gray.png" alt="stars icon" />
                 <div className="flex text-[#4F5665] gap-3 py-2 text-xl">
@@ -66,9 +98,9 @@ export const DetailProduct = () => {
         <div>
             <h2 className="text-4xl mb-8 mx-20 font-bold">Recommendation <span className="text-orange-900">For You</span></h2>
             <div className="flex flex-col md:flex-row gap-4 mb-20 md:mb-45 justify-center items-center">
-                <Product />
-                <Product />
-                <Product />
+                <Product product={product} />
+                <Product product={product} />
+                <Product product={product} />
             </div>
         </div>
         <div className="my-15 w-full flex justify-center">
