@@ -55,18 +55,17 @@ export const CheckoutProduct = () => {
             <p className="bg-[#FF8906] px-3 py-2 rounded cursor-pointer"><Link to="/product">+ Add Menu</Link></p>
           </div>
           {/* product  */}
-          {/* <ProductDiv ><img className="w-6 h-6 ml-70" src="/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
-          <ProductDiv ><img className="w-6 h-6 ml-70" src="/assets/img/XCircle.png" alt="delete icon"/></ProductDiv> */}
           {cartItems.length === 0 ? (
             <p className="mt-5 text-gray-500">Your cart is empty</p>
           ) : (cartItems.map((item, index) => (
             // cart 
-            <div key={index} className="flex justify-between items-center">
+            <div key={index} className="flex justify-between items-center gap-5 bg-[#E8E8E84D] p-3 mt-5">
               <div className="flex items-center gap-4">
-                <img src={item.img} alt={item.name} className="w-16 h-16 rounded" />
-                <div>
-                  <p className="font-bold">{item.name}</p>
-                  <p className="text-sm text-gray-500">{item.quantity}Pcs - {item.size} - {item.temp}</p>
+                <img src={item.img} alt={item.name} className="w-40 h-40" />
+                <div className="flex flex-col gap-3 items-left">
+                  <span className="bg-red-600 px-3 rounded-xl w-25 text-white">Flash Sale</span>
+                  <p className="font-bold text-xl">{item.name}</p>
+                  <p className="text-sm text-gray-500">{item.quantity}Pcs | {item.size} | {item.temp}</p>
                   <span className="flex gap-3">
                     <p className="text-red-500 line-through">IDR. {item.price.toLocaleString()}</p>
                     <p className="text-[#FF8906]">IDR. {item.discountPrice.toLocaleString()}</p>
@@ -77,25 +76,26 @@ export const CheckoutProduct = () => {
             </div>
           )))}
         </div>
+        {/* Total  */}
         <aside className="w-1/3 ">
           <p className="text-xl">Total</p>
           <div className="flex flex-col gap-3 p-3 bg-[#E8E8E84D] h-80 mt-5">
             <div className="flex justify-between">
               <p>Order</p>
-              <p>Idr. {orderTotal.toLocaleString()}</p>
+              <p>IDR. {orderTotal.toLocaleString()}</p>
             </div>
             <div className="flex justify-between">
               <p>Delivery</p>
-              <p>Idr. {deliveryCost.toLocaleString()}</p>
+              <p>IDR. {deliveryCost.toLocaleString()}</p>
             </div>
             <div className="flex justify-between">
               <p>Tax</p>
-              <p>Idr. {tax.toLocaleString()}</p>
+              <p>IDR. {tax.toLocaleString()}</p>
             </div>
             <hr/>
             <div className="flex justify-between">
               <p>Sub Total</p>
-              <p>Idr. {subTotal.toLocaleString()}</p>
+              <p>IDR. {subTotal.toLocaleString()}</p>
             </div>
             <button className="bg-[#FF8906] w-full rounded py-2 cursor-pointer">Checkout</button>
             <p>We Accept</p>
