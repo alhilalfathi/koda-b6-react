@@ -5,17 +5,25 @@ import productImage2 from "/assets/img/image32.png"
 import { BiDetail, BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { useRef } from "react";
 
 export const AdminOrder = () => {
+  const infoRef = useRef()
+  const showInfo = () => {
+    infoRef.current.classList.remove("hidden")
+  }
+  const hideInfo = () => {
+    infoRef.current.classList.add("hidden")
+  }
   return (
     <div className="py-10 relative">
       <div className="mr-15">
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-semibold">Order List</h1>
-            <button className="mt-3 bg-orange-500 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+            <button onClick={showInfo} className="mt-3 bg-orange-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer">
               <img src={addIcon} alt="add icon" className="md:w-4 w-2 md:h-4 h-2"/>
-                Add Product
+                Add Order
             </button>
           </div>
           <div className="flex items-center gap-3">
@@ -128,11 +136,11 @@ export const AdminOrder = () => {
         </div>
       </div>
       {/* order information  default hidden  */}
-        <div className="absolute top-0 right-0 w-271 bg-black/40 min-h-screen hidden">
+        <div ref={infoRef} className="absolute top-0 right-0 w-271 bg-black/40 min-h-screen hidden">
             <div className="absolute top-0 right-0 w-100 min-h-screen border p-5 bg-white">
                 <span className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Order  #12354-09893</h1>
-                    <IoCloseCircleSharp />
+                    <IoCloseCircleSharp onClick={hideInfo} className="cursor-pointer" />
                 </span>
                 <label for="productName" className="block text-sm mb-1">Order Information</label>
 
