@@ -4,15 +4,23 @@ import filterIcon from "/assets/img/Filter3.png"
 import editIcon from "/assets/img/Group-1707.png"
 import deleteIcon from "/assets/img/Group-1706.png"
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { useRef } from "react"
 
 export const AdminProduct = () => {
+    const insertRef = useRef()
+    const insertProduct = () => {
+        insertRef.current.classList.remove("hidden")
+    }
+    const closeInsert = () => {
+        insertRef.current.classList.add("hidden")
+    }
   return (
     <div className="py-10 relative">
         <div className="mr-15">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h1 className="text-2xl font-semibold">Product List</h1>
-                    <button className="mt-3 bg-orange-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer">
+                    <button onClick={insertProduct} className="mt-3 bg-orange-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer">
                         <img src={addIcon} alt="add icon" className="md:w-4 w-2 md:h-4 h-2"/>
                         Add Product
                     </button>
@@ -89,11 +97,11 @@ export const AdminProduct = () => {
             </div>
         </div>
         {/* insert product  default hidden  */}
-        <div className="absolute top-0 right-0 w-271 bg-black/40 min-h-screen hidden">
+        <div ref={insertRef} className="absolute top-0 right-0 w-271 bg-black/40 min-h-screen hidden">
             <div className="absolute top-0 right-0 w-100 min-h-screen border p-5 bg-white">
                 <span className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Add Product</h1>
-                    <IoCloseCircleSharp />
+                    <IoCloseCircleSharp onClick={closeInsert} className="cursor-pointer" />
                 </span>
                 <label className="block text-sm mb-2">Photo Product</label>
                 <div className="w-12 h-12 border rounded-lg flex items-center justify-center mb-3">
