@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
@@ -8,6 +8,7 @@ import { Product } from "../component/ProductDiv"
 
 export const ProductPage = () => {
     const [products, setProducts] = useState([])
+    const promoRef = useRef()
 
     useEffect(()=>{
         const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
@@ -16,6 +17,13 @@ export const ProductPage = () => {
         }).catch((err)=> console.log(err))
 
     },[])
+
+    const scrollButtonRight = () => {
+        promoRef.current.scrollLeft += 150
+    }
+    const scrollButtonLeft = () => {
+        promoRef.current.scrollLeft -= 150
+    }
 
   return (
     <div>
@@ -28,13 +36,14 @@ export const ProductPage = () => {
         <div className="flex justify-between items-center px-20">
             <h2 className="text-4xl font-bold">Today <span className="text-orange-900">Promo</span></h2>
             <div className="flex gap-4 py-6">
-                    <button className="w-12 h-12 bg-zinc-400 rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</button>
-                    <button className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</button>
+                {/* promo button  */}
+                    <button onClick={scrollButtonLeft} className="w-12 h-12 bg-zinc-400 rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer">&#8592;</button>
+                    <button onClick={scrollButtonRight} className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer">&#8594;</button>
             </div>
         </div>
         {/* promo-card  */}
-        <div className="flex gap-4 p-4 overflow-x-auto">
-            <div className="flex bg-[#88B788] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
+        <div ref={promoRef} className="scroll-bar flex gap-4 p-4 overflow-x-auto overflow-y-hidden">
+            <div className="flex items-center bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
                 <img src="/assets/img/image46.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
@@ -42,7 +51,7 @@ export const ProductPage = () => {
                     <small>Klaim Kupon</small>
                 </div>
             </div>
-            <div className="flex bg-[#88B788] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
+            <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
                 <img src="/assets/img/image46.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
@@ -50,7 +59,7 @@ export const ProductPage = () => {
                     <small>Klaim Kupon</small>
                 </div>
             </div>
-            <div className="flex bg-[#88B788] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
+            <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
                 <img src="/assets/img/image46.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
@@ -58,7 +67,23 @@ export const ProductPage = () => {
                     <small>Klaim Kupon</small>
                 </div>
             </div>
-            <div className="flex bg-[#F5C361] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
+            <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
+                <img src="/assets/img/image46.png" alt="promo-icon"/>
+                <div className="flex flex-col w-50">
+                    <h4>HAPPY MOTHER’S DAY!</h4>
+                    <p>Get one of our favorite menu for free!</p>
+                    <small>Klaim Kupon</small>
+                </div>
+            </div>
+            <div className="flex bg-[#88B788] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
+                <img src="/assets/img/image46.png" alt="promo-icon"/>
+                <div className="flex flex-col w-50">
+                    <h4>HAPPY MOTHER’S DAY!</h4>
+                    <p>Get one of our favorite menu for free!</p>
+                    <small>Klaim Kupon</small>
+                </div>
+            </div>
+            <div className="flex bg-[#F5C361] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0">
                 <img src="/assets/img/image43.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>Get a cup of coffe for free on sunday morning</h4>
