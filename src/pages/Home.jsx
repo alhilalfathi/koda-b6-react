@@ -4,8 +4,17 @@ import sideImage from "/assets/img/Rectangle291.png"
 import checklistIcon from "/assets/img/Vector.png"
 import { BsCart2 } from "react-icons/bs";
 import { Footer } from "../component/Footer";
+import { useEffect, useState } from "react";
 
 export const HomePage = ()=>{
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
+        fetch(url).then((res)=> res.json()).then((data)=>{
+            setProducts(data)
+        }).catch((err)=> console.log(err))
+    },[])
     return(
         <div>
             <HomeNav />
@@ -37,70 +46,24 @@ export const HomePage = ()=>{
                         {/* product list */}
                 <div className="flex justify-center items-center gap-2">
                         {/* product */}
-                    <div className="flex flex-col relative">
-                        <div className="w-64" >
-                            <img src="/assets/img/image27.png" alt="product image"/>
-                        </div>
-                        <div className="w-58 bg-white absolute top-52 left-3 p-2" >
-                            <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
-                            <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
-                            <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                                    <BsCart2 />
+                        {products.map((product)=>(
+                            <div className="flex flex-col relative">
+                                <div className="w-64" >
+                                    <img src={product.img} alt={product.name}/>
+                                </div>
+                                <div className="w-58 bg-white absolute top-52 left-3 p-2" >
+                                    <h3 className="text-2xl mb-2">{product.name}</h3>
+                                    <p className="text-sm text-stone-700 mb-2">{product.tag}</p>
+                                    <h3 className="text-xl text-[#FF8906] mb-2">IDR {product.price.toLocaleString("id")}</h3>
+                                    <div className="flex gap-3">
+                                        <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
+                                        <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
+                                            <BsCart2 />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col relative">
-                        <div className="w-64" >
-                            <img src="/assets/img/image27.png" alt="product image"/>
-                        </div>
-                        <div className="w-58 bg-white absolute top-52 left-3 p-2" >
-                            <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
-                            <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
-                            <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                                    <BsCart2 />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col relative">
-                        <div className="w-64" >
-                            <img src="/assets/img/image27.png" alt="product image"/>
-                        </div>
-                        <div className="w-58 bg-white absolute top-52 left-3 p-2" >
-                            <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
-                            <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
-                            <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                                    <BsCart2 />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col relative">
-                        <div className="w-64" >
-                            <img src="/assets/img/image27.png" alt="product image"/>
-                        </div>
-                        <div className="w-58 bg-white absolute top-52 left-3 p-2" >
-                            <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
-                            <p className="text-sm text-stone-700 mb-2">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-                            <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
-                            <div className="flex gap-3">
-                                <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                                    <BsCart2 />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        ))}
                 </div>
             </section>
 
