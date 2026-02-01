@@ -1,5 +1,5 @@
-import logo from "../assets/img/Frame12.png"
-import sosmed from "../assets/img/Frame42.png"
+import logo from "/assets/img/Frame12.png"
+import sosmed from "/assets/img/Frame42.png"
 
 export const Footer = () => {
   return (

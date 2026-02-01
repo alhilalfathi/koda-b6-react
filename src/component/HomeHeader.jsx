@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import mainImg from "../assets/img/Rectangle287.png"
+import mainImg from "/assets/img/Rectangle287.png"
 
 
 export const HomeHeader = () => {

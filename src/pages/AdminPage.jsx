@@ -1,13 +1,13 @@
 import { Link, Outlet } from "react-router-dom"
-import coffeeShopLogo from "../assets/img/Frame12.png"
-import profilPictures from "../assets/img/Ellipse185.png"
-import searchIcon from "../assets/img/Search-gray.png"
-import cartIcon from "../assets/img/ShoppingCart-grey.png"
-import dashboardIcon from "../assets/img/u_create-dashboard.png"
-import productIcon from "../assets/img/u_glass-tea.png"
-import orderIcon from "../assets/img/Bag.png"
-import userIcon from "../assets/img/2-User.png"
-import logOutIcon from "../assets/img/Log-Out.png"
+import coffeeShopLogo from "/assets/img/Frame12.png"
+import profilPictures from "/assets/img/Ellipse185.png"
+import searchIcon from "/assets/img/Search-gray.png"
+import cartIcon from "/assets/img/ShoppingCart-grey.png"
+import dashboardIcon from "/assets/img/u_create-dashboard.png"
+import productIcon from "/assets/img/u_glass-tea.png"
+import orderIcon from "/assets/img/Bag.png"
+import userIcon from "/assets/img/2-User.png"
+import logOutIcon from "/assets/img/Log-Out.png"
 
 
 export const AdminPage = () => {

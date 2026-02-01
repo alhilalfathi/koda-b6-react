@@ -7,7 +7,7 @@ export const HomeNav = ()=>{
             {/* left navbar  */}
             <div className="flex items-center gap-6">
                 <div >
-                    <img className="w-auto h-8" src="src/assets/img/Frame13.png" alt="logo-kopi"/>
+                    <img className="w-auto h-8" src="/assets/img/Frame13.png" alt="logo-kopi"/>
                 </div>
                 <ul className="text-white hidden md:flex gap-6">
                     <li><Link to="/" className="underline underline-offset-8 decoration-[#FF8906]">Home</Link></li>
@@ -16,8 +16,8 @@ export const HomeNav = ()=>{
             </div>
             {/* right navbar  */}
             <div className="hidden md:flex text-white items-center gap-6">
-                    <img className="w-6 h-6 cursor-pointer" src="src/assets/img/Search.png"  alt="logo-search"/>
-                    <Link to="/checkout"><img className="w-6 h-6 cursor-pointer" src="src/assets/img/ShoppingCart.png"  alt="logo-keranjang"/></Link>
+                    <img className="w-6 h-6 cursor-pointer" src="/assets/img/Search.png"  alt="logo-search"/>
+                    <Link to="/checkout"><img className="w-6 h-6 cursor-pointer" src="/assets/img/ShoppingCart.png"  alt="logo-keranjang"/></Link>
                 <Link className="w-24 h-10 border flex items-center justify-center rounded" to="/login">SignIn</Link>
                 <Link className="w-24 h-10 bg-[#FF8906] flex items-center justify-center rounded" to="/register">Sign Up</Link>
             </div>

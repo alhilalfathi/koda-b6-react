@@ -1,4 +1,4 @@
-import graphImage from "../assets/img/graph.png"
+import graphImage from "/assets/img/graph.png"
 
 export const Dashboard = () => {
   return (
@@ -6,7 +6,7 @@ export const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="w-80 bg-green-500 text-white rounded-xl p-5 flex justify-between flex-col items-left gap-2"> 
                 <div className="flex items-center gap-4">
-                    <img src="src/assets/img/cup-ellipse.png" alt="process icon" className="w-12 h-12"/>
+                    <img src="/assets/img/cup-ellipse.png" alt="process icon" className="w-12 h-12"/>
                     <p className="text-sm opacity-80">Order On Progress</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -16,7 +16,7 @@ export const Dashboard = () => {
             </div>
             <div className="w-80 bg-indigo-500 text-white rounded-xl p-5 flex justify-between flex-col items-left gap-2">
                 <div className="flex items-center gap-4">
-                    <img src="src/assets/img/truck-ellipse.png" alt="truck shipping icon" className="w-12 h-12"/>
+                    <img src="/assets/img/truck-ellipse.png" alt="truck shipping icon" className="w-12 h-12"/>
                     <p className="text-sm opacity-80">Order Shipping</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -26,7 +26,7 @@ export const Dashboard = () => {
             </div>
             <div className="w-80 bg-pink-500 text-white rounded-xl p-5 flex justify-between flex-col items-left gap-2">
                 <div className="flex items-center gap-4">
-                    <img src="src/assets/img/People-done.png" alt="done icon" className="w-12 h-12"/>
+                    <img src="/assets/img/People-done.png" alt="done icon" className="w-12 h-12"/>
                     <p className="text-sm opacity-80">Order Done</p>
                 </div>
                 <div className="flex items-center gap-2">

@@ -35,7 +35,7 @@ export const ProductPage = () => {
         {/* promo-card  */}
         <div className="flex gap-4 p-4 overflow-x-auto">
             <div className="flex bg-[#88B788] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
-                <img src="src/assets/img/image46.png" alt="promo-icon"/>
+                <img src="/assets/img/image46.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
@@ -43,7 +43,7 @@ export const ProductPage = () => {
                 </div>
             </div>
             <div className="flex bg-[#88B788] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
-                <img src="src/assets/img/image46.png" alt="promo-icon"/>
+                <img src="/assets/img/image46.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
@@ -51,7 +51,7 @@ export const ProductPage = () => {
                 </div>
             </div>
             <div className="flex bg-[#88B788] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
-                <img src="src/assets/img/image46.png" alt="promo-icon"/>
+                <img src="/assets/img/image46.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>HAPPY MOTHER’S DAY!</h4>
                     <p>Get one of our favorite menu for free!</p>
@@ -59,7 +59,7 @@ export const ProductPage = () => {
                 </div>
             </div>
             <div className="flex bg-[#F5C361] w-80  h-32 rounded-2xl px-2 pt-4 pb-0">
-                <img src="src/assets/img/image43.png" alt="promo-icon"/>
+                <img src="/assets/img/image43.png" alt="promo-icon"/>
                 <div className="flex flex-col w-50">
                     <h4>Get a cup of coffe for free on sunday morning</h4>
                     <p>Only at 7 to 9 AM</p>

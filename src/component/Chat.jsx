@@ -1,5 +1,5 @@
-import adminPicture from "../assets/img/Ellipse183.png"
-import userPicture from "../assets/img/Ellipse184.png"
+import adminPicture from "/assets/img/Ellipse183.png"
+import userPicture from "/assets/img/Ellipse184.png"
 
 export const ChatWidget = () => {
   return (

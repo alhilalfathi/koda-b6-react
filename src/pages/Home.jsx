@@ -1,7 +1,7 @@
 import { HomeHeader } from "../component/HomeHeader";
 import { HomeNav } from "../component/HomeNav";
-import sideImage from "../assets/img/Rectangle291.png"
-import checklistIcon from "../assets/img/Vector.png"
+import sideImage from "/assets/img/Rectangle291.png"
+import checklistIcon from "/assets/img/Vector.png"
 import { BsCart2 } from "react-icons/bs";
 import { Footer } from "../component/Footer";
 
@@ -39,7 +39,7 @@ export const HomePage = ()=>{
                         {/* product */}
                     <div className="flex flex-col relative">
                         <div className="w-64" >
-                            <img src="src/assets/img/image27.png" alt="product image"/>
+                            <img src="/assets/img/image27.png" alt="product image"/>
                         </div>
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
@@ -47,7 +47,7 @@ export const HomePage = ()=>{
                             <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
                                 <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
+                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -55,7 +55,7 @@ export const HomePage = ()=>{
                     </div>
                     <div className="flex flex-col relative">
                         <div className="w-64" >
-                            <img src="src/assets/img/image27.png" alt="product image"/>
+                            <img src="/assets/img/image27.png" alt="product image"/>
                         </div>
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
@@ -63,7 +63,7 @@ export const HomePage = ()=>{
                             <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
                                 <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
+                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -71,7 +71,7 @@ export const HomePage = ()=>{
                     </div>
                     <div className="flex flex-col relative">
                         <div className="w-64" >
-                            <img src="src/assets/img/image27.png" alt="product image"/>
+                            <img src="/assets/img/image27.png" alt="product image"/>
                         </div>
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
@@ -79,7 +79,7 @@ export const HomePage = ()=>{
                             <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
                                 <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
+                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ export const HomePage = ()=>{
                     </div>
                     <div className="flex flex-col relative">
                         <div className="w-64" >
-                            <img src="src/assets/img/image27.png" alt="product image"/>
+                            <img src="/assets/img/image27.png" alt="product image"/>
                         </div>
                         <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                             <h3 className="text-2xl mb-2">Hazelnut Latte</h3>
@@ -95,7 +95,7 @@ export const HomePage = ()=>{
                             <h3 className="text-xl text-[#FF8906] mb-2">IDR 20.000</h3>
                             <div className="flex gap-3">
                                 <a className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" href="">Buy</a>
-                                <div className="w-12 flex justify-center items-center border-1 border-[#FF8906] rounded">
+                                <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
                                     <BsCart2 />
                                 </div>
                             </div>
@@ -117,19 +117,19 @@ export const HomePage = ()=>{
             <section>
                 <div className="flex bg-black p-20 gap-4">
                     <div>
-                        <img src="src/assets/img/Rectangle295.png" alt="295"/>
+                        <img src="/assets/img/Rectangle295.png" alt="295"/>
                     </div>
                     <div className="text-white">
                         <p className="pb-4">TESTIMONIAL</p>
                         <h2 className="text-3xl border border-black border-l-[#FF8906] pl-4 py-4">Viezh Robert</h2>
                         <p className="text-[#FF8906] pt-4">Manager Coffe Shop</p>
                         <p className="w-128 py-4">“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!</p>
-                        <div><img src="src/assets/img/Frame41.png" alt="41"/></div>
+                        <div><img src="/assets/img/Frame41.png" alt="41"/></div>
                         <div className="flex gap-4 py-6">
                             <div className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</div>
                             <div className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</div>
                         </div>
-                        <div><img src="src/assets/img/Group1300.png" alt="1300"/></div>
+                        <div><img src="/assets/img/Group1300.png" alt="1300"/></div>
                     </div>
                 </div>
             </section>

@@ -2,7 +2,7 @@ import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { AiFillLike } from "react-icons/ai";
 import { Product } from "../component/ProductDiv";
-import cartIcon from "../assets/img/ShoppingCart-yellow.png"
+import cartIcon from "/assets/img/ShoppingCart-yellow.png"
 import { Pagination } from "../component/Pagination";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -61,7 +61,7 @@ export const DetailProduct = () => {
                     <del className="text-red-600 ">{product.price}</del>
                     <h3 className="text-xl text-[#FF8906] mb-2 pt-2">{product.discountPrice}</h3>
                 </div>
-                <img src="src/assets/img/Frame41-gray.png" alt="stars icon" />
+                <img src="/assets/img/Frame41-gray.png" alt="stars icon" />
                 <div className="flex text-[#4F5665] gap-3 py-2 text-xl">
                     <p>200+Review</p>
                     <p>Recommendation</p>

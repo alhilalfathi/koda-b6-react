@@ -1,6 +1,6 @@
-import logo from "../assets/img/Frame13.png"
-import searchIcon from "../assets/img/Search.png"
-import cartIcon from "../assets/img/ShoppingCart.png"
+import logo from "/assets/img/Frame13.png"
+import searchIcon from "/assets/img/Search.png"
+import cartIcon from "/assets/img/ShoppingCart.png"
 import { Link } from "react-router-dom"
 
 export const NavDiv = () => {

@@ -1,7 +1,7 @@
-import addIcon from "../assets/img/plus.png"
-import filterIcon from "../assets/img/Filter3.png"
-import productImage from "../assets/img/image31.png"
-import productImage2 from "../assets/img/image32.png"
+import addIcon from "/assets/img/plus.png"
+import filterIcon from "/assets/img/Filter3.png"
+import productImage from "/assets/img/image31.png"
+import productImage2 from "/assets/img/image32.png"
 import { BiDetail, BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { IoCloseCircleSharp } from "react-icons/io5";

@@ -1,8 +1,8 @@
-import productImage from "../assets/img/image27.png"
-import addIcon from "../assets/img/plus.png"
-import filterIcon from "../assets/img/Filter3.png"
-import editIcon from "../assets/img/Group-1707.png"
-import deleteIcon from "../assets/img/Group-1706.png"
+import productImage from "/assets/img/image27.png"
+import addIcon from "/assets/img/plus.png"
+import filterIcon from "/assets/img/Filter3.png"
+import editIcon from "/assets/img/Group-1707.png"
+import deleteIcon from "/assets/img/Group-1706.png"
 import { IoCloseCircleSharp } from "react-icons/io5";
 
 export const AdminProduct = () => {

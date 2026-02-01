@@ -2,7 +2,7 @@ import { InputDiv } from "../component/InputDiv";
 import { MainDiv } from "../component/MainDiv";
 import { HiOutlineMail } from "react-icons/hi";
 import { ButtonDiv } from "../component/buttonDiv";
-import forgotPassImage from "../assets/img/Rectangle289-2.png"
+import forgotPassImage from "/assets/img/Rectangle289-2.png"
 
 export const ForgotPass = ()=>{
     return(

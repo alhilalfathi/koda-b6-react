@@ -8,7 +8,7 @@ export const MainDiv = (main)=>{
             </div>
             {/* content */}
             <div className="w-full px-6 md:w-3/5 md:mx-40 py-8 flex flex-col gap-4">
-                <img className="w-74 my-10" src="src/assets/img/Frame12.png" alt="logo" />
+                <img className="w-74 my-10" src="/assets/img/Frame12.png" alt="logo" />
                 <div className="flex flex-col gap-4">
                     <h1 className="text-orange-900 font-bold text-2xl">{main.title}</h1>
                     <p>{main.desctitle}</p>

@@ -1,6 +1,6 @@
 import { BsCart2 } from "react-icons/bs"
 import { Link } from "react-router-dom"
-import starsIcon from "../assets/img/Frame41-gray.png"
+import starsIcon from "/assets/img/Frame41-gray.png"
 
 
 export const Product = ({product}) => {

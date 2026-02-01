@@ -6,7 +6,7 @@ import { GoKey } from "react-icons/go";
 import { ButtonDiv } from "../component/buttonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
 import { FiEye } from "react-icons/fi";
-import registerImage from "../assets/img/Rectangle289.png"
+import registerImage from "/assets/img/Rectangle289.png"
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";

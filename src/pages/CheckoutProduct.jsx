@@ -14,8 +14,8 @@ export const CheckoutProduct = () => {
             <p className="bg-[#FF8906] px-3 py-2 rounded cursor-pointer">+ Add Menu</p>
           </div>
           {/* product  */}
-          <ProductDiv ><img className="w-6 h-6 ml-70" src="src/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
-          <ProductDiv ><img className="w-6 h-6 ml-70" src="src/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
+          <ProductDiv ><img className="w-6 h-6 ml-70" src="/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
+          <ProductDiv ><img className="w-6 h-6 ml-70" src="/assets/img/XCircle.png" alt="delete icon"/></ProductDiv>
         </div>
         <aside className="w-1/3 ">
           <p className="text-xl">Total</p>
@@ -40,12 +40,12 @@ export const CheckoutProduct = () => {
             <button className="bg-[#FF8906] w-full rounded py-2 cursor-pointer">Checkout</button>
             <p>We Accept</p>
             <div className="flex gap-3 items-center">
-              <img src="src/assets/img/bri.png" alt="bri icon"/>
-              <img src="src/assets/img/dana.png" alt="dana icon"/>
-              <img src="src/assets/img/bca.png" alt="bca icon"/>
-              <img src="src/assets/img/gopay.png" alt="gopay icon"/>
-              <img src="src/assets/img/ovo.png" alt="ovo icon"/>
-              <img src="src/assets/img/logos_paypal.png" alt="paypal icon"/>
+              <img src="/assets/img/bri.png" alt="bri icon"/>
+              <img src="/assets/img/dana.png" alt="dana icon"/>
+              <img src="/assets/img/bca.png" alt="bca icon"/>
+              <img src="/assets/img/gopay.png" alt="gopay icon"/>
+              <img src="/assets/img/ovo.png" alt="ovo icon"/>
+              <img src="/assets/img/logos_paypal.png" alt="paypal icon"/>
             </div>
               <p>*Get Discount if you pay with Bank Central Asia</p>
           </div>
@@ -57,21 +57,21 @@ export const CheckoutProduct = () => {
         <div >
           <label for="email">Email</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-            <img src="src/assets/img/mail.png" alt="email icon" class="checkout-input-icon"/>
+            <img src="/assets/img/mail.png" alt="email icon" class="checkout-input-icon"/>
             <input type="text" id="email" placeholder="Enter Your Email" className=" px-3  w-full "/>
           </div>
         </div>
         <div >
           <label for="fullname">Full Name</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-            <img src="src/assets/img/Profile.png" alt="name icon" class="checkout-input-icon"/>
+            <img src="/assets/img/Profile.png" alt="name icon" class="checkout-input-icon"/>
             <input type="text" id="fullname" placeholder="Enter Your Full Name" className=" px-3  w-full "/>
           </div>
         </div>
         <div >
           <label for="address">Address</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-              <img src="src/assets/img/Location.png" alt="address icon" class="checkout-input-icon"/>
+              <img src="/assets/img/Location.png" alt="address icon" class="checkout-input-icon"/>
               <input type="text" id="address" placeholder="Enter Your Address" className=" px-3  w-full "/>
           </div>
         </div>

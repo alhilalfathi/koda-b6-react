@@ -6,7 +6,7 @@ import { ButtonDiv } from "../component/buttonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
-import loginImage from "../assets/img/Rectangle289-1.png"
+import loginImage from "/assets/img/Rectangle289-1.png"
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
