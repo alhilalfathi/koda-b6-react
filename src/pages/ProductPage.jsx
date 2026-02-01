@@ -21,7 +21,7 @@ export const ProductPage = () => {
     <div>
         <NavDiv />
         {/* header  */}
-        <div className="bg-[url('/src/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-4 md:px-20 ">
+        <div className="bg-[url('/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-4 md:px-20 ">
             <h1 className="text-white font-bold text-5xl w-220">We Provide Good Coffee and Healthy Meals</h1>
         </div>
 
