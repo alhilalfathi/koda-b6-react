@@ -74,7 +74,7 @@ export const HomePage = ()=>{
                         {products.map((product, index)=>(
                             <div key={index} className="flex flex-col relative">
                                 <div className="w-64" >
-                                    <img className="w-64" src={product.img} alt={product.name}/>
+                                    <img className="w-64 h-64" src={product.img} alt={product.name}/>
                                 </div>
                                 <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                                     <h3 className="text-2xl mb-2">{product.name}</h3>
