@@ -11,7 +11,7 @@ export const HomeHeader = () => {
                 <h1 className="font-bold text-3xl lg:text-5xl mb-6 lg:mb-10">Start Your Day with Coffee and Good Meals</h1>
                 <p>We provide high quality beans, good taste, and healthy meals made by love just fot you. Start your day with us for a bigger smile!</p>
                 <div className="w-28 h-10 bg-[#FF8906] mt-10 flex items-center justify-center text-black rounded">
-                    <Link>Get Started</Link>
+                    <Link to="/product">Get Started</Link>
                 </div>
                 <div className="flex gap-8 mt-10">
                     <div className="flex flex-col border-4 border-zinc-950 border-r-white pr-4">
