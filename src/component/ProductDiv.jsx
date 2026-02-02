@@ -7,7 +7,7 @@ export const Product = ({product}) => {
   return (
     <div className="flex flex-col relative">
         <div className="w-98" >
-            <img className="md:w-full w-60" src={product.img} alt={product.name}/>
+            <img className="md:w-full w-60 h-100" src={product.img} alt={product.name}/>
             <span className="absolute top-1 left-1 bg-red-600 text-white rounded-xl w-26 flex items-center justify-center">FLASH SALE!</span>
         </div>
         <div className="md:w-88 w-60 bg-white md:absolute md:top-80 md:left-5 md:px-4 p-2 md:py-2" >
