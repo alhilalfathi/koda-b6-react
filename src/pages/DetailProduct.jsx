@@ -178,7 +178,7 @@ export const DetailProduct = () => {
                     <button onClick={buyProduct} className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer">Buy</button>
                     <span className="flex gap-3 w-1/2 border border-[#FF8906] p-3 justify-center rounded cursor-pointer">
                         <img src={cartIcon} alt="cart"/>
-                        <button onClick={addToCart}>Add to cart</button>
+                        <button onClick={addToCart} className="cursor-pointer">Add to cart</button>
                     </span>
                 </div>
             </div>
