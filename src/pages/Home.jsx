@@ -71,7 +71,7 @@ export const HomePage = ()=>{
                         {/* product list */}
                 <div className="flex justify-center items-center gap-2">
                         {/* product */}
-                        {products.map((product, index)=>(
+                        {products.filter(item=> item.favorite === true).map((product, index)=>(
                             <div key={index} className="flex flex-col relative">
                                 <div className="w-64" >
                                     <img className="w-64 h-64" src={product.img} alt={product.name}/>
