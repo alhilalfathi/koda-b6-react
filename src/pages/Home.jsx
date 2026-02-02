@@ -6,6 +6,7 @@ import { BsCart2 } from "react-icons/bs";
 import { Footer } from "../component/Footer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ChatWidget } from "../component/Chat";
 
 export const HomePage = ()=>{
     const [products, setProducts] = useState([])
@@ -60,7 +61,7 @@ export const HomePage = ()=>{
                         {/* aside */}
                 <div className="w-full md:w-1/2"><img src={sideImage} alt="staff image" /></div>
             </section>
-
+            <ChatWidget />
             <section>
                         {/* header */}
                 <div className="flex flex-col justify-center items-center mt-10">
