@@ -55,7 +55,7 @@ export const CheckoutProduct = () => {
     const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {}
 
     const newOrder = {
-      id: `#123-${Date.now()}`,
+      id: `123-${Date.now()}`,
       customer: data,
       cartItems,
       delivery,
