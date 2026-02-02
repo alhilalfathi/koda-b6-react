@@ -110,7 +110,7 @@ export const ProductPage = () => {
                         className="cursor-pointer">Reset Filter</button>
                     </div>
                     <div className="flex flex-col items-start my-3">
-                        <label for="search">Search</label>
+                        <label htmlFor="search">Search</label>
                         <input 
                         type="text" 
                         id="search" 
@@ -119,7 +119,7 @@ export const ProductPage = () => {
                         onChange={(e)=> setSearch(e.target.value)} 
                         className="bg-white text-zinc-600 h-8 px-3 rounded w-full"></input>
                     </div>
-                    <div class="category">
+                    <div >
                         <label>Category</label>
                         <ul>
                             <li><input type="checkbox"/> Favorite Product</li>
@@ -130,9 +130,9 @@ export const ProductPage = () => {
                         </ul>
                     </div>
                     <br/>
-                    <div class="sort-by">
+                    <div >
                         <label>Sort By</label>
-                        <ul class="sort-options">
+                        <ul >
                             <li><input type="radio" name="sort"/> Buy 1 Get 1</li>
                             <li><input type="radio" name="sort"/> Flash Sale</li>
                             <li><input type="radio" name="sort"/> Birthday Package</li>
@@ -141,7 +141,7 @@ export const ProductPage = () => {
                     </div>
                     <div className="flex items-center gap-3 my-2">
                         <label>Range Price</label>
-                        <input type="range" class="price-slider" min="0" max="100"/>
+                        <input type="range" min="0" max="100"/>
                     </div>
                     <button className="bg-[#FF8906] w-full h-10 text-black cursor-pointer">Apply Filter</button>
                 </aside>
