@@ -26,7 +26,7 @@
             },
             {
                 "id": 3,
-                "img" : "https://images.pexels.com/photos/29156485/pexels-photo-29156485.jpeg",
+                "img" : "https://images.pexels.com/photos/12756666/pexels-photo-12756666.jpeg",
                 "name" : "Matcha Latte",
                 "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
                 "price" : 25000,
@@ -58,6 +58,18 @@
                 "imgUrl1" : "/assets/img/image22.png",
                 "imgUrl2" : "/assets/img/image34.png",
                 "imgUrl3" : "/assets/img/image33.png",
+                "flashSale": true
+            },
+            {
+                "id": 6,
+                "img" : "https://images.pexels.com/photos/5741238/pexels-photo-5741238.jpeg",
+                "name" : "Americano",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 15000,
+                "discountPrice": 10000,
+                "imgUrl1" : "/assets/img/image27.png",
+                "imgUrl2" : "/assets/img/image31.png",
+                "imgUrl3" : "/assets/img/image22.png",
                 "flashSale": true
             }
             
