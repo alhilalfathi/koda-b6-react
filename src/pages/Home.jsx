@@ -71,10 +71,10 @@ export const HomePage = ()=>{
                         {/* product list */}
                 <div className="flex justify-center items-center gap-2">
                         {/* product */}
-                        {products.map((product)=>(
-                            <div className="flex flex-col relative">
+                        {products.map((product, index)=>(
+                            <div key={index} className="flex flex-col relative">
                                 <div className="w-64" >
-                                    <img src={product.img} alt={product.name}/>
+                                    <img className="w-64" src={product.img} alt={product.name}/>
                                 </div>
                                 <div className="w-58 bg-white absolute top-52 left-3 p-2" >
                                     <h3 className="text-2xl mb-2">{product.name}</h3>
