@@ -3,19 +3,20 @@ import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
 import { LuCalendarDays } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const HistoryProduct = ({order}) => {
     const firstItem = order.cartItems[0]
     const otherItemsCount = order.cartItems.length - 1
     return(
         <div className="flex gap-5 my-5 bg-[#E8E8E8] p-3">
-            <img src={order.cartItems[0]?.img} alt={order.cartItems[0]?.img} className="w-24 h-24" />
+            <img src={firstItem?.img} alt={firstItem?.img} className="w-24 h-24" />
             <div className="flex flex-col justify-top items-center">
                 <span className="flex gap-3 justify-center items-center">
                     <img src="/assets/img/order.png"/> No. Order
                 </span>
                 <p className="font-bold">{order.id}</p>
-                <a href="#">Views Order Detail</a>
+                <Link to={`/detail-order/${order.id}`}>Views Order Detail</Link>
             </div>
             <div className="flex flex-col justify-top items-center">
                 <span className="flex gap-3 justify-center items-center">
