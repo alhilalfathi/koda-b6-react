@@ -99,7 +99,7 @@ export const CheckoutProduct = () => {
             </div>
             <button className="bg-[#FF8906] w-full rounded py-2 cursor-pointer">Checkout</button>
             <p>We Accept</p>
-            <div className="flex gap-3 items-center">
+            <div className="flex gap-6 items-center justify-center">
               <img src="/assets/img/bri.png" alt="bri icon"/>
               <img src="/assets/img/dana.png" alt="dana icon"/>
               <img src="/assets/img/bca.png" alt="bca icon"/>
