@@ -1,30 +1,40 @@
+import { useEffect, useState } from "react";
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
 import { LuCalendarDays } from "react-icons/lu";
 
-const ProductDiv = () => {
+const HistoryProduct = ({order}) => {
+    const firstItem = order.cartItems[0]
+    const otherItemsCount = order.cartItems.length - 1
     return(
         <div className="flex gap-5 my-5 bg-[#E8E8E8] p-3">
-            <img src="/assets/img/image31.png" alt="product image" className="w-24 h-24" />
+            <img src={order.cartItems[0]?.img} alt={order.cartItems[0]?.img} className="w-24 h-24" />
             <div className="flex flex-col justify-top items-center">
                 <span className="flex gap-3 justify-center items-center">
                     <img src="/assets/img/order.png"/> No. Order
                 </span>
-                <p className="font-bold">#12354-09893</p>
+                <p className="font-bold">{order.id}</p>
                 <a href="#">Views Order Detail</a>
             </div>
             <div className="flex flex-col justify-top items-center">
                 <span className="flex gap-3 justify-center items-center">
                     <img src="/assets/img/Calendar.png"/> Date
                 </span>
-                <p className="font-bold">23 January 2023</p>
+                <p className="font-bold">{new Date(order.date).toLocaleDateString("en-GB",{
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                })}</p>
             </div>
             <div className="flex flex-col justify-top items-center">
                 <span className="flex gap-3 justify-center items-center">
                     <img src="/assets/img/Repeat.png"/> Total
                 </span>
-                <p className="font-bold">Idr 40.000</p>
+                <p className="font-bold">IDR {order.subTotal.toLocaleString()}</p>
+                {otherItemsCount > 0 && (
+                    <p className="text-sm text-gray-500">+ {otherItemsCount} other items</p>
+                )}
             </div>
             <div className="flex flex-col justify-top items-center">
                 <span className="flex gap-3 justify-center items-center">
@@ -37,6 +47,19 @@ const ProductDiv = () => {
 }
 
 export const HistoryOrder = () => {
+    const [orders, setOrders] = useState([])
+
+    useEffect(()=>{
+        const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+        if(!loggedUser){
+            return
+        }
+
+        const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {}
+
+        const userOrders = orderHistory[loggedUser.email]
+        setOrders(userOrders)
+    },[])
   return (
     <div>
         <NavDiv />
@@ -78,10 +101,15 @@ export const HistoryOrder = () => {
                     </div>
 
                     {/* product  */}
-                    <ProductDiv />
-                    <ProductDiv />
-                    <ProductDiv />
-                    <ProductDiv />
+                    {orders.length === 0 ? (
+                        <p>No Order History</p>
+                    ) : (
+                        orders.map((order)=> (
+                            <HistoryProduct key={order.id} order={order} />
+                        ))
+                    )}
+
+                    
                 </div>
 
                 <aside className="w-[40%] border border-[#E8E8E8] h-full p-5">
