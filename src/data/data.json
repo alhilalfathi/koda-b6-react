@@ -26,7 +26,7 @@
             },
             {
                 "id": 3,
-                "img" : "/assets/img/image33.png",
+                "img" : "https://images.pexels.com/photos/29156485/pexels-photo-29156485.jpeg",
                 "name" : "Matcha Latte",
                 "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
                 "price" : 25000,
@@ -41,11 +41,23 @@
                 "img" : "/assets/img/image22.png",
                 "name" : "Caramel Machiato",
                 "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
-                "price" : 20000,
-                "discountPrice": 10000,
+                "price" : 25000,
+                "discountPrice": 15000,
                 "imgUrl1" : "/assets/img/image34.png",
                 "imgUrl2" : "/assets/img/image33.png",
                 "imgUrl3" : "/assets/img/image27.png",
+                "flashSale": true
+            },
+            {
+                "id": 5,
+                "img" : "/assets/img/image33.png",
+                "name" : "Caramel Latte",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 20000,
+                "discountPrice": 10000,
+                "imgUrl1" : "/assets/img/image22.png",
+                "imgUrl2" : "/assets/img/image34.png",
+                "imgUrl3" : "/assets/img/image33.png",
                 "flashSale": true
             }
             
