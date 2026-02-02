@@ -6,7 +6,7 @@ import { Product } from "../component/ProductDiv"
 
 const PromoCard = (promo) => {
     return(
-        <div className={`flex items-center bg-[${promo.color}] w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0`}>
+        <div className={`flex items-center ${promo.color} w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0`}>
             <img src={promo.icon} alt="promo-icon"/>
             <div className="flex flex-col w-50">
                 <h4>HAPPY MOTHER’S DAY!</h4>
@@ -56,11 +56,11 @@ export const ProductPage = () => {
         </div>
         {/* promo-card  */}
         <div ref={promoRef} className="scroll-bar flex gap-4 p-4 overflow-x-auto overflow-y-hidden">
-            <PromoCard icon={"/assets/img/image46.png"} color={"#88B788"}/>
-            <PromoCard icon={"/assets/img/image46.png"} color={"#88B788"}/>
-            <PromoCard icon={"/assets/img/image46.png"} color={"#88B788"}/>
-            <PromoCard icon={"/assets/img/image46.png"} color={"#88B788"}/>
-            <PromoCard icon={"/assets/img/image43.png"} color={"#F5C361"}/>
+            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
+            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
+            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
+            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
+            <PromoCard icon={"/assets/img/image43.png"} color={"bg-[#F5C361]"}/>
         </div>
         {/* content  */}
         <div>
