@@ -1,55 +1,91 @@
+import { useParams } from "react-router-dom"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
-import { ProductDiv } from "../component/ProductSmallDiv"
+import { useEffect, useState } from "react"
 
 
+const InfoRow = ({ icon, label, value }) => (
+  <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8]">
+    <span className="flex items-center gap-3">
+      <img src={`/assets/img/${icon}`} />
+      {label}
+    </span>
+    <p>
+      <b>{value}</b>
+    </p>
+  </div>
+)
 
 export const DetailOrder = () => {
+  const {orderId} = useParams()
+  const [order, setOrder] = useState(null)
+
+  useEffect(()=>{
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+    if(!loggedUser){
+      return
+    }
+    const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {}
+    const userOrders = orderHistory[loggedUser.email] || []
+    
+    const foundOrder = userOrders.find((item) => item.id === orderId)
+
+    setOrder(foundOrder)
+  },[orderId])
+
+  if (!order) {
+  return (
+    <div>
+      <NavDiv />
+      <p className="text-center mt-20">Loading order detail...</p>
+    </div>
+  )
+  }
   return (
     <div>
         <NavDiv />
         <div className="mx-20 mt-10">
-            <h1 className="text-3xl font-bold">Order #12354-09893</h1>
-            <p>21 March 2023 at 10:30 AM</p>
+            <h1 className="text-3xl font-bold">Order {order.id}</h1>
+            <p>{new Date(order.date).toLocaleDateString("en-GB")}</p>
         </div>
         <div className="flex mx-20 mt-10 gap-3 mb-10">
             <div className="flex flex-col w-1/2">
+
                 <h2 className="mb-5">Order Information</h2>
-                <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8] ">
-                    <span className="flex items-center gap-3"><img src="/assets/img/Profile.png" alt="profile icon"/>Full Name</span>
-                    <p><b>Ghaluh Wizard Anggoro</b></p>
-                </div>
-                <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8] ">
-                    <span className="flex items-center gap-3"><img src="/assets/img/Location.png" alt="location icon"/>Address</span>
-                    <p><b>Griya bandung indah</b></p>
-                </div>
-                <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8] ">
-                    <span className="flex items-center gap-3"><img src="/assets/img/PhoneCall.png" alt="phone icon"/>Phone</span>
-                    <p><b>082116304338</b></p>
-                </div>
-                <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8] ">
-                    <span className="flex items-center gap-3"><img src="/assets/img/u_postcard.png" alt="postcard icon"/>Payment Method</span>
-                    <p><b>Cash</b></p>
-                </div>
-                <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8] ">
-                    <span className="flex items-center gap-3"><img src="/assets/img/truck.png" alt="truck shipping icon"/>Shipping</span>
-                    <p><b>Dine In</b></p>
-                </div>
+                <InfoRow icon="Profile.png" label="Full Name" value={order.customer.fullName} />
+                <InfoRow icon="Location.png" label="Address" value={order.customer.address} />
+                <InfoRow icon="PhoneCall.png" label="Phone" value={"082116304338"} />
+                <InfoRow icon="u_postcard.png" label="Payment Method" value={order.paymentMethod} />
+                <InfoRow icon="truck.png" label="Shipping" value={order.delivery} />
+
                 <div className="flex justify-between py-3 px-2 bg-[#E8E8E84D] border border-[#E8E8E8] ">
                     <span className="flex items-center gap-3"><img src="/assets/img/u_process.png" alt="process icon"/>Status</span>
                     <p className="bg-green-200 p-2 rounded-2xl">Done</p>
                 </div>
                 <div className="flex justify-between py-3 px-2">
                     <span>Total Transaction</span>
-                    <p className="text-yellow-600">Idr 40.000</p>
+                    <p className="text-yellow-600">IDR {order.subTotal.toLocaleString()}</p>
                 </div>
             </div>
+            {/* product  */}
             <aside className="w-1/2">
               <h2>Your Order</h2>
-              <div className="w-full">
-                <ProductDiv />
-                <ProductDiv />
-              </div>
+              {order.cartItems.map((item, index)=>
+                (
+                  <div key={index} className="flex items-center gap-5 bg-[#E8E8E84D] p-3 mt-5">
+                    <img src={item.img} alt={item.name} className="w-40 h-40"/>
+                    <div className="flex flex-col gap-3 items-left">
+                      <span className="bg-red-600 px-3 rounded-xl w-25 text-white">Flash Sale</span>
+                      <h3>{item.name}</h3>
+                      <p>{item.quantity} pcs   |   {item.size}   |   {item.temp}   |   {order.delivery}</p>
+                      <div className="flex gap-2">
+                        <span className="text-red-400"><del>IDR {item.price.toLocaleString()}</del></span>
+                        <span>IDR {(item.discountPrice * item.quantity).toLocaleString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
             </aside>
         </div>
         <Footer />
