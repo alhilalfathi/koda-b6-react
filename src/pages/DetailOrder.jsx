@@ -46,7 +46,11 @@ export const DetailOrder = () => {
         <NavDiv />
         <div className="mx-20 mt-10">
             <h1 className="text-3xl font-bold">Order {order.id}</h1>
-            <p>{new Date(order.date).toLocaleDateString("en-GB")}</p>
+            <p>{new Date(order.date).toLocaleDateString("en-GB",{
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                })}</p>
         </div>
         <div className="flex mx-20 mt-10 gap-3 mb-10">
             <div className="flex flex-col w-1/2">
