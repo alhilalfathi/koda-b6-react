@@ -3,12 +3,16 @@ import { MainDiv } from "../component/MainDiv";
 import { HiOutlineMail } from "react-icons/hi";
 import { ButtonDiv } from "../component/buttonDiv";
 import forgotPassImage from "/assets/img/Rectangle289-2.png"
+import { useForm } from "react-hook-form";
 
 export const ForgotPass = ()=>{
+    const {handleSubmit, register} = useForm()
     return(
-        <MainDiv img={forgotPassImage} imgname={"main-image"} title={"Fill out the form correctly"} desctitle={"We will send new password to your email"}>
-            <InputDiv type={"email"} id={"email"} name={"email"} icon={<HiOutlineMail />} placeholder={"Enter Your Email"}>Email</InputDiv>
-            <ButtonDiv>Submit</ButtonDiv>        
-        </MainDiv>
+        <form onSubmit={handleSubmit}>
+            <MainDiv img={forgotPassImage} imgname={"main-image"} title={"Fill out the form correctly"} desctitle={"We will send new password to your email"}>
+                <InputDiv register={register} type={"email"} id={"email"} name={"email"} icon={<HiOutlineMail />} placeholder={"Enter Your Email"}>Email</InputDiv>
+                <ButtonDiv>Submit</ButtonDiv>
+            </MainDiv>
+        </form>
     )
 }
