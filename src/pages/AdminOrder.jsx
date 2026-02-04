@@ -28,7 +28,7 @@ export const AdminOrder = () => {
           </div>
           <div className="flex items-center gap-3">
             <div className=" flex flex-col">
-              <label for="product-name">Status</label>
+              <label htmlFor="product-name">Status</label>
               <select id="order-status" type="text"
               className="border rounded-lg pl-4 pr-4 py-2 w-64 text-sm">
                 <option value="All">All</option>
@@ -39,7 +39,7 @@ export const AdminOrder = () => {
               </select>
             </div>
             <div className=" flex flex-col">
-                <label for="product-name">Search Order</label>
+                <label htmlFor="product-name">Search Order</label>
                 <input id="product-name" type="text" placeholder="Enter Order Number"
                 className="border rounded-lg pl-10 pr-4 py-2 w-64 text-sm"/>
             </div>
@@ -142,7 +142,7 @@ export const AdminOrder = () => {
                     <h1 className="text-2xl font-bold">Order  #12354-09893</h1>
                     <IoCloseCircleSharp onClick={hideInfo} className="cursor-pointer" />
                 </span>
-                <label for="productName" className="block text-sm mb-1">Order Information</label>
+                <label htmlFor="productName" className="block text-sm mb-1">Order Information</label>
 
                 <div className="flex justify-between py-4 border border-white border-b-[#E8E8E84D]">
                   <p>Full Name</p>
