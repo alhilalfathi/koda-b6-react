@@ -9,6 +9,7 @@ const PPN = 0.1
 export const CheckoutProduct = () => {
   const {handleSubmit, register} = useForm()
   const [cartItems, setCartsItem] = useState([])
+  const [currentUser, setCurrentUser] = useState("")
   const [delivery, setDelivery] = useState("Dine In")
   const navigate = useNavigate()
 
@@ -19,8 +20,10 @@ export const CheckoutProduct = () => {
     }
     const cart = JSON.parse(localStorage.getItem("cart")) || {}
     const userCart = cart[loggedUser.email] || []
+    setCurrentUser(loggedUser)
     setCartsItem(userCart)
   },[])
+
 
   const handleRemove = (index) => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
@@ -157,14 +160,14 @@ export const CheckoutProduct = () => {
           <label htmlFor="email">Email</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/mail.png" alt="email icon" className="checkout-input-icon"/>
-            <input {...register("email")} type="text" id="email" placeholder="Enter Your Email" className=" px-3  w-full "/>
+            <input {...register("email")} type="text" id="email" placeholder="Enter Your Email" defaultValue={currentUser.email} className=" px-3  w-full "/>
           </div>
         </div>
         <div >
           <label htmlFor="fullname">Full Name</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/Profile.png" alt="name icon" className="checkout-input-icon"/>
-            <input {...register("fullName")} type="text" id="fullname" placeholder="Enter Your Full Name" className=" px-3  w-full "/>
+            <input {...register("fullName")} type="text" id="fullname" placeholder="Enter Your Full Name" defaultValue={currentUser.name} className=" px-3  w-full "/>
           </div>
         </div>
         <div >
