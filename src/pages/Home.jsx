@@ -69,11 +69,11 @@ export const HomePage = ()=>{
                     <p className="mt-10 mb-20">Let's choose and have a bit taste of people's favorite. It might be yours too!</p>
                 </div>
                         {/* product list */}
-                <div className="flex justify-center items-center gap-2">
+                <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-2">
                         {/* product */}
                         {products.filter(item=> item.favorite === true).map((product, index)=>(
                             <div key={index} className="flex flex-col relative">
-                                <div className="w-64" >
+                                <div className="w-64 my-15 md:my-o" >
                                     <img className="w-64 h-64" src={product.img} alt={product.name}/>
                                 </div>
                                 <div className="w-58 bg-white absolute top-52 left-3 p-2" >
@@ -105,13 +105,13 @@ export const HomePage = ()=>{
             </section>
                         {/* testimoni  */}
             <section>
-                <div className="flex bg-black p-20 gap-4">
+                <div className="flex bg-black p-10 md:p-20 gap-4">
                     {showedTesti && (
-                        <div className="flex gap-5">
+                        <div className="flex md:flex-row flex-col gap-10 md:gap-5">
                             <div className="w-150 h-100"><img src={showedTesti.img} alt={showedTesti.name}/></div>
                             <div className="text-white">
                                 <p className="pb-4">TESTIMONIAL</p>
-                                <h2 className="text-3xl border border-black border-l-[#FF8906] pl-4 py-4">{showedTesti.name}</h2>
+                                <h2 className="text-xl md:text-3xl border border-black border-l-[#FF8906] pl-4 py-4">{showedTesti.name}</h2>
                                 <p className="text-[#FF8906] pt-4">{showedTesti.role}</p>
                                 <p className="w-128 py-4">{showedTesti.msg}</p>
                                 <div><img src="/assets/img/Frame41.png" alt="stars icon"/></div>
