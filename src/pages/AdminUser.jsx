@@ -37,7 +37,7 @@ export const AdminUser = () => {
                 </div>
                 <div className="flex items-center gap-3">
                     <div className=" flex flex-col">
-                        <label for="product-name">Search User</label>
+                        <label htmlFor="product-name">Search User</label>
                             <input id="product-name" type="text" placeholder="Enter User Name"
                             className="border rounded-lg pl-10 pr-4 py-2 w-64 text-sm"/>
                     </div>
