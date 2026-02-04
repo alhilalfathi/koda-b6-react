@@ -27,7 +27,7 @@ export const AdminProduct = () => {
                 </div>
                 <div className="flex items-center gap-3">
                     <div className=" flex flex-col">
-                        <label for="product-name">Search Product</label>
+                        <label htmlFor="product-name">Search Product</label>
                             <input id="product-name" type="text" placeholder="Enter Product Name"
                             className="border rounded-lg pl-10 pr-4 py-2 w-64 text-sm"/>
                     </div>
@@ -111,14 +111,14 @@ export const AdminProduct = () => {
                     Upload
                 </button>
 
-                <label for="productName" className="block text-sm mb-1">Product name</label>
+                <label htmlFor="productName" className="block text-sm mb-1">Product name</label>
                 <input id="productName" className="w-full border rounded-lg px-4 py-2 mb-4" placeholder="Enter Product Name"/>
 
-                <label for="productPrice" className="block text-sm mb-1">Price</label>
+                <label htmlFor="productPrice" className="block text-sm mb-1">Price</label>
                 <input id="productPrice" className="w-full border rounded-lg px-4 py-2 mb-4" placeholder="Enter Product Price"/>
 
             
-                <label for="description" className="block text-sm mb-1">Description</label>
+                <label htmlFor="description" className="block text-sm mb-1">Description</label>
                 <textarea id="description" className="w-full border rounded-lg px-4 py-2 h-28 mb-4" placeholder="Enter Product Description">
                 </textarea>
 
