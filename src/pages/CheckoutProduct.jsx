@@ -4,6 +4,8 @@ import { NavDiv } from "../component/NavDiv"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 
+const PPN = 0.1
+
 export const CheckoutProduct = () => {
   const {handleSubmit, register} = useForm()
   const [cartItems, setCartsItem] = useState([])
@@ -40,7 +42,7 @@ export const CheckoutProduct = () => {
     orderTotal += item.discountPrice * item.quantity
   })
 
-  const tax = orderTotal * 0.1
+  const tax = orderTotal * PPN
   const deliveryCost = delivery === "Door Delivery" ? 10000 : 0
   const subTotal = orderTotal + tax + deliveryCost
 
