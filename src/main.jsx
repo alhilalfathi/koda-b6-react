@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./assets/css/style.css"
 import { Router } from "./Router";
+import { DataProvider } from "./component/context/DataContext";
 
 
 
@@ -10,4 +11,8 @@ const root = createRoot(el)
 
 
 
-root.render(<Router/>)
+root.render(
+    <DataProvider>
+        <Router/>
+    </DataProvider>
+)
