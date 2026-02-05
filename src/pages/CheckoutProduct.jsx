@@ -160,21 +160,21 @@ export const CheckoutProduct = () => {
           <label htmlFor="email">Email</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/mail.png" alt="email icon" className="checkout-input-icon"/>
-            <input {...register("email")} type="text" id="email" placeholder="Enter Your Email" defaultValue={currentUser.email} className=" px-3  w-full "/>
+            <input {...register("email")} type="text" id="email" placeholder="Enter Your Email" autoComplete="off" defaultValue={currentUser.email} className=" px-3  w-full "/>
           </div>
         </div>
         <div >
           <label htmlFor="fullname">Full Name</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/Profile.png" alt="name icon" className="checkout-input-icon"/>
-            <input {...register("fullName")} type="text" id="fullname" placeholder="Enter Your Full Name" defaultValue={currentUser.name} className=" px-3  w-full "/>
+            <input {...register("fullName")} type="text" id="fullname" placeholder="Enter Your Full Name" autoComplete="off" defaultValue={currentUser.name} className=" px-3  w-full "/>
           </div>
         </div>
         <div >
           <label htmlFor="address">Address</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
               <img src="/assets/img/Location.png" alt="address icon" className="checkout-input-icon"/>
-              <input {...register("address")} type="text" id="address" placeholder="Enter Your Address" className=" px-3  w-full "/>
+              <input {...register("address")} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full "/>
           </div>
         </div>
         <div >
