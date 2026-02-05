@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
 import { Product } from "../component/ProductDiv"
+import { DataContext } from "../component/context/DataContext"
 
 const PromoCard = (promo) => {
     return(
@@ -18,17 +19,9 @@ const PromoCard = (promo) => {
 }
 
 export const ProductPage = () => {
-    const [products, setProducts] = useState([])
     const [search, setSearch] = useState("")
     const promoRef = useRef()
-
-    useEffect(()=>{
-        const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
-        fetch(url).then((res)=> res.json()).then((data)=>{
-            setProducts(data)
-        }).catch((err)=> console.log(err))
-
-    },[])
+    const {products} = useContext(DataContext)
 
     const scrollButtonRight = () => {
         promoRef.current.scrollLeft += 150
