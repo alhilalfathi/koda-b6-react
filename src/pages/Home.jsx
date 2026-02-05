@@ -4,22 +4,15 @@ import sideImage from "/assets/img/Rectangle291.png"
 import checklistIcon from "/assets/img/Vector.png"
 import { BsCart2 } from "react-icons/bs";
 import { Footer } from "../component/Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChatWidget } from "../component/Chat";
+import { DataContext } from "../component/context/DataContext";
 
 export const HomePage = ()=>{
-    const [products, setProducts] = useState([])
     const [testi, setTesti] = useState([])
     const [currentTesti, setCurrentTesti] = useState(0)
-
-    // fetch data product 
-    useEffect(()=>{
-        const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/data.json"
-        fetch(url).then((res)=> res.json()).then((data)=>{
-            setProducts(data)
-        }).catch((err)=> console.log(err))
-    },[])
+    const {products, loading} = useContext(DataContext)
 
     // fetch data testimoni 
     useEffect(()=>{
