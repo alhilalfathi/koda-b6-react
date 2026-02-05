@@ -9,86 +9,88 @@ import { Link } from "react-router-dom";
 import { ChatWidget } from "../component/Chat";
 import { DataContext } from "../component/context/DataContext";
 
-export const HomePage = ()=>{
+export const HomePage = () => {
     const [testi, setTesti] = useState([])
     const [currentTesti, setCurrentTesti] = useState(0)
-    const {products, loading} = useContext(DataContext)
+    const { products, loading } = useContext(DataContext)
 
     // fetch data testimoni 
-    useEffect(()=>{
+    useEffect(() => {
         const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/testimoni.json"
-        fetch(url).then((res)=> res.json()).then((data)=>{
+        fetch(url).then((res) => res.json()).then((data) => {
             setTesti(data)
-        }).catch((err)=> console.log(err))
-    },[])
+        }).catch((err) => console.log(err))
+    }, [])
     const showedTesti = testi[currentTesti]
 
     const nextTesti = () => {
-        setCurrentTesti((prev) => 
-            prev === testi.length-1 ? 0 : prev + 1
+        setCurrentTesti((prev) =>
+            prev === testi.length - 1 ? 0 : prev + 1
         )
     }
     const prevTesti = () => {
         setCurrentTesti((prev) =>
-            prev === 0 ? testi.length-1 : prev-1
+            prev === 0 ? testi.length - 1 : prev - 1
         )
     }
-    return(
+    return (
         <div>
             <HomeNav />
 
             <HomeHeader />
 
             <section className="flex flex-col md:flex-row">
-                        {/* header */}
+                {/* header */}
                 <div className="w-full md:w-1/2 px-6 md:px-20 py-10">
                     <h1 className="text-3xl md:text-6xl font-medium">We Provide <span className="text-yellow-700">Good Cofee</span> and <span className="text-yellow-700">Healthy Meals</span></h1>
                     <p className="my-10">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
                     <div className="flex flex-col gap-6">
-                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon"/><p>High quality beans</p></div>
-                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon"/><p>Healthy meals, you can request the ingerdient</p></div>
-                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon"/><p>Chat with our staff to get better experience for ordering</p></div>
-                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon"/><p>Free member card with a minimum purchase of IDR 200.000.</p></div>
+                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon" /><p>High quality beans</p></div>
+                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon" /><p>Healthy meals, you can request the ingerdient</p></div>
+                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon" /><p>Chat with our staff to get better experience for ordering</p></div>
+                        <div className="flex gap-4"><img className="w-6 h-6" src={checklistIcon} alt="checklist icon" /><p>Free member card with a minimum purchase of IDR 200.000.</p></div>
                     </div>
                 </div>
-                        {/* aside */}
+                {/* aside */}
                 <div className="w-full md:w-1/2"><img src={sideImage} alt="staff image" /></div>
             </section>
             <ChatWidget />
             <section>
-                        {/* header */}
+                {/* header */}
                 <div className="flex flex-col justify-center items-center mt-10">
                     <h1 className="text-3xl md:text-6xl font-medium">Here is People's <span className="text-yellow-700">Favorite</span></h1>
                     <p className="mt-10 mb-20">Let's choose and have a bit taste of people's favorite. It might be yours too!</p>
                 </div>
-                        {/* product list */}
+                {/* product list */}
                 <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-2">
-                        {/* product */}
-                        {products.filter(item=> item.favorite === true).map((product, index)=>(
-                            <div key={index} className="flex flex-col relative">
-                                <div className="w-64 my-15 md:my-o" >
-                                    <img className="w-64 h-64" src={product.img} alt={product.name}/>
-                                </div>
-                                <div className="w-58 bg-white absolute top-52 left-3 p-2" >
-                                    <h3 className="text-2xl mb-2">{product.name}</h3>
-                                    <p className="text-sm text-stone-700 mb-2">{product.tag}</p>
-                                    <h3 className="text-xl text-[#FF8906] mb-2">IDR {product.price.toLocaleString("id")}</h3>
-                                    <div className="flex gap-3">
-                                        <Link className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.id}`}>Buy</Link>
-                                        <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
-                                            <Link to="/checkout">
-                                                <BsCart2 />
-                                            </Link>
-                                        </div>
+                    {/* product */}
+                    {loading ? (
+                        <p className="text-xl">Loading favorite products...</p>
+                    ) : (products.filter(item => item.favorite === true).map((product, index) => (
+                        <div key={index} className="flex flex-col relative">
+                            <div className="w-64 my-15 md:my-o" >
+                                <img className="w-64 h-64" src={product.img} alt={product.name} />
+                            </div>
+                            <div className="w-58 bg-white absolute top-52 left-3 p-2" >
+                                <h3 className="text-2xl mb-2">{product.name}</h3>
+                                <p className="text-sm text-stone-700 mb-2">{product.tag}</p>
+                                <h3 className="text-xl text-[#FF8906] mb-2">IDR {product.price.toLocaleString("id")}</h3>
+                                <div className="flex gap-3">
+                                    <Link className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.id}`}>Buy</Link>
+                                    <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
+                                        <Link to="/checkout">
+                                            <BsCart2 />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        </div>
+                    )))}
                 </div>
             </section>
 
             <section>
-                       {/* header */}
+                {/* header */}
                 <div className="flex flex-col justify-center items-center mt-70 bg-zinc-50 pt-20">
                     <h1 className="text-3xl md:text-6xl font-medium text-center"> <span className="text-yellow-700">Visit Our Store</span> in the Spot on the Map Below</h1>
                     <p className="mt-10 w-128 text-center">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
@@ -96,27 +98,27 @@ export const HomePage = ()=>{
                 <div className="flex justify-center items-center"><img className="w-300 " src="/assets/img/HugeGlobal.png" alt="maps image" /></div>
 
             </section>
-                        {/* testimoni  */}
+            {/* testimoni  */}
             <section>
                 <div className="flex bg-black p-10 md:p-20 gap-4">
                     {showedTesti && (
                         <div className="flex md:flex-row flex-col gap-10 md:gap-5">
-                            <div className="w-150 h-100"><img src={showedTesti.img} alt={showedTesti.name}/></div>
+                            <div className="w-150 h-100"><img src={showedTesti.img} alt={showedTesti.name} /></div>
                             <div className="text-white">
                                 <p className="pb-4">TESTIMONIAL</p>
                                 <h2 className="text-xl md:text-3xl border border-black border-l-[#FF8906] pl-4 py-4">{showedTesti.name}</h2>
                                 <p className="text-[#FF8906] pt-4">{showedTesti.role}</p>
                                 <p className="w-128 py-4">{showedTesti.msg}</p>
-                                <div><img src="/assets/img/Frame41.png" alt="stars icon"/></div>
+                                <div><img src="/assets/img/Frame41.png" alt="stars icon" /></div>
                                 <div className="flex gap-4 py-6">
                                     <button onClick={prevTesti} className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</button>
                                     <button onClick={nextTesti} className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</button>
                                 </div>
-                                <div><img src="/assets/img/Group1300.png" alt="1300"/></div>
+                                <div><img src="/assets/img/Group1300.png" alt="1300" /></div>
                             </div>
                         </div>
                     )}
-                    
+
                 </div>
             </section>
 
