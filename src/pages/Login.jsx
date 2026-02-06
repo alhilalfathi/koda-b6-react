@@ -10,6 +10,8 @@ import loginImage from "/assets/img/Rectangle289-1.png"
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { AuthContext } from "../component/context/AuthContext";
 
 const loginSchema = yup.object({
     email: yup.string().required("Email must be filled").email("Email Invalid"),
@@ -19,6 +21,9 @@ const loginSchema = yup.object({
 export const LoginPage = ()=>{
     const {handleSubmit, register, formState: {errors}} = useForm({resolver: yupResolver(loginSchema)})
     const navigate = useNavigate()
+
+    const {login} = useContext(AuthContext)
+
     function submitForm(value){
         const oldRegisteredUser = JSON.parse(localStorage.getItem("registeredUsers")) || []
 
@@ -31,7 +36,7 @@ export const LoginPage = ()=>{
             return
         }
 
-        localStorage.setItem("loggedUser",JSON.stringify(member))
+        login(member)
 
         alert("Login success")
         navigate("/")
