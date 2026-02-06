@@ -3,7 +3,7 @@ import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { useCart } from "../component/hook/cart"
+import { useCart } from "../component/hook/useCart"
 
 const PPN = 0.1
 
