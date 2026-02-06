@@ -1,45 +1,31 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
+import { useCart } from "../component/hook/cart"
 
 const PPN = 0.1
 
 export const CheckoutProduct = () => {
-  const {handleSubmit, register} = useForm()
-  const [cartItems, setCartsItem] = useState([])
-  const [currentUser, setCurrentUser] = useState("")
+  const { handleSubmit, register } = useForm()
   const [delivery, setDelivery] = useState("Dine In")
   const navigate = useNavigate()
 
-  useEffect(()=>{
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-    if(!loggedUser){
-      return
-    }
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    const userCart = cart[loggedUser.email] || []
-    setCurrentUser(loggedUser)
-    setCartsItem(userCart)
-  },[])
+  const { cartItems, currentUser, handleRemove, clearCart } = useCart()
 
-
-  const handleRemove = (index) => {
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-    if(!loggedUser){
-      return
-    }
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    const updatedCart = [...cartItems]
-
-    updatedCart.splice(index, 1)
-
-    cart[loggedUser.email] = updatedCart
-    localStorage.setItem("cart",JSON.stringify(cart))
-
-    setCartsItem(updatedCart)
+  if (!currentUser) {
+    return (
+      <div>
+        <NavDiv />
+        <p className="text-center mt-20 text-xl">
+          Please login to continue checkout
+        </p>
+        <Footer />
+      </div>
+    )
   }
+
   let orderTotal = 0
   cartItems.forEach((item) => {
     orderTotal += item.discountPrice * item.quantity
@@ -50,12 +36,11 @@ export const CheckoutProduct = () => {
   const subTotal = orderTotal + tax + deliveryCost
 
   const activeClass = "border border-[#FF8906] px-3 w-55 h-10 cursor-pointer"
-  const inactiveClass = "border border-[#E8E8E8] px-3 w-55 h-10 cursor-pointer" 
+  const inactiveClass = "border border-[#E8E8E8] px-3 w-55 h-10 cursor-pointer"
 
   const checkoutPayment = (data) => {
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-    if (!loggedUser || cartItems.length === 0){
-      return
+    if (!currentUser || cartItems.length === 0) {
+      return alert("You need to login")
     }
     const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {}
 
@@ -72,17 +57,13 @@ export const CheckoutProduct = () => {
       date: new Date().toISOString()
     }
 
-    if(!orderHistory[loggedUser.email]){
-      orderHistory[loggedUser.email] = []
+    if (!orderHistory[currentUser.email]) {
+      orderHistory[currentUser.email] = []
     }
-    orderHistory[loggedUser.email].push(newOrder)
-    localStorage.setItem("orderHistory",JSON.stringify(orderHistory))
-    
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    cart[loggedUser.email] = []
-    localStorage.setItem("cart", JSON.stringify(cart))
-    setCartsItem([])
+    orderHistory[currentUser.email].push(newOrder)
+    localStorage.setItem("orderHistory", JSON.stringify(orderHistory))
 
+    clearCart()
     navigate("/history-order")
   }
 
@@ -134,7 +115,7 @@ export const CheckoutProduct = () => {
               <p>Tax</p>
               <p>IDR {tax.toLocaleString()}</p>
             </div>
-            <hr/>
+            <hr />
             <div className="flex justify-between">
               <p>Sub Total</p>
               <p>IDR {subTotal.toLocaleString()}</p>
@@ -142,14 +123,14 @@ export const CheckoutProduct = () => {
             <button type="submit" form="deliveryForm" className="bg-[#FF8906] w-full rounded py-2 cursor-pointer">Checkout</button>
             <p>We Accept</p>
             <div className="flex gap-3 items-center justify-between">
-              <img src="/assets/img/bri.png" alt="bri icon"/>
-              <img src="/assets/img/dana.png" alt="dana icon"/>
-              <img src="/assets/img/bca.png" alt="bca icon"/>
-              <img src="/assets/img/gopay.png" alt="gopay icon"/>
-              <img src="/assets/img/ovo.png" alt="ovo icon"/>
-              <img src="/assets/img/logos_paypal.png" alt="paypal icon"/>
+              <img src="/assets/img/bri.png" alt="bri icon" />
+              <img src="/assets/img/dana.png" alt="dana icon" />
+              <img src="/assets/img/bca.png" alt="bca icon" />
+              <img src="/assets/img/gopay.png" alt="gopay icon" />
+              <img src="/assets/img/ovo.png" alt="ovo icon" />
+              <img src="/assets/img/logos_paypal.png" alt="paypal icon" />
             </div>
-              <p>*Get Discount if you pay with Bank Central Asia</p>
+            <p>*Get Discount if you pay with Bank Central Asia</p>
           </div>
         </aside>
       </div>
@@ -159,29 +140,29 @@ export const CheckoutProduct = () => {
         <div >
           <label htmlFor="email">Email</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-            <img src="/assets/img/mail.png" alt="email icon" className="checkout-input-icon"/>
-            <input {...register("email")} type="text" id="email" placeholder="Enter Your Email" autoComplete="off" defaultValue={currentUser.email} className=" px-3  w-full "/>
+            <img src="/assets/img/mail.png" alt="email icon" className="checkout-input-icon" />
+            <input {...register("email")} type="text" id="email" placeholder="Enter Your Email" autoComplete="off" defaultValue={currentUser.email} className=" px-3  w-full " />
           </div>
         </div>
         <div >
           <label htmlFor="fullname">Full Name</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-            <img src="/assets/img/Profile.png" alt="name icon" className="checkout-input-icon"/>
-            <input {...register("fullName")} type="text" id="fullname" placeholder="Enter Your Full Name" autoComplete="off" defaultValue={currentUser.name} className=" px-3  w-full "/>
+            <img src="/assets/img/Profile.png" alt="name icon" className="checkout-input-icon" />
+            <input {...register("fullName")} type="text" id="fullname" placeholder="Enter Your Full Name" autoComplete="off" defaultValue={currentUser.name} className=" px-3  w-full " />
           </div>
         </div>
         <div >
           <label htmlFor="address">Address</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
-              <img src="/assets/img/Location.png" alt="address icon" className="checkout-input-icon"/>
-              <input {...register("address")} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full "/>
+            <img src="/assets/img/Location.png" alt="address icon" className="checkout-input-icon" />
+            <input {...register("address")} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full " />
           </div>
         </div>
         <div >
           <label>Delivery</label>
           <div className="flex gap-5 p-3 w-[70%]">
-            {["Dine In", "Door Delivery", "Pick Up"].map((item)=>(
-              <button type="button" key={item} onClick={()=> setDelivery(item)} className={`px-3 w-55 h-10 border cursor-pointer ${delivery === item ? activeClass : inactiveClass}`}>{item}</button>
+            {["Dine In", "Door Delivery", "Pick Up"].map((item) => (
+              <button type="button" key={item} onClick={() => setDelivery(item)} className={`px-3 w-55 h-10 border cursor-pointer ${delivery === item ? activeClass : inactiveClass}`}>{item}</button>
             ))}
           </div>
         </div>
