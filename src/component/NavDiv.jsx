@@ -1,12 +1,16 @@
 import { useContext } from "react"
 import logo from "/assets/img/Frame13.png"
 import searchIcon from "/assets/img/Search.png"
-import cartIcon from "/assets/img/ShoppingCart.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "./context/AuthContext"
 
 export const NavDiv = () => {
     const { user, logout } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const onLogout = () => {
+        logout()
+        navigate("/")
+    }
     return (
         <div className="w-full h-16 flex justify-between bg-black px-4 md:px-20">
             {/* left navbar  */}
@@ -32,7 +36,7 @@ export const NavDiv = () => {
                     <>
                         <span className="text-sm">Hi, {user.name}</span>
                         <button
-                            onClick={logout}
+                            onClick={onLogout}
                             className="w-24 h-10 border flex items-center justify-center rounded"
                         >
                             Logout
