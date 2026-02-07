@@ -4,6 +4,7 @@ import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
 import { LuCalendarDays } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { object } from "yup";
 
 const HistoryProduct = ({order}) => {
     const firstItem = order.cartItems[0]
@@ -49,6 +50,7 @@ const HistoryProduct = ({order}) => {
 
 export const HistoryOrder = () => {
     const [orders, setOrders] = useState([])
+    const [count, setCount] = useState(1)
 
     useEffect(()=>{
         const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
@@ -68,7 +70,7 @@ export const HistoryOrder = () => {
             {/* title  */}
             <div className="flex gap-5 items-center ml-20 mt-10 mb-5">
                 <h1 className="text-4xl py-3">History Order</h1>
-                <span className="bg-[#E8E8E8] px-2 mt-3">2</span>
+                <span className="bg-[#E8E8E8] px-2 mt-3">{orders.length}</span>
             </div>
 
             <div className="flex gap-5 mx-20">
