@@ -10,6 +10,7 @@
                 "imgUrl1" : "/assets/img/image22.png",
                 "imgUrl2" : "/assets/img/image30.png",
                 "imgUrl3" : "/assets/img/image31.png",
+                "category" : "coffee",
                 "flashSale": true,
                 "favorite" : true
             },
@@ -23,6 +24,7 @@
                 "imgUrl1" : "/assets/img/image27.png",
                 "imgUrl2" : "/assets/img/image31.png",
                 "imgUrl3" : "/assets/img/image30.png",
+                "category" : "coffee",
                 "flashSale": true,
                 "favorite" : true
             },
@@ -36,6 +38,7 @@
                 "imgUrl1" : "/assets/img/image27.png",
                 "imgUrl2" : "/assets/img/image31.png",
                 "imgUrl3" : "/assets/img/image22.png",
+                "category" : "non coffee",
                 "flashSale": true,
                 "favorite" : true
             },
@@ -49,6 +52,7 @@
                 "imgUrl1" : "/assets/img/image34.png",
                 "imgUrl2" : "/assets/img/image33.png",
                 "imgUrl3" : "/assets/img/image27.png",
+                "category" : "non coffee",
                 "flashSale": true,
                 "favorite" : true
             },
@@ -62,6 +66,7 @@
                 "imgUrl1" : "/assets/img/image22.png",
                 "imgUrl2" : "/assets/img/image34.png",
                 "imgUrl3" : "/assets/img/image33.png",
+                "category" : "coffee",
                 "flashSale": true,
                 "favorite" : false
             },
@@ -75,6 +80,7 @@
                 "imgUrl1" : "/assets/img/image27.png",
                 "imgUrl2" : "/assets/img/image31.png",
                 "imgUrl3" : "/assets/img/image22.png",
+                "category" : "coffee",
                 "flashSale": true,
                 "favorite" : false
             }
