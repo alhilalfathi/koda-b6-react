@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Pagination } from "../component/Pagination"
@@ -19,9 +19,13 @@ const PromoCard = (promo) => {
 }
 
 export const ProductPage = () => {
-    const [search, setSearch] = useState("")
     const promoRef = useRef()
     const {products} = useContext(DataContext)
+    const [search, setSearch] = useState("")
+    const [searchInput, setSearchInput] = useState("")
+    const [categories, setCategories] = useState([])
+    const [favorite, setFavorite] = useState(false)
+    const [sort, setSort] = useState("")
 
     const scrollButtonRight = () => {
         promoRef.current.scrollLeft += 150
@@ -29,7 +33,34 @@ export const ProductPage = () => {
     const scrollButtonLeft = () => {
         promoRef.current.scrollLeft -= 150
     }
-    const filteredSearch = products.filter((product)=> product.name.toLowerCase().includes(search.toLocaleLowerCase()))
+    const handleApplyFilter = () => {
+        setSearch(searchInput)
+    }
+    const handleCategoryChange = (value) => {
+        setCategories(prev => prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value])
+    }
+    const handleReset = () => {
+        setSearch("")
+        setSearchInput("")
+        setCategories([])
+        setFavorite(false)
+        setSort("")
+    }
+    let filteredProducts = products.filter(product=> {
+        const matchSearch = product.name.toLowerCase().includes(search.toLowerCase())
+        const matchCategory = categories.length === 0 || categories.includes(product.category)
+        const matchFavorite = !favorite || product.favorite === true
+        return matchSearch && matchCategory && matchFavorite
+    })
+      if (sort === "flashSale") {
+    filteredProducts = filteredProducts.filter(p => p.flashSale)
+  }
+
+  if (sort === "cheap") {
+    filteredProducts = [...filteredProducts].sort(
+      (a, b) => a.discountPrice - b.discountPrice
+    )
+  }
 
   return (
     <div>
@@ -67,7 +98,7 @@ export const ProductPage = () => {
                     <div className="flex justify-between">
                         <h2>Filter</h2>
                         <button 
-                        onClick={()=> setSearch("")} 
+                        onClick={handleReset} 
                         className="cursor-pointer">Reset Filter</button>
                     </div>
                     <div className="flex flex-col items-start my-3">
@@ -76,16 +107,34 @@ export const ProductPage = () => {
                         type="text" 
                         id="search" 
                         placeholder="Search Your Product"
-                        value={search}
-                        onChange={(e)=> setSearch(e.target.value)} 
+                        value={searchInput}
+                        onChange={(e)=> setSearchInput(e.target.value)} 
                         className="bg-white text-zinc-600 h-8 px-3 rounded w-full"></input>
                     </div>
                     <div >
                         <label>Category</label>
                         <ul>
-                            <li><input type="checkbox"/> Favorite Product</li>
-                            <li><input type="checkbox"/> Coffee</li>
-                            <li><input type="checkbox"/> Non Coffee</li>
+                            <li>
+                                <input 
+                                type="checkbox" 
+                                checked={favorite}
+                                onChange={()=> setFavorite(!favorite)}
+                                /> Favorite Product
+                            </li>
+                            <li>
+                                <input 
+                                type="checkbox"
+                                checked={categories.includes("coffee")}
+                                onChange={()=> handleCategoryChange("coffee")}
+                                /> Coffee
+                            </li>
+                            <li>
+                                <input 
+                                type="checkbox"
+                                checked={categories.includes("non coffee")}
+                                onChange={()=> handleCategoryChange("non coffee")}
+                                /> Non Coffee
+                            </li>
                             <li><input type="checkbox"/> Foods</li>
                             <li><input type="checkbox"/> Add-On</li>
                         </ul>
@@ -95,7 +144,14 @@ export const ProductPage = () => {
                         <label>Sort By</label>
                         <ul >
                             <li><input type="radio" name="sort"/> Buy 1 Get 1</li>
-                            <li><input type="radio" name="sort"/> Flash Sale</li>
+                            <li>
+                                <input 
+                                type="radio" 
+                                name="sort"
+                                checked={sort === "flashSale"}
+                                onChange={()=> setSort("flashSale")}
+                                /> Flash Sale
+                            </li>
                             <li><input type="radio" name="sort"/> Birthday Package</li>
                             <li><input type="radio" name="sort"/> Cheap</li>
                         </ul>
@@ -104,11 +160,16 @@ export const ProductPage = () => {
                         <label>Range Price</label>
                         <input type="range" min="0" max="100"/>
                     </div>
-                    <button className="bg-[#FF8906] w-full h-10 text-black cursor-pointer">Apply Filter</button>
+                    <button 
+                    onClick={handleApplyFilter}
+                    className="bg-[#FF8906] w-full h-10 text-black cursor-pointer"
+                    >
+                        Apply Filter
+                    </button>
                 </aside>
 
                 <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
-                    {filteredSearch.map((product) => (
+                    {filteredProducts.map((product) => (
                         <Product key={product.id} product={product} />
                         ))}
                 </div>
