@@ -6,7 +6,7 @@ export const HomeNav = () => {
     const { user, logout } = useContext(AuthContext)
     return (
 
-        <div className="w-full h-16 flex justify-between bg-black/10 absolute px-4 md:px-20">
+        <div className="w-full h-16 flex justify-between bg-black/10 absolute px-10 md:px-20">
             {/* left navbar  */}
             <div className="flex items-center gap-6">
                 <div >
