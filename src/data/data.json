@@ -83,6 +83,34 @@
                 "category" : "coffee",
                 "flashSale": true,
                 "favorite" : false
+            },
+            {
+                "id": 7,
+                "img" : "https://images.pexels.com/photos/29150162/pexels-photo-29150162.jpeg",
+                "name" : "French Fries",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 15000,
+                "discountPrice": 10000,
+                "imgUrl1" : "/assets/img/image27.png",
+                "imgUrl2" : "/assets/img/image31.png",
+                "imgUrl3" : "/assets/img/image22.png",
+                "category" : "food",
+                "flashSale": true,
+                "favorite" : false
+            },
+            {
+                "id": 8,
+                "img" : "https://images.pexels.com/photos/236813/pexels-photo-236813.jpeg",
+                "name" : "Sandwhich",
+                "tag" : "You can explore the menu that we provide with fun and have their own taste and make your day better.",
+                "price" : 17000,
+                "discountPrice": 15000,
+                "imgUrl1" : "/assets/img/image27.png",
+                "imgUrl2" : "/assets/img/image31.png",
+                "imgUrl3" : "/assets/img/image22.png",
+                "category" : "food",
+                "flashSale": true,
+                "favorite" : false
             }
             
         ]
