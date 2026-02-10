@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const registerSchema = yup.object({
     name: yup.string().required("Name must be filled"),
@@ -23,6 +24,12 @@ const registerSchema = yup.object({
 export const RegisterPage = () => {
     const { handleSubmit, register, formState: { errors } } = useForm({ resolver: yupResolver(registerSchema) })
     const navigate = useNavigate()
+
+    const [changePassword, setChangePassword] = useState(true)
+    const changeIcon = changePassword === true ? false : true
+    const [changeConfirm, setChangeConfirm] = useState(true)
+    const changeConfirmIcon = changeConfirm === true ? false : true
+
     function submitForm(value) {
 
         const dataUser = {
@@ -68,23 +75,23 @@ export const RegisterPage = () => {
                 <p className="text-red-500 text-sm">{errors.email?.message}</p>
 
                 <InputDiv
-                    type={"password"}
+                    type={changePassword ? "password" : "text"}
                     id={"password"}
                     name={"password"}
                     icon={<GoKey />}
                     register={register}
                     placeholder={"Enter Your Password"}
-                    eye={<FiEye />}>Password</InputDiv>
+                    eye={<FiEye className="cursor-pointer" onClick={()=>{setChangePassword(changeIcon)}}/>}>Password</InputDiv>
                 <p className="text-red-500 text-sm">{errors.password?.message}</p>
 
                 <InputDiv
-                    type={"password"}
+                    type={changeConfirm ? "password" : "text"}
                     id={"confirmPassword"}
                     name={"confirmPassword"}
                     icon={<GoKey />}
                     register={register}
                     placeholder={"Enter Your Password Again"}
-                    eye={<FiEye />}>Confirm Password</InputDiv>
+                    eye={<FiEye className="cursor-pointer" onClick={()=>{setChangeConfirm(changeConfirmIcon)}}/>}>Confirm Password</InputDiv>
                 <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>
 
                 <ButtonDiv type="submit">Register</ButtonDiv>

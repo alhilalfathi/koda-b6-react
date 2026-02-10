@@ -10,7 +10,7 @@ import loginImage from "/assets/img/Rectangle289-1.png"
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../component/context/AuthContext";
 
 const loginSchema = yup.object({
@@ -21,6 +21,9 @@ const loginSchema = yup.object({
 export const LoginPage = ()=>{
     const {handleSubmit, register, formState: {errors}} = useForm({resolver: yupResolver(loginSchema)})
     const navigate = useNavigate()
+
+    const [changePassword, setChangePassword] =useState(true)
+    const changeIcon = changePassword === true ? false : true
 
     const {login} = useContext(AuthContext)
 
@@ -55,13 +58,13 @@ export const LoginPage = ()=>{
                 <p className="text-red-500 text-sm">{errors.email?.message}</p>
 
                 <InputDiv
-                type={"password"}
+                type={changePassword ? "password" : "text"}
                 id={"password"}
                 name={"password"}
                 icon={<GoKey />}
                 register={register}
                 placeholder={"Enter Your Password"}
-                eye={<FiEye />}>Password</InputDiv>
+                eye={<FiEye className="cursor-pointer" onClick={()=>{setChangePassword(changeIcon)}}/>}>Password</InputDiv>
                 <p className="text-red-500 text-sm">{errors.password?.message}</p>
 
                 <Link
