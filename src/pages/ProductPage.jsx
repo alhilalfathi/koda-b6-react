@@ -114,37 +114,37 @@ export const ProductPage = () => {
                     <div >
                         <label>Category</label>
                         <ul>
-                            <li>
+                            <li className="flex gap-3">
                                 <input 
                                 type="checkbox" 
                                 checked={favorite}
                                 onChange={()=> setFavorite(!favorite)}
                                 /> Favorite Product
                             </li>
-                            <li>
+                            <li className="flex gap-3">
                                 <input 
                                 type="checkbox"
                                 checked={categories.includes("coffee")}
                                 onChange={()=> handleCategoryChange("coffee")}
                                 /> Coffee
                             </li>
-                            <li>
+                            <li className="flex gap-3">
                                 <input 
                                 type="checkbox"
                                 checked={categories.includes("non coffee")}
                                 onChange={()=> handleCategoryChange("non coffee")}
                                 /> Non Coffee
                             </li>
-                            <li><input type="checkbox"/> Foods</li>
-                            <li><input type="checkbox"/> Add-On</li>
+                            <li className="flex gap-3"><input type="checkbox"/> Foods</li>
+                            <li className="flex gap-3"><input type="checkbox"/> Add-On</li>
                         </ul>
                     </div>
                     <br/>
                     <div >
                         <label>Sort By</label>
                         <ul >
-                            <li><input type="radio" name="sort"/> Buy 1 Get 1</li>
-                            <li>
+                            <li className="flex gap-3"><input type="radio" name="sort"/> Buy 1 Get 1</li>
+                            <li className="flex gap-3">
                                 <input 
                                 type="radio" 
                                 name="sort"
@@ -152,11 +152,11 @@ export const ProductPage = () => {
                                 onChange={()=> setSort("flashSale")}
                                 /> Flash Sale
                             </li>
-                            <li><input type="radio" name="sort"/> Birthday Package</li>
-                            <li><input type="radio" name="sort"/> Cheap</li>
+                            <li className="flex gap-3"><input type="radio" name="sort"/> Birthday Package</li>
+                            <li className="flex gap-3"><input type="radio" name="sort"/> Cheap</li>
                         </ul>
                     </div>
-                    <div className="flex items-center gap-3 my-2">
+                    <div className="flex flex-col gap-2 my-2">
                         <label>Range Price</label>
                         <input type="range" min="0" max="100"/>
                     </div>
