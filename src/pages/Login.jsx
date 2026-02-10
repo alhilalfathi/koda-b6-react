@@ -2,7 +2,7 @@ import { MainDiv } from "../component/MainDiv";
 import { InputDiv } from "../component/InputDiv";
 import { HiOutlineMail } from "react-icons/hi";
 import { GoKey } from "react-icons/go";
-import { ButtonDiv } from "../component/buttonDiv";
+import { ButtonDiv } from "../component/ButtonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";

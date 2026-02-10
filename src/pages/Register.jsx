@@ -3,7 +3,7 @@ import { MainDiv } from "../component/MainDiv";
 import { IoPersonOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 import { GoKey } from "react-icons/go";
-import { ButtonDiv } from "../component/buttonDiv";
+import { ButtonDiv } from "../component/ButtonDiv";
 import { LoginByDiv } from "../component/LoginByDiv";
 import { FiEye } from "react-icons/fi";
 import registerImage from "/assets/img/Rectangle289.png"
