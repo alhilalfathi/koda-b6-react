@@ -94,7 +94,7 @@ export const ProductPage = () => {
             </div>
             <div className="flex mx-20 gap-15">
                 {/* filter product  */}
-                <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex flex-col hidden md:block gap-3">
+                <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex-col hidden md:block gap-3">
                     <div className="flex justify-between">
                         <h2>Filter</h2>
                         <button 
@@ -135,7 +135,13 @@ export const ProductPage = () => {
                                 onChange={()=> handleCategoryChange("non coffee")}
                                 /> Non Coffee
                             </li>
-                            <li className="flex gap-3"><input type="checkbox"/> Foods</li>
+                            <li className="flex gap-3">
+                                <input 
+                                type="checkbox"
+                                checked={categories.includes("food")}
+                                onChange={()=> handleCategoryChange("food")}
+                                /> Foods
+                            </li>
                             <li className="flex gap-3"><input type="checkbox"/> Add-On</li>
                         </ul>
                     </div>
