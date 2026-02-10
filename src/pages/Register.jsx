@@ -11,18 +11,19 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 
 const registerSchema = yup.object({
     name: yup.string().required("Name must be filled"),
     email: yup.string().required("Email must be filled").email("Email Invalid"),
-    password: yup.string().required("Password must be filled").min(8,"Password minimum 8 characters"),
+    password: yup.string().required("Password must be filled").min(8, "Password minimum 8 characters"),
     confirmPassword: yup.string().required("Confirm password must be filled").oneOf([yup.ref("password")], "Password not match")
 })
 
-export const RegisterPage = ()=>{
-    const {handleSubmit, register, formState: {errors}} = useForm({resolver: yupResolver(registerSchema)})
+export const RegisterPage = () => {
+    const { handleSubmit, register, formState: { errors } } = useForm({ resolver: yupResolver(registerSchema) })
     const navigate = useNavigate()
-    function submitForm(value){
+    function submitForm(value) {
 
         const dataUser = {
             name: value.name,
@@ -33,60 +34,64 @@ export const RegisterPage = ()=>{
         const oldRegisteredUser = JSON.parse(localStorage.getItem("registeredUsers")) || []
 
         const isExist = oldRegisteredUser.some((user) => user.email === dataUser.email)
-        if(isExist){
+        if (isExist) {
             alert("Email Registered")
             return
         }
 
         oldRegisteredUser.push(dataUser)
-        
-        localStorage.setItem("registeredUsers",JSON.stringify(oldRegisteredUser))
+
+        localStorage.setItem("registeredUsers", JSON.stringify(oldRegisteredUser))
         alert("Register Success")
         navigate("/login")
-        
+
     }
     return (
         <form onSubmit={handleSubmit(submitForm)}>
             <MainDiv img={registerImage} imgname={"main-image"} title={"Register"} desctitle={"Fill out the form correctly"}>
                 <InputDiv
-                type={"text"}
-                id={"name"}
-                name={"name"}
-                icon={<IoPersonOutline />}
-                register={register}
-                placeholder={"Enter Your Full Name"}>Full Name</InputDiv>
+                    type={"text"}
+                    id={"name"}
+                    name={"name"}
+                    icon={<IoPersonOutline />}
+                    register={register}
+                    placeholder={"Enter Your Full Name"}>Full Name</InputDiv>
                 <p className="text-red-500 text-sm">{errors.name?.message}</p>
 
                 <InputDiv
-                type={"email"}
-                id={"email"}
-                name={"email"}
-                icon={<HiOutlineMail />}
-                register={register}
-                placeholder={"Enter Your Email"}>Email</InputDiv>
+                    type={"email"}
+                    id={"email"}
+                    name={"email"}
+                    icon={<HiOutlineMail />}
+                    register={register}
+                    placeholder={"Enter Your Email"}>Email</InputDiv>
                 <p className="text-red-500 text-sm">{errors.email?.message}</p>
 
                 <InputDiv
-                type={"password"}
-                id={"password"}
-                name={"password"}
-                icon={<GoKey />}
-                register={register}
-                placeholder={"Enter Your Password"}
-                eye={<FiEye />}>Password</InputDiv>
+                    type={"password"}
+                    id={"password"}
+                    name={"password"}
+                    icon={<GoKey />}
+                    register={register}
+                    placeholder={"Enter Your Password"}
+                    eye={<FiEye />}>Password</InputDiv>
                 <p className="text-red-500 text-sm">{errors.password?.message}</p>
 
                 <InputDiv
-                type={"password"}
-                id={"confirmPassword"}
-                name={"confirmPassword"}
-                icon={<GoKey />}
-                register={register}
-                placeholder={"Enter Your Password Again"}
-                eye={<FiEye />}>Confirm Password</InputDiv>
+                    type={"password"}
+                    id={"confirmPassword"}
+                    name={"confirmPassword"}
+                    icon={<GoKey />}
+                    register={register}
+                    placeholder={"Enter Your Password Again"}
+                    eye={<FiEye />}>Confirm Password</InputDiv>
                 <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>
 
                 <ButtonDiv type="submit">Register</ButtonDiv>
+
+                <p className="flex justify-center items-center gap-2">
+                    Have an account? <Link to="/login" className="text-orange-600">Login</Link>
+                </p>
 
                 <LoginByDiv />
             </MainDiv>

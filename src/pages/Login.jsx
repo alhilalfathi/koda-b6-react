@@ -69,6 +69,10 @@ export const LoginPage = ()=>{
                 to="/forgot-password">Forgot Password?</Link>
 
                 <ButtonDiv type="submit">Login</ButtonDiv>
+
+                <p className="flex justify-center items-center gap-2">
+                    Not have an account? <Link to="/register" className="text-orange-600">Register</Link>
+                </p>
             
                 <LoginByDiv />
             </MainDiv>
