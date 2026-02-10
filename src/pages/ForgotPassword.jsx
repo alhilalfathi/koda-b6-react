@@ -1,7 +1,7 @@
 import { InputDiv } from "../component/InputDiv";
 import { MainDiv } from "../component/MainDiv";
 import { HiOutlineMail } from "react-icons/hi";
-import { ButtonDiv } from "../component/buttonDiv";
+import { ButtonDiv } from "../component/ButtonDiv";
 import forgotPassImage from "/assets/img/Rectangle289-2.png"
 import { useForm } from "react-hook-form";
 
