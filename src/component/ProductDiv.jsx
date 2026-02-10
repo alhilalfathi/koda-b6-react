@@ -6,10 +6,13 @@ import starsIcon from "/assets/img/Frame41-gray.png"
 export const Product = ({product}) => {
   return (
     <div className="flex flex-col relative">
+        {/* product image  */}
         <div className="w-98" >
             <img className="md:w-full w-60 h-100" src={product.img} alt={product.name}/>
             <span className="absolute top-1 left-1 bg-red-600 text-white rounded-xl w-26 flex items-center justify-center">FLASH SALE!</span>
         </div>
+
+        {/* product description  */}
         <div className="md:w-88 w-60 bg-white md:absolute md:top-80 md:left-5 md:px-4 p-2 md:py-2" >
             <h3 className="text-xl md:text-2xl mb-2">{product.name}</h3>
             <p className="text-sm text-stone-700 mb-2">{product.tag}</p>
