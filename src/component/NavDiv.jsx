@@ -1,14 +1,18 @@
-import { useContext } from "react"
 import logo from "/assets/img/Frame13.png"
 import searchIcon from "/assets/img/Search.png"
 import { Link, useNavigate } from "react-router-dom"
-import { AuthContext } from "./context/AuthContext"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { logout } from "../redux/reducers/authReducer"
 
 export const NavDiv = () => {
-    const { user, logout } = useContext(AuthContext)
+    
+    const user = useSelector((state) => state.auth.user)
+    const dispatch = useDispatch()
+
     const navigate = useNavigate()
     const onLogout = () => {
-        logout()
+        dispatch(logout())
         navigate("/")
     }
     return (
@@ -37,7 +41,7 @@ export const NavDiv = () => {
                         <span className="text-sm">Hi, {user.name}</span>
                         <button
                             onClick={onLogout}
-                            className="w-24 h-10 border flex items-center justify-center rounded"
+                            className="w-24 h-10 border flex items-center justify-center rounded cursor-pointer"
                         >
                             Logout
                         </button>
