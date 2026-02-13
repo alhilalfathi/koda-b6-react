@@ -10,8 +10,10 @@ import loginImage from "/assets/img/Rectangle289-1.png"
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useState } from "react";
-import { AuthContext } from "../component/context/AuthContext";
+import { useState } from "react";
+import { useDispatch } from "react-redux"
+import { login } from "../redux/reducers/authReducer";
+
 
 const loginSchema = yup.object({
     email: yup.string().required("Email must be filled").email("Email Invalid"),
@@ -25,7 +27,8 @@ export const LoginPage = ()=>{
     const [changePassword, setChangePassword] =useState(true)
     const changeIcon = changePassword === true ? false : true
 
-    const {login} = useContext(AuthContext)
+    const dispatch = useDispatch()
+
 
     function submitForm(value){
         const oldRegisteredUser = JSON.parse(localStorage.getItem("registeredUsers")) || []
@@ -39,7 +42,8 @@ export const LoginPage = ()=>{
             return
         }
 
-        login(member)
+        // login(member)
+        dispatch(login(member))
 
         alert("Login success")
         navigate("/")

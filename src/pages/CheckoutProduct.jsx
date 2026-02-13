@@ -4,6 +4,8 @@ import { NavDiv } from "../component/NavDiv"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useCart } from "../component/hook/useCart"
+import { addOrder } from "../redux/reducers/cartReducer"
+import { useDispatch } from "react-redux"
 
 const PPN = 0.1
 
@@ -11,6 +13,7 @@ export const CheckoutProduct = () => {
   const { handleSubmit, register } = useForm()
   const [delivery, setDelivery] = useState("Dine In")
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const { cartItems, currentUser, handleRemove, clearCart } = useCart()
 
@@ -39,10 +42,10 @@ export const CheckoutProduct = () => {
   const inactiveClass = "border border-[#E8E8E8] px-3 w-55 h-10 cursor-pointer"
 
   const checkoutPayment = (data) => {
-    if (!currentUser || cartItems.length === 0) {
-      return alert("You need to login")
+
+    if (cartItems.length === 0){
+      return alert("Cart is empty")
     }
-    const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || {}
 
     const newOrder = {
       id: `123-${Date.now()}`,
@@ -57,11 +60,10 @@ export const CheckoutProduct = () => {
       date: new Date().toISOString()
     }
 
-    if (!orderHistory[currentUser.email]) {
-      orderHistory[currentUser.email] = []
-    }
-    orderHistory[currentUser.email].push(newOrder)
-    localStorage.setItem("orderHistory", JSON.stringify(orderHistory))
+    dispatch(addOrder({
+      email: currentUser.email,
+      order: newOrder
+    }))
 
     clearCart()
     navigate("/history-order")

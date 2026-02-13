@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../component/context/DataContext";
+import { useSelector, useDispatch } from "react-redux"
+import { addToCart } from "../redux/reducers/cartReducer";
+
 
 
 
@@ -19,6 +22,9 @@ export const DetailProduct = () => {
     const [recom, setRecom] = useState(null)
 
     const { products, loading } = useContext(DataContext)
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.auth.user)
+
 
     const [quantity, setQuantity] = useState(1)
     const [size, setSize] = useState("Regular")
@@ -72,13 +78,11 @@ export const DetailProduct = () => {
         setQuantity((prev) => prev > 1 ? prev - 1 : 1)
     }
     // cart 
-    const addToCart = (redirect = false) => {
-        const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-        if (!loggedUser) {
+    const handleAddToCart = (redirect = false) => {
+        
+        if (!user) {
             return alert("You need to login")
         }
-        const cart = JSON.parse(localStorage.getItem("cart")) || {}
-        const userCart = cart[loggedUser.email] || []
 
         const newItem = {
             productId: product.id,
@@ -90,19 +94,14 @@ export const DetailProduct = () => {
             temp,
             img: product.img
         }
-        const existingData = userCart.findIndex(
-            (item) =>
-                item.productId === newItem.productId &&
-                item.size === newItem.size &&
-                item.temp === newItem.temp
+
+        dispatch(
+            addToCart({
+                email: user.email,
+                item: newItem
+            })
         )
-        if (existingData !== -1) {
-            userCart[existingData].quantity += quantity
-        } else {
-            userCart.push(newItem)
-        }
-        cart[loggedUser.email] = userCart
-        localStorage.setItem("cart", JSON.stringify(cart))
+
         if (redirect) {
             navigate("/checkout")
         } else {
@@ -159,10 +158,10 @@ export const DetailProduct = () => {
                         ))}
                     </div>
                     <div className="flex gap-5 my-5">
-                        <button onClick={() => addToCart(true)} className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer">Buy</button>
+                        <button onClick={() => handleAddToCart(true)} className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer">Buy</button>
                         <span className="flex gap-3 w-1/2 border border-[#FF8906] p-3 justify-center rounded cursor-pointer">
                             <img src={cartIcon} alt="cart" />
-                            <button onClick={() => addToCart(false)} className="cursor-pointer">Add to cart</button>
+                            <button onClick={() => handleAddToCart(false)} className="cursor-pointer">Add to cart</button>
                         </span>
                     </div>
                 </div>
