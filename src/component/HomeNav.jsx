@@ -1,9 +1,16 @@
-import { useContext } from "react"
+// import { useContext } from "react"
 import { Link } from "react-router-dom"
-import { AuthContext } from "./context/AuthContext"
+// import { AuthContext } from "./context/AuthContext"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { logout } from "../redux/reducers/authReducer"
 
 export const HomeNav = () => {
-    const { user, logout } = useContext(AuthContext)
+    // const { user, logout } = useContext(AuthContext)
+    const user = useSelector((state) => state.auth.user)
+    const dispatch = useDispatch()
+
+
     return (
 
         <div className="w-full h-16 flex justify-between bg-black/10 absolute px-10 md:px-20">
@@ -29,8 +36,8 @@ export const HomeNav = () => {
                     <>
                         <span className="text-sm">Hi, {user.name}</span>
                         <button
-                            onClick={logout}
-                            className="w-24 h-10 border flex items-center justify-center rounded"
+                            onClick={()=>dispatch(logout())}
+                            className="w-24 h-10 border flex items-center justify-center rounded cursor-pointer"
                         >
                             Logout
                         </button>
