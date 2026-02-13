@@ -1,55 +1,37 @@
-import { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { removeFromCart, clearCart } from "../../redux/reducers/cartReducer"
 
 export const useCart = () => {
-  const [cartItems, setCartItems] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-    if (!loggedUser){
-        return alert("You need to login")
+  const user = useSelector((state) => state.auth.user)
+  const carts = useSelector((state) => state.cart.carts)
+
+  if (!user) {
+    alert("You need to login")
+    return {
+      cartItems: [],
+      currentUser: null
     }
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    const userCart = cart[loggedUser.email] || []
-
-    setCurrentUser(loggedUser)
-    setCartItems(userCart)
-  }, [])
-
-  const handleRemove = (index) => {
-    if(!currentUser){
-      return
-    }
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    const updatedCart = [...cartItems]
-
-    updatedCart.splice(index, 1)
-
-    cart[currentUser.email] = updatedCart
-    localStorage.setItem("cart", JSON.stringify(cart))
-
-    setCartItems(updatedCart)
   }
 
-  const clearCart = () => {
-    if (!currentUser){
-        return
-    }
+  const cartItems = carts[user.email] || []
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || {}
-    cart[currentUser.email] = []
-    localStorage.setItem("cart", JSON.stringify(cart))
+  const handleRemove = (index) => {
+    dispatch(removeFromCart({
+      email: user.email,
+      index
+    }))
+  }
 
-    setCartItems([])
+  const handleClearCart = () => {
+    dispatch(clearCart(user.email))
   }
 
   return {
     cartItems,
-    currentUser,
+    currentUser: user,
     handleRemove,
-    clearCart,
-    setCartItems
+    clearCart: handleClearCart
   }
 }
