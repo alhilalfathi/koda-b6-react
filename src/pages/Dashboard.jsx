@@ -61,10 +61,10 @@ export const Dashboard = () => {
                 <table className="w-full text-sm">
                     <thead className="text-gray-500 border-b">
                         <tr>
-                            <th className="py-3 text-left text-center">No</th>
-                            <th className="py-3 text-left text-center">Nama Produk</th>
-                            <th className="py-3 text-left text-center">Terjual</th>
-                            <th className="py-3 text-left text-center">Keuntungan</th>
+                            <th className="py-3 text-left">No</th>
+                            <th className="py-3 text-left">Nama Produk</th>
+                            <th className="py-3 text-left">Terjual</th>
+                            <th className="py-3 text-left">Keuntungan</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y">
