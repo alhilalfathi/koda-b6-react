@@ -8,12 +8,15 @@ import productIcon from "/assets/img/u_glass-tea.png"
 import orderIcon from "/assets/img/Bag.png"
 import userIcon from "/assets/img/2-User.png"
 import logOutIcon from "/assets/img/Log-Out.png"
+import { useDispatch } from "react-redux"
+import { logout } from "../redux/reducers/authReducer"
 
 
 export const AdminPage = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutUser = () => {
-        localStorage.removeItem("loggedUser")
+        dispatch(logout())
         alert("You have logged out")
         navigate("/")
     }
