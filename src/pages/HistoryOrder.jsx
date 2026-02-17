@@ -4,6 +4,7 @@ import { Pagination } from "../component/Pagination"
 import { LuCalendarDays } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux"
+import { useState } from "react";
 
 
 
@@ -51,10 +52,20 @@ const HistoryProduct = ({ order }) => {
 
 export const HistoryOrder = () => {
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemsPerPage = 3
+
     const currentUser = useSelector((state) => state.auth.user)
     const allOrders = useSelector((state) => state.cart.orders)
 
     const orders = currentUser ? allOrders[currentUser.email] || [] : []
+
+    // pagination
+    const totalPages = Math.ceil(orders.length / itemsPerPage)
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    const currentOrders = orders.slice(startIndex, endIndex)
+
 
     if (!currentUser) {
         return (
@@ -110,7 +121,7 @@ export const HistoryOrder = () => {
                         {orders.length === 0 ? (
                             <p>No Order History</p>
                         ) : (
-                            orders.map((order) => (
+                            currentOrders.map((order) => (
                                 <HistoryProduct key={order.id} order={order} />
                             ))
                         )}
@@ -127,7 +138,11 @@ export const HistoryOrder = () => {
                 </div>
             </div>
             <div className="flex justify-center mt-5 mb-10">
-                <Pagination />
+                <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}                
+                />  
             </div>
             <Footer />
         </div>

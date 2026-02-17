@@ -6,9 +6,9 @@ import { Product } from "../component/ProductDiv"
 import { DataContext } from "../component/context/DataContext"
 
 const PromoCard = (promo) => {
-    return(
+    return (
         <div className={`flex items-center ${promo.color} w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0`}>
-            <img src={promo.icon} alt="promo-icon"/>
+            <img src={promo.icon} alt="promo-icon" />
             <div className="flex flex-col w-50">
                 <h4>HAPPY MOTHER’S DAY!</h4>
                 <p>Get one of our favorite menu for free!</p>
@@ -20,12 +20,15 @@ const PromoCard = (promo) => {
 
 export const ProductPage = () => {
     const promoRef = useRef()
-    const {products} = useContext(DataContext)
+    const { products } = useContext(DataContext)
+
     const [search, setSearch] = useState("")
     const [searchInput, setSearchInput] = useState("")
     const [categories, setCategories] = useState([])
     const [favorite, setFavorite] = useState(false)
     const [sort, setSort] = useState("")
+
+    const [currentPage, setCurrentPage] = useState(1)
 
     const scrollButtonRight = () => {
         promoRef.current.scrollLeft += 150
@@ -46,145 +49,157 @@ export const ProductPage = () => {
         setFavorite(false)
         setSort("")
     }
-    let filteredProducts = products.filter(product=> {
+    let filteredProducts = products.filter(product => {
         const matchSearch = product.name.toLowerCase().includes(search.toLowerCase())
         const matchCategory = categories.length === 0 || categories.includes(product.category)
         const matchFavorite = !favorite || product.favorite === true
         return matchSearch && matchCategory && matchFavorite
     })
-      if (sort === "flashSale") {
-    filteredProducts = filteredProducts.filter(p => p.flashSale)
-  }
+    // Pagination
+    const itemsPerPage = 4
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    const currentProducts = filteredProducts.slice(startIndex, endIndex)
 
-  if (sort === "cheap") {
-    filteredProducts = [...filteredProducts].sort(
-      (a, b) => a.discountPrice - b.discountPrice
-    )
-  }
 
-  return (
-    <div>
-        <NavDiv />
-        {/* header  */}
-        <div className="bg-[url('/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-4 md:px-20 ">
-            <h1 className="text-white font-bold text-5xl w-220">We Provide Good Coffee and Healthy Meals</h1>
-        </div>
+    if (sort === "flashSale") {
+        filteredProducts = filteredProducts.filter(p => p.flashSale)
+    }
 
-        <div className="flex justify-between items-center px-20">
-            <h2 className="text-4xl font-bold">Today <span className="text-orange-900">Promo</span></h2>
-            <div className="flex gap-4 py-6">
-                {/* promo button  */}
+    if (sort === "cheap") {
+        filteredProducts = [...filteredProducts].sort(
+            (a, b) => a.discountPrice - b.discountPrice
+        )
+    }
+
+    return (
+        <div>
+            <NavDiv />
+            {/* header  */}
+            <div className="bg-[url('/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-4 md:px-20 ">
+                <h1 className="text-white font-bold text-5xl w-220">We Provide Good Coffee and Healthy Meals</h1>
+            </div>
+
+            <div className="flex justify-between items-center px-20">
+                <h2 className="text-4xl font-bold">Today <span className="text-orange-900">Promo</span></h2>
+                <div className="flex gap-4 py-6">
+                    {/* promo button  */}
                     <button onClick={scrollButtonLeft} className="w-12 h-12 bg-zinc-400 rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer">&#8592;</button>
                     <button onClick={scrollButtonRight} className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer">&#8594;</button>
-            </div>
-        </div>
-        {/* promo-card  */}
-        <div ref={promoRef} className="scroll-bar flex gap-4 p-4 overflow-x-auto overflow-y-hidden">
-            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
-            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
-            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
-            <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"}/>
-            <PromoCard icon={"/assets/img/image43.png"} color={"bg-[#F5C361]"}/>
-        </div>
-        {/* content  */}
-        <div>
-            <div className="mx-20">
-                <h2 className="text-4xl mb-8 font-bold">Our <span className="text-orange-900">Product</span></h2>
-                <button className="bg-black text-white p-2 mb-10 w-full md:hidden">Filter</button>
-            </div>
-            <div className="flex mx-20 gap-15">
-                {/* filter product  */}
-                <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex-col hidden md:block gap-3">
-                    <div className="flex justify-between">
-                        <h2>Filter</h2>
-                        <button 
-                        onClick={handleReset} 
-                        className="cursor-pointer">Reset Filter</button>
-                    </div>
-                    <div className="flex flex-col items-start my-3">
-                        <label htmlFor="search">Search</label>
-                        <input 
-                        type="text" 
-                        id="search" 
-                        placeholder="Search Your Product"
-                        value={searchInput}
-                        onChange={(e)=> setSearchInput(e.target.value)} 
-                        className="bg-white text-zinc-600 h-8 px-3 rounded w-full"></input>
-                    </div>
-                    <div >
-                        <label>Category</label>
-                        <ul>
-                            <li className="flex gap-3">
-                                <input 
-                                type="checkbox" 
-                                checked={favorite}
-                                onChange={()=> setFavorite(!favorite)}
-                                /> Favorite Product
-                            </li>
-                            <li className="flex gap-3">
-                                <input 
-                                type="checkbox"
-                                checked={categories.includes("coffee")}
-                                onChange={()=> handleCategoryChange("coffee")}
-                                /> Coffee
-                            </li>
-                            <li className="flex gap-3">
-                                <input 
-                                type="checkbox"
-                                checked={categories.includes("non coffee")}
-                                onChange={()=> handleCategoryChange("non coffee")}
-                                /> Non Coffee
-                            </li>
-                            <li className="flex gap-3">
-                                <input 
-                                type="checkbox"
-                                checked={categories.includes("food")}
-                                onChange={()=> handleCategoryChange("food")}
-                                /> Foods
-                            </li>
-                            <li className="flex gap-3"><input type="checkbox"/> Add-On</li>
-                        </ul>
-                    </div>
-                    <br/>
-                    <div >
-                        <label>Sort By</label>
-                        <ul >
-                            <li className="flex gap-3"><input type="radio" name="sort"/> Buy 1 Get 1</li>
-                            <li className="flex gap-3">
-                                <input 
-                                type="radio" 
-                                name="sort"
-                                checked={sort === "flashSale"}
-                                onChange={()=> setSort("flashSale")}
-                                /> Flash Sale
-                            </li>
-                            <li className="flex gap-3"><input type="radio" name="sort"/> Birthday Package</li>
-                            <li className="flex gap-3"><input type="radio" name="sort"/> Cheap</li>
-                        </ul>
-                    </div>
-                    <div className="flex flex-col gap-2 my-2">
-                        <label>Range Price</label>
-                        <input type="range" min="0" max="100"/>
-                    </div>
-                    <button 
-                    onClick={handleApplyFilter}
-                    className="bg-[#FF8906] w-full h-10 text-black cursor-pointer"
-                    >
-                        Apply Filter
-                    </button>
-                </aside>
-
-                <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
-                    {filteredProducts.map((product) => (
-                        <Product key={product.id} product={product} />
-                        ))}
                 </div>
             </div>
-            <div className="md:mx-110 flex justify-center md:justify-end my-5">
-                <Pagination />
+            {/* promo-card  */}
+            <div ref={promoRef} className="scroll-bar flex gap-4 p-4 overflow-x-auto overflow-y-hidden">
+                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                <PromoCard icon={"/assets/img/image43.png"} color={"bg-[#F5C361]"} />
             </div>
+            {/* content  */}
+            <div>
+                <div className="mx-20">
+                    <h2 className="text-4xl mb-8 font-bold">Our <span className="text-orange-900">Product</span></h2>
+                    <button className="bg-black text-white p-2 mb-10 w-full md:hidden">Filter</button>
+                </div>
+                <div className="flex mx-20 gap-15">
+                    {/* filter product  */}
+                    <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex-col hidden md:block gap-3">
+                        <div className="flex justify-between">
+                            <h2>Filter</h2>
+                            <button
+                                onClick={handleReset}
+                                className="cursor-pointer">Reset Filter</button>
+                        </div>
+                        <div className="flex flex-col items-start my-3">
+                            <label htmlFor="search">Search</label>
+                            <input
+                                type="text"
+                                id="search"
+                                placeholder="Search Your Product"
+                                value={searchInput}
+                                onChange={(e) => setSearchInput(e.target.value)}
+                                className="bg-white text-zinc-600 h-8 px-3 rounded w-full"></input>
+                        </div>
+                        <div >
+                            <label>Category</label>
+                            <ul>
+                                <li className="flex gap-3">
+                                    <input
+                                        type="checkbox"
+                                        checked={favorite}
+                                        onChange={() => setFavorite(!favorite)}
+                                    /> Favorite Product
+                                </li>
+                                <li className="flex gap-3">
+                                    <input
+                                        type="checkbox"
+                                        checked={categories.includes("coffee")}
+                                        onChange={() => handleCategoryChange("coffee")}
+                                    /> Coffee
+                                </li>
+                                <li className="flex gap-3">
+                                    <input
+                                        type="checkbox"
+                                        checked={categories.includes("non coffee")}
+                                        onChange={() => handleCategoryChange("non coffee")}
+                                    /> Non Coffee
+                                </li>
+                                <li className="flex gap-3">
+                                    <input
+                                        type="checkbox"
+                                        checked={categories.includes("food")}
+                                        onChange={() => handleCategoryChange("food")}
+                                    /> Foods
+                                </li>
+                                <li className="flex gap-3"><input type="checkbox" /> Add-On</li>
+                            </ul>
+                        </div>
+                        <br />
+                        <div >
+                            <label>Sort By</label>
+                            <ul >
+                                <li className="flex gap-3"><input type="radio" name="sort" /> Buy 1 Get 1</li>
+                                <li className="flex gap-3">
+                                    <input
+                                        type="radio"
+                                        name="sort"
+                                        checked={sort === "flashSale"}
+                                        onChange={() => setSort("flashSale")}
+                                    /> Flash Sale
+                                </li>
+                                <li className="flex gap-3"><input type="radio" name="sort" /> Birthday Package</li>
+                                <li className="flex gap-3"><input type="radio" name="sort" /> Cheap</li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col gap-2 my-2">
+                            <label>Range Price</label>
+                            <input type="range" min="0" max="100" />
+                        </div>
+                        <button
+                            onClick={handleApplyFilter}
+                            className="bg-[#FF8906] w-full h-10 text-black cursor-pointer"
+                        >
+                            Apply Filter
+                        </button>
+                    </aside>
+
+                    <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
+                        {currentProducts.map((product) => (
+                            <Product key={product.id} product={product} />
+                        ))}
+                    </div>
+                </div>
+                <div className="md:mx-110 flex justify-center md:justify-end my-5">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </div>
+            </div>
+            <Footer />
         </div>
-        <Footer />
-    </div>
-  )
+    )
 }
