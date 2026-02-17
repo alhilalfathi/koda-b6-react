@@ -104,7 +104,7 @@ export const CheckoutProduct = () => {
         {/* Total  */}
         <aside className="w-1/3 ">
           <p className="text-xl">Total</p>
-          <div className="flex flex-col gap-3 p-3 bg-[#E8E8E84D] h-80 mt-8">
+          <div className="flex flex-col gap-3 p-3 bg-[#E8E8E84D] h-84 mt-8">
             <div className="flex justify-between">
               <p>Order</p>
               <p>IDR {orderTotal.toLocaleString()}</p>
