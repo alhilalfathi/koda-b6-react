@@ -12,7 +12,8 @@
                 "imgUrl3" : "/assets/img/image31.png",
                 "category" : "coffee",
                 "flashSale": true,
-                "favorite" : true
+                "favorite" : true,
+                "stock": 50
             },
             {
                 "id": 2,
@@ -26,7 +27,8 @@
                 "imgUrl3" : "/assets/img/image30.png",
                 "category" : "coffee",
                 "flashSale": true,
-                "favorite" : true
+                "favorite" : true,
+                "stock": 50
             },
             {
                 "id": 3,
@@ -40,7 +42,8 @@
                 "imgUrl3" : "/assets/img/image22.png",
                 "category" : "non coffee",
                 "flashSale": true,
-                "favorite" : true
+                "favorite" : true,
+                "stock": 50
             },
             {
                 "id": 4,
@@ -54,7 +57,8 @@
                 "imgUrl3" : "/assets/img/image27.png",
                 "category" : "non coffee",
                 "flashSale": true,
-                "favorite" : true
+                "favorite" : true,
+                "stock": 50
             },
             {
                 "id": 5,
@@ -68,7 +72,8 @@
                 "imgUrl3" : "/assets/img/image33.png",
                 "category" : "coffee",
                 "flashSale": true,
-                "favorite" : false
+                "favorite" : false,
+                "stock": 50
             },
             {
                 "id": 6,
@@ -82,7 +87,8 @@
                 "imgUrl3" : "/assets/img/image22.png",
                 "category" : "coffee",
                 "flashSale": true,
-                "favorite" : false
+                "favorite" : false,
+                "stock": 80
             },
             {
                 "id": 7,
@@ -96,7 +102,8 @@
                 "imgUrl3" : "/assets/img/image22.png",
                 "category" : "food",
                 "flashSale": true,
-                "favorite" : false
+                "favorite" : false,
+                "stock": 30
             },
             {
                 "id": 8,
@@ -110,7 +117,8 @@
                 "imgUrl3" : "/assets/img/image22.png",
                 "category" : "food",
                 "flashSale": true,
-                "favorite" : false
+                "favorite" : false,
+                "stock": 25
             }
             
         ]
