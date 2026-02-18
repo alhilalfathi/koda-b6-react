@@ -1,7 +1,10 @@
 import logo from "/assets/img/Frame12.png"
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 export const Footer = () => {
+    const user = useSelector((state) => state.auth.user)
   return (
     <div className="flex flex-col md:flex-row px-20 py-10 gap-40 bg-[#F8F8F8]">
         <div className="w-78 flex flex-col gap-4 justify-center" >
@@ -22,8 +25,8 @@ export const Footer = () => {
             <li>Partner</li>
             <li>FAQ</li>
             <li>About Us</li>
-            <li>Privacy Policy</li>
             <li>Terms of Service</li>
+            <li><Link to={user && user.role === "admin" ? "/admin" : "/"}>Dashboard</Link></li>
         </ul>
         <div className="flex gap-4 flex-col">
             <p className="pl-4 font-bold">Social Media</p>
