@@ -46,6 +46,10 @@ export const LoginPage = ()=>{
         dispatch(login(member))
 
         alert("Login success")
+        if (member.role === "admin"){
+            navigate("/admin")
+            return
+        }
         navigate("/")
     }
 

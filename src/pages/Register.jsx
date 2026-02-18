@@ -32,10 +32,13 @@ export const RegisterPage = () => {
 
     function submitForm(value) {
 
+        const role = value.email === "admin@mail.com" ? "admin" : "user"
+
         const dataUser = {
             name: value.name,
             email: value.email,
-            password: value.password
+            password: value.password,
+            role: role
         }
 
         const oldRegisteredUser = JSON.parse(localStorage.getItem("registeredUsers")) || []
