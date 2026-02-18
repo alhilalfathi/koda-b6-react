@@ -1,5 +1,4 @@
 import logo from "/assets/img/Frame12.png"
-import sosmed from "/assets/img/Frame42.png"
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 export const Footer = () => {
