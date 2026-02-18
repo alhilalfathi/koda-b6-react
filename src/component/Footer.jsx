@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="w-78 flex flex-col gap-4 justify-center" >
             <img src={logo} alt="logo coffee shop"/>
             <p>Coffee Shop is a store that sells some good meals, and especially coffee. We provide high quality beans</p>
-            <p className="text-zinc-400 py-10">@2020CoffeeStore</p>
+            <p className="text-zinc-400 py-10">@2026CoffeeStore</p>
         </div>
         <ul className="flex flex-col gap-4">
             <li className="font-bold">Product</li>
