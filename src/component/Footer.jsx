@@ -1,5 +1,6 @@
 import logo from "/assets/img/Frame12.png"
 import sosmed from "/assets/img/Frame42.png"
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 export const Footer = () => {
   return (
@@ -27,7 +28,11 @@ export const Footer = () => {
         </ul>
         <div className="flex gap-4 flex-col">
             <p className="pl-4 font-bold">Social Media</p>
-            <img className="w-30 md:w-unset" src={sosmed} alt="sosmed"/>
+            <div className="pl-4 flex gap-3">
+                <FaFacebook className="w-6 h-6 cursor-pointer"/>
+                <FaInstagram className="w-6 h-6 cursor-pointer"/>
+                <FaTwitter className="w-6 h-6 cursor-pointer"/>
+            </div>
         </div>
     </div>
   )
