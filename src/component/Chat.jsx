@@ -8,7 +8,7 @@ export const ChatWidget = () => {
         chatRef.current.classList.toggle("hidden")
     }
   return (
-    <div className="fixed right-10 bottom-15 items-center ">
+    <div className="fixed right-10 bottom-25 items-center ">
 
       {/* Chat Box */}
         <article ref={chatRef} className="w-80 bg-white rounded-2xl mb-5 hidden">
@@ -57,7 +57,7 @@ export const ChatWidget = () => {
         </article>
 
       {/* Chat Button */}
-        <button onClick={chat} className="w-14 h-14 bg-[#FF8906] rounded-full flex items-center justify-center cursor-pointer absolute right-0 bottom-[-2]">
+        <button onClick={chat} className="w-14 h-14 bg-[#FF8906] rounded-full flex items-center justify-center cursor-pointer absolute right-0 bottom-[-90px]">
             <img src="/assets/img/ChatCircleDots.png" alt="Chat" className="mt-1" />
         </button>
 
