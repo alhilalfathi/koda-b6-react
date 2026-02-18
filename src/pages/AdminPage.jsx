@@ -1,8 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import coffeeShopLogo from "/assets/img/Frame12.png"
 import profilPictures from "/assets/img/Ellipse185.png"
-import searchIcon from "/assets/img/Search-gray.png"
-import cartIcon from "/assets/img/ShoppingCart-grey.png"
 import dashboardIcon from "/assets/img/u_create-dashboard.png"
 import productIcon from "/assets/img/u_glass-tea.png"
 import orderIcon from "/assets/img/Bag.png"
@@ -10,9 +8,11 @@ import userIcon from "/assets/img/2-User.png"
 import logOutIcon from "/assets/img/Log-Out.png"
 import { useDispatch } from "react-redux"
 import { logout } from "../redux/reducers/authReducer"
+import { useSelector } from "react-redux"
 
 
 export const AdminPage = () => {
+    const user = useSelector((state) => state.auth.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutUser = () => {
@@ -23,10 +23,9 @@ export const AdminPage = () => {
   return (
     <div>
         <nav className="flex items-center justify-between px-20 py-5 border border-white border-b-[#E8E8E8]">
-            <img src={coffeeShopLogo} alt="logo coffee shop"/>
+            <Link to="/"><img src={coffeeShopLogo} alt="logo coffee shop"/></Link>
             <div className="flex items-center gap-6">
-                <img src={searchIcon} alt="search icon"/>
-                <img src={cartIcon} alt="cart icon"/>
+                <span className="text-gray-600 border rounded-lg px-3 py-1">{user.name}</span>
                 <div>
                     <img src={profilPictures} alt="profile pictures" className="w-8 h-8"/>
                 </div>
