@@ -20,10 +20,7 @@ export const HomePage = () => {
         const fetchRecom = async () => {
             try {
                 const data = await http("/recommended-products");
-
-                if (data && data.success) {
                     setProducts(data.results);
-                }
             } catch (err) {
                 console.log(err);
             } finally {
@@ -86,8 +83,8 @@ export const HomePage = () => {
                     {/* product */}
                     {loading ? (
                         <p className="text-xl">Loading favorite products...</p>
-                    ) : (products.map((product, index) => (
-                        <div key={index} className="flex flex-col relative">
+                    ) : (products.map((product) => (
+                        <div key={product.product_id} className="flex flex-col relative">
                             <div className="w-64 my-15 md:my-o" >
                                 <img className="w-64 h-64" src={product.path} alt={product.product_name} />
                             </div>
