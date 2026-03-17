@@ -12,7 +12,24 @@ import { DataContext } from "../component/context/DataContext";
 export const HomePage = () => {
     const [testi, setTesti] = useState([])
     const [currentTesti, setCurrentTesti] = useState(0)
-    const { products, loading } = useContext(DataContext)
+    // const { products, loading } = useContext(DataContext)
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        const fetchRecom = async () => {
+            try {
+                const data = await http("/recommended-products");
+
+                if (data && data.success) {
+                    setProducts(data.result);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchRecom();
+    },[])
 
     // fetch data testimoni 
     useEffect(() => {
@@ -66,17 +83,17 @@ export const HomePage = () => {
                     {/* product */}
                     {loading ? (
                         <p className="text-xl">Loading favorite products...</p>
-                    ) : (products.filter(item => item.favorite === true).map((product, index) => (
+                    ) : (products.map((product, index) => (
                         <div key={index} className="flex flex-col relative">
                             <div className="w-64 my-15 md:my-o" >
-                                <img className="w-64 h-64" src={product.img} alt={product.name} />
+                                <img className="w-64 h-64" src={product.path} alt={product.product_name} />
                             </div>
                             <div className="w-58 bg-white absolute top-52 left-3 p-2" >
-                                <h3 className="text-2xl mb-2">{product.name}</h3>
-                                <p className="text-sm text-stone-700 mb-2">{product.tag}</p>
+                                <h3 className="text-2xl mb-2">{product.product_name}</h3>
+                                <p className="text-sm text-stone-700 mb-2">{product.product_desc}</p>
                                 <h3 className="text-xl text-[#FF8906] mb-2">IDR {product.price.toLocaleString("id")}</h3>
                                 <div className="flex gap-3">
-                                    <Link className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.id}`}>Buy</Link>
+                                    <Link className="w-44 h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.product_id}`}>Buy</Link>
                                     <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
                                         <Link to="/checkout">
                                             <BsCart2 />
