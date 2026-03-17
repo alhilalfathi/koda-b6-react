@@ -22,7 +22,7 @@ export const HomePage = () => {
                 const data = await http("/recommended-products");
 
                 if (data && data.success) {
-                    setProducts(data.result);
+                    setProducts(data.results);
                 }
             } catch (err) {
                 console.log(err);
