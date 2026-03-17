@@ -85,7 +85,7 @@ export const HomePage = () => {
                     {/* product */}
                     {loading ? (
                         <p className="text-xl">Loading favorite products...</p>
-                    ) : (products.map((product) => (
+                    ) : (products?.map((product) => (
                         <div key={product.product_id} className="flex flex-col relative">
                             <div className="w-64 my-15 md:my-o" >
                                 <img className="w-64 h-64" src={product.path} alt={product.product_name} />
