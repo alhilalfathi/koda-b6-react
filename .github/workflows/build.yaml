@@ -9,16 +9,8 @@ jobs:
     permissions:
       packages: write
     steps:
-      - name: Setup nodejs v22.22.0
-        uses: actions/setup-node@v6
-        with:
-          node-version: '22.22.0'
-      - name: Check nodejs version
-        run: node -v
       - name: Gathering source code
         uses: actions/checkout@v6
-      - name: Build app
-        run: npm install && npm run build
       - name: "[DOCKER] Setup metadata"
         id: meta
         uses: docker/metadata-action@v5
@@ -53,6 +45,6 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker pull ghcr.io/alhilalfathi/coffeeshop-hilal:latest
-            docker rm -f web-hilal
-            docker run -d -p 20301:80 --name web-hilal --network pman_web ghcr.io/alhilalfathi/coffeeshop-hilal:latest
+            cd server-hilal
+            docker compose pull frontend
+            docker compose up frontend -d

@@ -1,3 +1,18 @@
-FROM nginx:stable-alpine
+FROM node:22.22.0-alpine AS build
 
-COPY ./dist /usr/share/nginx/html
+WORKDIR /workspace
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+
+FROM nginx:1.28.2-alpine
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=build /workspace/dist/ . 
