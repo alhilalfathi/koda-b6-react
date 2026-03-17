@@ -20,6 +20,7 @@ export const HomePage = () => {
         const fetchRecom = async () => {
             try {
                 const data = await http("/recommended-products");
+                console.log(data)
                     setProducts(data.results);
             } catch (err) {
                 console.log(err);
