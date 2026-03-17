@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChatWidget } from "../component/Chat";
 // import { DataContext } from "../component/context/DataContext";
-import http from "../lib/http";
+import http from "../lib/http.js";
 
 export const HomePage = () => {
     const [testi, setTesti] = useState([])
