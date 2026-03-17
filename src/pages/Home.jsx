@@ -14,6 +14,7 @@ export const HomePage = () => {
     const [currentTesti, setCurrentTesti] = useState(0)
     // const { products, loading } = useContext(DataContext)
     const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
         const fetchRecom = async () => {
@@ -25,6 +26,8 @@ export const HomePage = () => {
                 }
             } catch (err) {
                 console.log(err);
+            } finally {
+                setLoading(false)
             }
         };
 
