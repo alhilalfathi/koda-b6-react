@@ -4,10 +4,10 @@ import sideImage from "/assets/img/Rectangle291.png"
 import checklistIcon from "/assets/img/Vector.png"
 import { BsCart2 } from "react-icons/bs";
 import { Footer } from "../component/Footer";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChatWidget } from "../component/Chat";
-import { DataContext } from "../component/context/DataContext";
+// import { DataContext } from "../component/context/DataContext";
 import http from "../lib/http";
 
 export const HomePage = () => {
