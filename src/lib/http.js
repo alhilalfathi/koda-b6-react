@@ -1,16 +1,22 @@
 
 const BASE_URL = "https://hilal-backend.camps.fahrul.id"
 
-function http(url, body ,opts={}){
-    const headers = {}
-    if(opts.token){
-        headers.Authorization = "Bearer "+opts.token
+async function http(url, opts={}){ 
+    const headers = {
+        'Content-Type': 'application/json'
     }
-    return fetch(BASE_URL + url, {
+    if(opts.token){
+        headers.Authorization = "Bearer " + opts.token
+    }
+
+    const response = await fetch(BASE_URL + url, {
         method: opts.method || "GET",
-        body,
-        headers
+        headers: headers,
+        body: opts.body ? JSON.stringify(opts.body) : undefined
     })
+
+    return await response.json()
 }
+
 
 export default http;
