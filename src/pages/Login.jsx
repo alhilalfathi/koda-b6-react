@@ -51,6 +51,7 @@ export const LoginPage = () => {
 
                 //save to localStorage
                 localStorage.setItem("token", userData.token)
+                localStorage.setItem("user", JSON.stringify(userData.fullname))
 
                 alert("Login Success")
 
