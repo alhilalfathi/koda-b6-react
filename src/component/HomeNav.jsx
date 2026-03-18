@@ -31,7 +31,7 @@ export const HomeNav = () => {
                         <Link className="w-24 h-10 bg-[#FF8906] flex items-center justify-center rounded" to="/register">Sign Up</Link>
                     </>) : (
                     <>
-                        <span className="text-sm">Hi, {user}</span>
+                        <span className="text-sm">Hi, {user.fullname}</span>
                         <button
                             onClick={()=>dispatch(logout())}
                             className="w-24 h-10 border flex items-center justify-center rounded cursor-pointer"
