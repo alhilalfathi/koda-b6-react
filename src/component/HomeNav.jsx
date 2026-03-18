@@ -1,12 +1,9 @@
-// import { useContext } from "react"
 import { Link } from "react-router-dom"
-// import { AuthContext } from "./context/AuthContext"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { logout } from "../redux/reducers/authReducer"
 
 export const HomeNav = () => {
-    // const { user, logout } = useContext(AuthContext)
     const user = useSelector((state) => state.auth.user)
     const dispatch = useDispatch()
 
@@ -34,7 +31,7 @@ export const HomeNav = () => {
                         <Link className="w-24 h-10 bg-[#FF8906] flex items-center justify-center rounded" to="/register">Sign Up</Link>
                     </>) : (
                     <>
-                        <span className="text-sm">Hi, {user.name}</span>
+                        <span className="text-sm">Hi, {user}</span>
                         <button
                             onClick={()=>dispatch(logout())}
                             className="w-24 h-10 border flex items-center justify-center rounded cursor-pointer"
