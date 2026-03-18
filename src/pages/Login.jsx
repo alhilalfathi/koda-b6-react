@@ -37,34 +37,34 @@ export const LoginPage = () => {
             const response = await http("/auth/login", {
                 method: "POST",
                 body: {
-                    email: value.email,
-                    password: value.password
+                    Email: value.email,
+                    Password: value.password
                 }
             });
 
             //Login check
             if (response.success || response.results) {
-                const userData = response.results; // Asumsi: { token: "...", role: "...", name: "..." }
+                const userData = response.results
 
                 //Save to Redux 
-                dispatch(login(userData));
+                dispatch(login(userData))
 
-                //Simpan token ke localStorage
-                localStorage.setItem("token", userData.token);
+                //save to localStorage
+                localStorage.setItem("token", userData.token)
 
-                alert("Login Success");
+                alert("Login Success")
 
                 if (userData.role === "admin") {
-                    navigate("/admin");
+                    navigate("/admin")
                 } else {
-                    navigate("/");
+                    navigate("/")
                 }
             } else {
-                alert(response.message || "Email or Password Wrong");
+                alert(response.message)
             }
         } catch (error) {
-            console.error("Login Error:", error);
-            alert("Connection server error");
+            console.error("Login Error:", error)
+            alert("Connection server error")
         }
     }
 
