@@ -7,13 +7,11 @@ import { Footer } from "../component/Footer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChatWidget } from "../component/Chat";
-// import { DataContext } from "../component/context/DataContext";
 import http from "../lib/http.js";
 
 export const HomePage = () => {
     const [testi, setTesti] = useState([])
     const [currentTesti, setCurrentTesti] = useState(0)
-    // const { products, loading } = useContext(DataContext)
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -112,7 +110,7 @@ export const HomePage = () => {
                 {/* header */}
                 <div className="flex flex-col justify-center items-center mt-70 bg-zinc-50 pt-20">
                     <h1 className="text-3xl md:text-6xl font-medium text-center"> <span className="text-yellow-700">Visit Our Store</span> in the Spot on the Map Below</h1>
-                    <p className="mt-10 w-128 text-center">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
+                    <p className="mt-10 w-lg text-center">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
                 </div>
                 <div className="flex justify-center items-center"><img className="w-300 " src="/assets/img/HugeGlobal.png" alt="maps image" /></div>
 
@@ -127,7 +125,7 @@ export const HomePage = () => {
                                 <p className="pb-4">TESTIMONIAL</p>
                                 <h2 className="text-xl md:text-3xl border border-black border-l-[#FF8906] pl-4 py-4">{showedTesti.name}</h2>
                                 <p className="text-[#FF8906] pt-4">{showedTesti.role}</p>
-                                <p className="w-128 py-4">{showedTesti.msg}</p>
+                                <p className="w-lg py-4">{showedTesti.msg}</p>
                                 <div><img src="/assets/img/Frame41.png" alt="stars icon" /></div>
                                 <div className="flex gap-4 py-6">
                                     <button onClick={prevTesti} className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</button>
