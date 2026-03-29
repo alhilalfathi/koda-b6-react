@@ -31,14 +31,6 @@ export const HomePage = () => {
         fetchRecom();
     }, [])
 
-    // fetch data testimoni 
-    // useEffect(() => {
-    //     const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/testimoni.json"
-    //     fetch(url).then((res) => res.json()).then((data) => {
-    //         setTesti(data)
-    //     }).catch((err) => console.log(err))
-    // }, [])
-
     useEffect(() => {
         const fetchReviews = async () => {
             try {
@@ -135,7 +127,7 @@ export const HomePage = () => {
             
             {/* testimoni  */}
             <section>
-                <div className="flex bg-black p-10 md:p-20 gap-4 min-h-125">
+                <div className="flex justify-center bg-black p-10 md:p-20 gap-4">
                     {showedTesti ? (
                         <div className="flex md:flex-row flex-col gap-10 md:gap-5">
                             {/* image */}
