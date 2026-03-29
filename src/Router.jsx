@@ -15,6 +15,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { AdminProduct } from "./pages/AdminProduct";
 import { AdminOrder } from "./pages/AdminOrder";
 import { AdminUser } from "./pages/AdminUser";
+import { ResetPassword } from "./pages/ResetPassword";
 
 
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
     {
         path: "/forgot-password",
         element: <ForgotPass />
+    },
+    {
+        path: "/reset-password",
+        element: <ResetPassword />
     },
     {
         path: "/product",
