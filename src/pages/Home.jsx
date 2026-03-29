@@ -135,7 +135,7 @@ export const HomePage = () => {
                                 <img
                                     src={showedTesti.path}
                                     alt={`User ${showedTesti.user_id}`}
-                                    className="w-80 h-80 object-cover rounded-lg"
+                                    className="w-120 h-80 object-cover rounded-lg"
                                 />
                             </div>
 
