@@ -7,6 +7,8 @@ import resetPassImage from "/assets/img/Rectangle289-2.png";
 import { useForm } from "react-hook-form";
 import http from "../lib/http.js";
 import { useNavigate, useLocation } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const registerSchema = yup.object({
     password: yup.string().required("Password must be filled").min(8, "Password minimum 8 characters")
