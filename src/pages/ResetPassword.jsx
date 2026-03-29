@@ -1,23 +1,32 @@
 import { InputDiv } from "../component/InputDiv";
 import { MainDiv } from "../component/MainDiv";
 import { GoKey, GoShieldCheck } from "react-icons/go";
+import { FiEye } from "react-icons/fi";
 import { ButtonDiv } from "../component/ButtonDiv";
 import resetPassImage from "/assets/img/Rectangle289-2.png";
 import { useForm } from "react-hook-form";
 import http from "../lib/http.js";
 import { useNavigate, useLocation } from "react-router-dom";
 
+const registerSchema = yup.object({
+    password: yup.string().required("Password must be filled").min(8, "Password minimum 8 characters")
+})
+
 export const ResetPassword = () => {
     const { 
         handleSubmit, 
         register, 
         formState: { isSubmitting } 
-    } = useForm()
+    } = useForm({ resolver: yupResolver(registerSchema) })
+
+    const [changePassword, setChangePassword] = useState(true)
+    const changeIcon = changePassword === true ? false : true
     
     const navigate = useNavigate()
     const location = useLocation()
 
     const emailFromForgot = location.state?.email || ""
+    console.log(emailFromForgot)
 
     async function onResetPassword(value) {
         try {
@@ -65,11 +74,12 @@ export const ResetPassword = () => {
                 {/* Input New Password */}
                 <InputDiv 
                     register={register} 
-                    type={"password"} 
+                    type={changePassword ? "password" : "text"}
                     id={"password"} 
                     name={"password"} 
                     icon={<GoKey />} 
                     placeholder={"Enter New Password"}
+                    eye={<FiEye className="cursor-pointer" onClick={() => { setChangePassword(changeIcon) }} />}
                 >
                     New Password
                 </InputDiv>
