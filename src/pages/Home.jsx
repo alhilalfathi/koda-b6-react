@@ -131,11 +131,11 @@ export const HomePage = () => {
                     {showedTesti ? (
                         <div className="flex md:flex-row flex-col gap-10 md:gap-5">
                             {/* image */}
-                            <div className="w-80 h-80 md:w-1/3">
+                            <div className="w-full md:w-1/3">
                                 <img
                                     src={showedTesti.path}
                                     alt={`User ${showedTesti.user_id}`}
-                                    className="w-full h-80 object-cover rounded-lg"
+                                    className="w-80 h-80 object-cover rounded-lg"
                                 />
                             </div>
 
