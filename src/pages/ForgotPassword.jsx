@@ -12,9 +12,9 @@ export const ForgotPass = () => {
         handleSubmit, 
         register, 
         formState: { isSubmitting } 
-    } = useForm();
+    } = useForm()
     
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     async function onRequestForgot(value) {
         try {
@@ -26,8 +26,8 @@ export const ForgotPass = () => {
             })
 
             if (response.success) {
-                alert("Request Success! Please check your email for the new password.")
-                navigate("/login")
+                alert("Request Success! Please check your email for the reset code")
+                navigate("/reset-password", { state: { email: value.email } })
             } else {
                 alert(response.message || "Email not found")
             }
@@ -61,5 +61,5 @@ export const ForgotPass = () => {
                 </ButtonDiv>
             </MainDiv>
         </form>
-    );
-};
+    )
+}
