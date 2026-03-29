@@ -15,12 +15,12 @@ export const HomePage = () => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchRecom = async () => {
             try {
                 const data = await http("/recommended-products");
                 console.log(data)
-                    setProducts(data.results);
+                setProducts(data.results);
             } catch (err) {
                 console.log(err);
             } finally {
@@ -29,15 +29,32 @@ export const HomePage = () => {
         };
 
         fetchRecom();
-    },[])
+    }, [])
 
     // fetch data testimoni 
+    // useEffect(() => {
+    //     const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/testimoni.json"
+    //     fetch(url).then((res) => res.json()).then((data) => {
+    //         setTesti(data)
+    //     }).catch((err) => console.log(err))
+    // }, [])
+
     useEffect(() => {
-        const url = "https://raw.githubusercontent.com/alhilalfathi/koda-b6-react/refs/heads/main/src/data/testimoni.json"
-        fetch(url).then((res) => res.json()).then((data) => {
-            setTesti(data)
-        }).catch((err) => console.log(err))
+        const fetchReviews = async () => {
+            try {
+                const response = await http("/reviews")
+
+                if (response && response.results) {
+                    setTesti(response.results)
+                }
+            } catch (err) {
+                console.error("Failed to fetch reviews:", err)
+            }
+        }
+
+        fetchReviews()
     }, [])
+
     const showedTesti = testi[currentTesti]
 
     const nextTesti = () => {
@@ -115,27 +132,61 @@ export const HomePage = () => {
                 <div className="flex justify-center items-center"><img className="w-275" src="/assets/img/HugeGlobal.png" alt="maps image" /></div>
 
             </section>
+            
             {/* testimoni  */}
             <section>
-                <div className="flex bg-black p-10 md:p-20 gap-4">
-                    {showedTesti && (
-                        <div className="flex md:flex-row flex-col gap-10 md:gap-5">
-                            <div className="w-150 h-100"><img src={showedTesti.img} alt={showedTesti.name} /></div>
-                            <div className="text-white">
-                                <p className="pb-4">TESTIMONIAL</p>
-                                <h2 className="text-xl md:text-3xl border border-black border-l-[#FF8906] pl-4 py-4">{showedTesti.name}</h2>
-                                <p className="text-[#FF8906] pt-4">{showedTesti.role}</p>
-                                <p className="w-lg py-4">{showedTesti.msg}</p>
-                                <div><img src="/assets/img/Frame41.png" alt="stars icon" /></div>
-                                <div className="flex gap-4 py-6">
-                                    <button onClick={prevTesti} className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8592;</button>
-                                    <button onClick={nextTesti} className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold">&#8594;</button>
+                <div className="flex bg-black p-10 md:p-20 gap-4 min-h-125">
+                    {showedTesti ? (
+                        <div className="flex md:flex-row flex-col gap-10 md:gap-5 items-center">
+                            {/* image */}
+                            <div className="w-full md:w-1/3">
+                                <img
+                                    src={showedTesti.path}
+                                    alt={`User ${showedTesti.user_id}`}
+                                    className="w-full h-80 object-cover rounded-lg"
+                                />
+                            </div>
+
+                            <div className="text-white md:w-2/3">
+                                <p className="pb-2 text-sm tracking-widest text-gray-400">TESTIMONIAL</p>
+                                <h2 className="text-xl md:text-3xl border-l-4 border-[#FF8906] pl-4 py-2 font-bold">
+                                    User ID: {showedTesti.user_id}
+                                </h2>
+                                <p className="text-[#FF8906] pt-4 font-medium">Customer</p>
+
+                                {/* messages */}
+                                <p className="w-full max-w-lg py-4 text-lg italic text-gray-300">
+                                    "{showedTesti.messages}"
+                                </p>
+
+                                {/* rating */}
+                                <div className="flex mb-6">
+                                    {[...Array(showedTesti.rating)].map((_, i) => (
+                                        <span key={i} className="text-yellow-400 text-xl">★</span>
+                                    ))}
                                 </div>
-                                <div><img src="/assets/img/Group1300.png" alt="1300" /></div>
+
+                                <div className="flex gap-4 py-6">
+                                    <button
+                                        onClick={prevTesti}
+                                        className="w-12 h-12 bg-white rounded-full text-black flex justify-center items-center text-2xl hover:bg-gray-200 transition-colors"
+                                    >
+                                        &#8592;
+                                    </button>
+                                    <button
+                                        onClick={nextTesti}
+                                        className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-2xl hover:bg-[#e67a05] transition-colors"
+                                    >
+                                        &#8594;
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                    ) : (
+                        <div className="flex justify-center items-center w-full">
+                            <p className="text-white">Loading reviews...</p>
+                        </div>
                     )}
-
                 </div>
             </section>
 
