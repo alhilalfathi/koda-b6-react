@@ -137,7 +137,7 @@ export const HomePage = () => {
             <section>
                 <div className="flex bg-black p-10 md:p-20 gap-4 min-h-125">
                     {showedTesti ? (
-                        <div className="flex md:flex-row flex-col gap-10 md:gap-5 items-center">
+                        <div className="flex md:flex-row flex-col gap-10 md:gap-5">
                             {/* image */}
                             <div className="w-full md:w-1/3">
                                 <img
@@ -150,7 +150,7 @@ export const HomePage = () => {
                             <div className="text-white md:w-2/3">
                                 <p className="pb-2 text-sm tracking-widest text-gray-400">TESTIMONIAL</p>
                                 <h2 className="text-xl md:text-3xl border-l-4 border-[#FF8906] pl-4 py-2 font-bold">
-                                    User ID: {showedTesti.user_id}
+                                    {showedTesti.fullname}
                                 </h2>
                                 <p className="text-[#FF8906] pt-4 font-medium">Customer</p>
 
