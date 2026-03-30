@@ -62,7 +62,7 @@ export const ProductPage = () => {
 
     if (sort === "cheap") {
         filteredProducts = [...filteredProducts].sort(
-            (a, b) => a.discountPrice - b.discountPrice
+            (a, b) => a.price - b.price
         )
     }
 
