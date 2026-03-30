@@ -19,7 +19,7 @@ export const Product = ({product}) => {
             <img src={starsIcon} alt="stars icon" />
             <div className="flex gap-2 items-center">
                 <del className="text-red-600 ">IDR {product.price.toLocaleString("id")}</del>
-                <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.discountPrice.toLocaleString("id")}</h3>
+                <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.price.toLocaleString("id")}</h3>
             </div>
             <div className="flex gap-3">
                 <Link className="w-full h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.id}`} >Buy</Link>
