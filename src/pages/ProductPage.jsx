@@ -56,9 +56,9 @@ export const ProductPage = () => {
         return matchSearch && matchCategory //&& matchFavorite
     })
 
-    if (sort === "flashSale") {
-        filteredProducts = filteredProducts.filter(p => p.flashSale)
-    }
+    // if (sort === "flashSale") {
+    //     filteredProducts = filteredProducts.filter(p => p.flashSale)
+    // }
 
     if (sort === "cheap") {
         filteredProducts = [...filteredProducts].sort(
@@ -128,8 +128,8 @@ export const ProductPage = () => {
                                 <li className="flex gap-3">
                                     <input
                                         type="checkbox"
-                                        checked={favorite}
-                                        onChange={() => setFavorite(!favorite)}
+                                        // checked={favorite}
+                                        // onChange={() => setFavorite(!favorite)}
                                     /> Favorite Product
                                 </li>
                                 <li className="flex gap-3">
