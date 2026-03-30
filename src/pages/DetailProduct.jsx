@@ -40,11 +40,11 @@ export const DetailProduct = () => {
         if (products.length === 0) return
 
         const selected = products.find(
-            (item) => item.id === Number(id)
+            (item) => item.product_id === Number(id)
         )
 
         const recommendation = products
-            .filter((item) => item.id !== Number(id))
+            .filter((item) => item.product_id !== Number(id))
             .slice(0, 3)
 
         setProduct(selected)
@@ -92,7 +92,7 @@ export const DetailProduct = () => {
             quantity,
             size,
             temp,
-            img: product.img
+            img: product.path
         }
 
         dispatch(
