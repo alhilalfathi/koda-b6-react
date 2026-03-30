@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import http from "../lib/http.js";
+import http from "../../lib/http.js";
 
 export const DataContext = createContext()
 
