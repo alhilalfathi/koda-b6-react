@@ -85,9 +85,9 @@ export const DetailProduct = () => {
         }
 
         const newItem = {
-            productId: product.id,
-            name: product.name,
-            discountPrice: product.discountPrice,
+            productId: product.product_id,
+            name: product.product_name,
+            discountPrice: product.price,
             price: product.price,
             quantity,
             size,
@@ -115,20 +115,20 @@ export const DetailProduct = () => {
             <div className="flex md:flex-row flex-col mx-20 my-10 gap-4">
                 {/* side image  */}
                 <div className="flex flex-col w-1/2 gap-4 ">
-                    <img className=" w-full " src={product.img} alt={product.name} />
+                    <img className=" w-full " src={product.path} alt={product.product_name} />
                     <div className="md:flex gap-3 hidden md:items-center md:justify-center">
-                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.imgUrl1} alt="product image" />
-                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.imgUrl2} alt="product image" />
-                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.imgUrl3} alt="product image" />
+                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
+                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
+                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
                     </div>
                 </div>
                 {/* content  */}
                 <div className="w-1/2">
                     <span className="bg-red-600 text-white rounded-xl w-26  flex items-center justify-center">FLASH SALE!</span>
-                    <h1 className="md:text-4xl text-xl py-3">{product.name}</h1>
+                    <h1 className="md:text-4xl text-xl py-3">{product.product_name}</h1>
                     <div className="flex gap-2 items-center">
                         <del className="text-red-600 ">IDR {product.price.toLocaleString("id")}</del>
-                        <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.discountPrice.toLocaleString("id")}</h3>
+                        <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.price.toLocaleString("id")}</h3>
                     </div>
                     <img src="/assets/img/Frame41-gray.png" alt="stars icon" />
                     <div className="flex text-[#4F5665] gap-3 py-2 text-xl">
