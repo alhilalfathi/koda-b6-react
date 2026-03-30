@@ -22,7 +22,7 @@ export const Product = ({product}) => {
                 <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.price.toLocaleString("id")}</h3>
             </div>
             <div className="flex gap-3">
-                <Link className="w-full h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.id}`} >Buy</Link>
+                <Link className="w-full h-10 bg-[#FF8906] rounded flex items-center justify-center" to={`/detail-product/${product.product_id}`} >Buy</Link>
             <div className="w-12 flex justify-center items-center border border-[#FF8906] rounded">
                 <Link to="/checkout">
                     <BsCart2 />
