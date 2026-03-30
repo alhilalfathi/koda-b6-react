@@ -55,13 +55,6 @@ export const ProductPage = () => {
         const matchFavorite = !favorite || product.favorite === true
         return matchSearch && matchCategory && matchFavorite
     })
-    // Pagination
-    const itemsPerPage = 4
-    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
-    const startIndex = (currentPage - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    const currentProducts = filteredProducts.slice(startIndex, endIndex)
-
 
     if (sort === "flashSale") {
         filteredProducts = filteredProducts.filter(p => p.flashSale)
@@ -72,6 +65,13 @@ export const ProductPage = () => {
             (a, b) => a.discountPrice - b.discountPrice
         )
     }
+
+    // Pagination
+    const itemsPerPage = 4  //limit
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+    const startIndex = (currentPage - 1) * itemsPerPage  //offset
+    const endIndex = startIndex + itemsPerPage
+    const currentProducts = filteredProducts.slice(startIndex, endIndex)
 
     return (
         <div>
