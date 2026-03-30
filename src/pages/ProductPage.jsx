@@ -165,8 +165,8 @@ export const ProductPage = () => {
                                     <input
                                         type="radio"
                                         name="sort"
-                                        checked={sort === "flashSale"}
-                                        onChange={() => setSort("flashSale")}
+                                        // checked={sort === "flashSale"}
+                                        // onChange={() => setSort("flashSale")}
                                     /> Flash Sale
                                 </li>
                                 <li className="flex gap-3"><input type="radio" name="sort" /> Birthday Package</li>
