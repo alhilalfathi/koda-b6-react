@@ -25,7 +25,7 @@ export const ProductPage = () => {
     const [search, setSearch] = useState("")
     const [searchInput, setSearchInput] = useState("")
     const [categories, setCategories] = useState([])
-    const [favorite, setFavorite] = useState(false)
+    // const [favorite, setFavorite] = useState(false)
     const [sort, setSort] = useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -46,14 +46,14 @@ export const ProductPage = () => {
         setSearch("")
         setSearchInput("")
         setCategories([])
-        setFavorite(false)
+        // setFavorite(false)
         setSort("")
     }
     let filteredProducts = products.filter(product => {
-        const matchSearch = product.name.toLowerCase().includes(search.toLowerCase())
+        const matchSearch = product.product_name.toLowerCase().includes(search.toLowerCase())
         const matchCategory = categories.length === 0 || categories.includes(product.category)
-        const matchFavorite = !favorite || product.favorite === true
-        return matchSearch && matchCategory && matchFavorite
+        // const matchFavorite = !favorite || product.favorite === true
+        return matchSearch && matchCategory //&& matchFavorite
     })
 
     if (sort === "flashSale") {
