@@ -10,8 +10,7 @@ import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../component/context/DataContext";
 import { useSelector, useDispatch } from "react-redux"
 import { addToCart } from "../redux/reducers/cartReducer";
-
-
+import http from "../lib/http.js";
 
 
 export const DetailProduct = () => {
@@ -78,35 +77,54 @@ export const DetailProduct = () => {
         setQuantity((prev) => prev > 1 ? prev - 1 : 1)
     }
     // cart 
-    const handleAddToCart = (redirect = false) => {
-        
+    const handleAddToCart = async (redirect = false) => {
+
         if (!user) {
             return alert("You need to login")
         }
 
-        const newItem = {
-            productId: product.product_id,
-            name: product.product_name,
-            discountPrice: product.price,
-            price: product.price,
-            quantity,
-            size,
-            temp,
-            img: product.path
+        const payload = {
+            product_id: product.product_id,
+            quantity: quantity,
+            size: size,
+            variant: temp
         }
 
-        dispatch(
-            addToCart({
-                email: user.email,
-                item: newItem
+        try {
+            const response = await http("/cart", {
+                method: "POST",
+                body: payload
             })
-        )
 
-        if (redirect) {
-            navigate("/checkout")
-        } else {
-            alert("Item added to cart")
+            if (response.success) {
+                const reduxItem = {
+                    productId: product.product_id,
+                    name: product.product_name,
+                    price: product.price,
+                    quantity,
+                    size,
+                    temp,
+                    img: product.path
+                }
+
+                dispatch(addToCart({
+                    email: user.email,
+                    item: reduxItem
+                }))
+
+                if (redirect) {
+                    navigate("/checkout")
+                } else {
+                    alert("Item added to cart!")
+                }
+            } else {
+                alert(response.message || "Failed to add to cart")
+            }
+        } catch (error) {
+            console.error("Add to Cart Error:", error)
+            alert("Connection error to server")
         }
+
     }
 
     return (
@@ -170,8 +188,8 @@ export const DetailProduct = () => {
             <div>
                 <h2 className="text-4xl mb-8 mx-20 font-bold">Recommendation <span className="text-orange-900">For You</span></h2>
                 <div className="flex flex-col md:flex-row gap-4 mb-20 md:mb-45 justify-center items-center">
-                    {recom.map((item) => (
-                        <Product key={item.id} product={item} />
+                    {recom && recom.map((item) => (
+                        <Product key={item.product_id} product={item} />
                     ))}
                 </div>
             </div>
