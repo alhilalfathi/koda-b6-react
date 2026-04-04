@@ -115,7 +115,7 @@ export const DetailProduct = () => {
             <div className="flex md:flex-row flex-col mx-20 my-10 gap-4">
                 {/* side image  */}
                 <div className="flex flex-col w-1/2 gap-4 ">
-                    <img className=" w-200 h-200 " src={product.path} alt={product.product_name} />
+                    <img className=" w-160 h-160 " src={product.path} alt={product.product_name} />
                     <div className="md:flex gap-3 hidden md:items-center md:justify-center">
                         <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
                         <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
