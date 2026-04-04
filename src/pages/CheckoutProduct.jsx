@@ -62,7 +62,7 @@ export const CheckoutProduct = () => {
     }
 
     try {
-      const response = await http("/admin/transaction", {
+      const response = await http("/admin/transaction/", {
         method: "POST",
         body: payload
       })
