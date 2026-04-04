@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { useCart } from "../component/hook/useCart"
 import { addOrder } from "../redux/reducers/cartReducer"
 import { useDispatch } from "react-redux"
+import http from "../lib/http.js"
 
 const PPN = 0.1
 
@@ -31,7 +32,8 @@ export const CheckoutProduct = () => {
 
   let orderTotal = 0
   cartItems.forEach((item) => {
-    orderTotal += item.discountPrice * item.quantity
+    const currentPrice = item.discountPrice || item.price || 0
+    orderTotal += currentPrice * item.quantity
   })
 
   const tax = orderTotal * PPN
@@ -41,32 +43,61 @@ export const CheckoutProduct = () => {
   const activeClass = "border border-[#FF8906] px-3 w-55 h-10 cursor-pointer"
   const inactiveClass = "border border-[#E8E8E8] px-3 w-55 h-10 cursor-pointer"
 
-  const checkoutPayment = (data) => {
+  const checkoutPayment = async (data) => {
 
-    if (cartItems.length === 0){
+    if (cartItems.length === 0) {
       return alert("Cart is empty")
     }
 
-    const newOrder = {
-      id: `123-${Date.now()}`,
-      customer: data,
-      cartItems,
-      delivery,
-      paymentMethod: "Cash",
-      orderTotal,
-      tax,
-      deliveryCost,
-      subTotal,
-      date: new Date().toISOString()
+    const payload = {
+      trx_id: Math.floor(Math.random() * 1000000),
+      fullname: data.fullName,
+      email: data.email,
+      address: data.address,
+      delivery: delivery,
+      delivery_fee: deliveryCost,
+      tax: Math.round(tax),
+      total: Math.round(subTotal),
+      status_order: "Pending"
     }
 
-    dispatch(addOrder({
-      email: currentUser.email,
-      order: newOrder
-    }))
+    try {
+      const response = await http("/admin/transaction", {
+        method: "POST",
+        body: payload
+      })
 
-    clearCart()
-    navigate("/history-order")
+      if (response.success) {
+        const newOrder = {
+          id: response.results.trx_id || `TRX-${Date.now()}`,
+          customer: data,
+          cartItems: cartItems,
+          delivery: delivery,
+          paymentMethod: "Cash",
+          orderTotal: orderTotal,
+          tax: tax,
+          deliveryCost: deliveryCost,
+          subTotal: subTotal,
+          date: new Date().toISOString()
+        }
+
+        dispatch(addOrder({
+          email: currentUser.email,
+          order: newOrder
+        }))
+
+        await http("/admin/cart/user", { method: "DELETE" })
+
+        clearCart()
+        alert("Transaction Successful!")
+        navigate("/history-order")
+      } else {
+        alert(response.message || "Failed to create transaction")
+      }
+    } catch (error) {
+      console.error("Checkout error:", error)
+      alert("Connection error to server")
+    }
   }
 
   return (
