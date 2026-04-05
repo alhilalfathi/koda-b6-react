@@ -91,7 +91,7 @@ export const DetailProduct = () => {
         }
 
         try {
-            const response = await http("/admin/cart/", {
+            const response = await http("/admin/cart/user", {
                 method: "POST",
                 body: payload
             })
