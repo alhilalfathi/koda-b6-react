@@ -71,7 +71,7 @@ export const CheckoutProduct = () => {
         const newOrder = {
           id: response.results.trx_id || `TRX-${Date.now()}`,
           customer: data,
-          cartItems: cartItems,
+          cartItems: [...cartItems],
           delivery: delivery,
           paymentMethod: "Cash",
           orderTotal: orderTotal,
@@ -188,7 +188,7 @@ export const CheckoutProduct = () => {
           <label htmlFor="address">Address</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/Location.png" alt="address icon" className="checkout-input-icon" />
-            <input {...register("address")} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full " />
+            <input {...register("address", {required: true})} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full " />
           </div>
         </div>
         <div >
