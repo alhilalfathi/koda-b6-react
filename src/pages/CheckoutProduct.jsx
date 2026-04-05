@@ -22,7 +22,9 @@ export const CheckoutProduct = () => {
     const fetchCartFromDB = async () => {
       try {
         const response = await http("/admin/cart/", { method: "GET" })
+        console.log("RESPONSE DARI BACKEND:", response)
         if (response.success) {
+          console.log("DATA RESULTS:", response.results)
           dispatch(setCart({
             email: currentUser.email,
             items: response.results
@@ -67,10 +69,6 @@ export const CheckoutProduct = () => {
     if (cartItems.length === 0) {
       return alert("Cart is empty")
     }
-    cartItems.map((item, index) => {
-      console.log("Item ke-" + index, item)
-    })
-
 
     const payload = {
       trx_id: Math.floor(Math.random() * 1000000).toString(),
