@@ -38,17 +38,16 @@ const cartSlice = createSlice({
     },
 
     clearCart: (state, action) => {
-      const email = action.payload
+      const {email} = action.payload
       if (state.carts[email]) {
         state.carts[email] = []
       }
+      
     },
 
     addOrder: (state, action) => {
         const {email, order} = action.payload
-        if (!state.orders) {
-            state.orders = {}
-        }
+
         if (!state.orders[email]){
             state.orders[email]=[]
         }
