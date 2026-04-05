@@ -107,7 +107,8 @@ export const CheckoutProduct = () => {
           order: newOrder
         }))
 
-        await http("/admin/cart/user", { method: "DELETE" })
+        const delRes = await http("/admin/cart/user", { method: "DELETE" })
+        console.log("Response Delete Cart:", delRes)
 
         clearCart()
         alert("Transaction Successful!")
