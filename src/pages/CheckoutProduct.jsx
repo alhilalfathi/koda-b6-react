@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useCart } from "../component/hook/useCart"
-import { addOrder } from "../redux/reducers/cartReducer"
+import { addOrder, setCart } from "../redux/reducers/cartReducer"
 import { useDispatch } from "react-redux"
 import http from "../lib/http.js"
 
@@ -18,6 +18,25 @@ export const CheckoutProduct = () => {
 
   const { cartItems, currentUser, handleRemove, clearCart } = useCart()
 
+  useEffect(() => {
+    const fetchCartFromDB = async () => {
+      try {
+        const response = await http("/admin/cart/", { method: "GET" })
+        if (response.success) {
+          dispatch(setCart({
+            email: currentUser.email,
+            items: response.results
+          }))
+        }
+      } catch (err) {
+        console.error("Failed to sync cart:", err)
+      }
+    }
+
+    if (currentUser) {
+      fetchCartFromDB()
+    }
+  }, [currentUser, dispatch])
   if (!currentUser) {
     return (
       <div>
@@ -188,7 +207,7 @@ export const CheckoutProduct = () => {
           <label htmlFor="address">Address</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/Location.png" alt="address icon" className="checkout-input-icon" />
-            <input {...register("address", {required: true})} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full " />
+            <input {...register("address", { required: true })} type="text" id="address" placeholder="Enter Your Address" autoComplete="address" className=" px-3  w-full " />
           </div>
         </div>
         <div >

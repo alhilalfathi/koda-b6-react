@@ -9,6 +9,11 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setCart: (state, action) => {
+      const { email, items } = action.payload
+      state.carts[email] = items
+    },
+
     addToCart: (state, action) => {
       const { email, item } = action.payload
 
@@ -17,9 +22,9 @@ const cartSlice = createSlice({
       }
 
       const existingItemIndex = state.carts[email].findIndex(
-        (cartItem) => 
-          cartItem.productId === item.productId && 
-          cartItem.size === item.size && 
+        (cartItem) =>
+          cartItem.productId === item.productId &&
+          cartItem.size === item.size &&
           cartItem.temp === item.temp
       )
 
@@ -38,23 +43,23 @@ const cartSlice = createSlice({
     },
 
     clearCart: (state, action) => {
-      const {email} = action.payload
+      const { email } = action.payload
       if (state.carts[email]) {
         state.carts[email] = []
       }
-      
+
     },
 
     addOrder: (state, action) => {
-        const {email, order} = action.payload
+      const { email, order } = action.payload
 
-        if (!state.orders[email]){
-            state.orders[email]=[]
-        }
-        state.orders[email].push(order)
+      if (!state.orders[email]) {
+        state.orders[email] = []
+      }
+      state.orders[email].push(order)
     }
   }
 })
 
-export const { addToCart, removeFromCart, clearCart, addOrder } = cartSlice.actions
+export const { addToCart, setCart,removeFromCart, clearCart, addOrder } = cartSlice.actions
 export default cartSlice.reducer
