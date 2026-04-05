@@ -142,8 +142,8 @@ export const CheckoutProduct = () => {
                   <p className="font-bold text-xl">{item.name}</p>
                   <p className="text-sm text-gray-500">{item.quantity} Pcs | {item.size} | {item.temp}</p>
                   <span className="flex gap-3">
-                    <p className="text-red-500 line-through">IDR {item.price.toLocaleString()}</p>
-                    <p className="text-[#FF8906]">IDR {(item.discountPrice || item.price).toLocaleString()}</p>
+                    <p className="text-red-500 line-through">IDR {(item.price || 0).toLocaleString()}</p>
+                    <p className="text-[#FF8906]">IDR {(item.discountPrice || item.price || 0).toLocaleString()}</p>
                   </span>
                 </div>
               </div>
