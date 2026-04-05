@@ -67,6 +67,10 @@ export const CheckoutProduct = () => {
     if (cartItems.length === 0) {
       return alert("Cart is empty")
     }
+    cartItems.map((item, index) => {
+      console.log("Item ke-" + index, item)
+    })
+
 
     const payload = {
       trx_id: Math.floor(Math.random() * 1000000).toString(),
@@ -133,6 +137,7 @@ export const CheckoutProduct = () => {
           {cartItems.length === 0 ? (
             <p className="mt-5 text-gray-500">Your cart is empty</p>
           ) : (cartItems.map((item, index) => (
+
             // cart 
             <div key={index} className="flex justify-between items-center gap-5 bg-[#E8E8E84D] p-3 mt-5">
               <div className="flex items-center gap-4">
