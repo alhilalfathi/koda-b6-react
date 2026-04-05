@@ -136,11 +136,11 @@ export const CheckoutProduct = () => {
             // cart 
             <div key={index} className="flex justify-between items-center gap-5 bg-[#E8E8E84D] p-3 mt-5">
               <div className="flex items-center gap-4">
-                <img src={item.img} alt={item.name} className="w-40 h-40" />
+                <img src={item.path} alt={item.product_name} className="w-40 h-40" />
                 <div className="flex flex-col gap-3 items-left">
                   <span className="bg-red-600 px-3 rounded-xl w-25 text-white">Flash Sale</span>
-                  <p className="font-bold text-xl">{item.name}</p>
-                  <p className="text-sm text-gray-500">{item.quantity} Pcs | {item.size} | {item.temp}</p>
+                  <p className="font-bold text-xl">{item.product_name}</p>
+                  <p className="text-sm text-gray-500">{item.quantity} Pcs | {item.size} | {item.variant}</p>
                   <span className="flex gap-3">
                     <p className="text-red-500 line-through">IDR {(item.price || 0).toLocaleString()}</p>
                     <p className="text-[#FF8906]">IDR {(item.discountPrice || item.price || 0).toLocaleString()}</p>
