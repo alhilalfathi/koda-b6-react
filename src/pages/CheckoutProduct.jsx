@@ -50,7 +50,7 @@ export const CheckoutProduct = () => {
     }
 
     const payload = {
-      trx_id: Math.floor(Math.random() * 1000000),
+      trx_id: Math.floor(Math.random() * 1000000).toString(),
       fullname: data.fullName,
       email: data.email,
       address: data.address,
