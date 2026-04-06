@@ -69,7 +69,7 @@ export const CheckoutProduct = () => {
     }
 
     const payload = {
-      trx_id: Math.floor(Math.random() * 1000000).toString(),
+      trx_id: 'TRX' + Date.now.toString(),
       fullname: data.fullName,
       email: data.email,
       address: data.address,
@@ -88,7 +88,7 @@ export const CheckoutProduct = () => {
 
       if (response.success) {
         const newOrder = {
-          id: response.results.trx_id || `TRX-${Date.now()}`,
+          id: response.results.trx_id,
           customer: data,
           cartItems: [...cartItems],
           delivery: delivery,
