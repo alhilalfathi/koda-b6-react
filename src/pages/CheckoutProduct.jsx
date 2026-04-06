@@ -22,9 +22,7 @@ export const CheckoutProduct = () => {
     const fetchCartFromDB = async () => {
       try {
         const response = await http("/admin/cart/", { method: "GET" })
-        console.log("RESPONSE DARI BACKEND:", response)
         if (response.success) {
-          console.log("DATA RESULTS:", response.results)
           dispatch(setCart({
             email: currentUser.email,
             items: response.results
@@ -108,7 +106,6 @@ export const CheckoutProduct = () => {
         }))
 
         const delRes = await http("/admin/cart/user", { method: "DELETE" })
-        console.log("Response Delete Cart:", delRes)
 
         clearCart()
         alert("Transaction Successful!")
