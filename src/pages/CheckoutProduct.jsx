@@ -36,7 +36,6 @@ export const CheckoutProduct = () => {
     if (currentUser) {
       fetchCartFromDB()
     }
-    console.log("current user: ", currentUser)
   }, [currentUser, dispatch])
   if (!currentUser) {
     return (
@@ -202,7 +201,7 @@ export const CheckoutProduct = () => {
           <label htmlFor="fullname">Full Name</label>
           <div className="flex items-center gap-2 p-3 border w-180 border-[#DEDEDE] mt-2 rounded" >
             <img src="/assets/img/Profile.png" alt="name icon" className="checkout-input-icon" />
-            <input {...register("fullName", { required: true })} type="text" id="fullname" placeholder="Enter Your Full Name" autoComplete="off" defaultValue={currentUser.name} className=" px-3  w-full " />
+            <input {...register("fullName", { required: true })} type="text" id="fullname" placeholder="Enter Your Full Name" autoComplete="off" defaultValue={currentUser.fullname} className=" px-3  w-full " />
           </div>
         </div>
         <div >
