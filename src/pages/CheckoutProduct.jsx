@@ -36,6 +36,7 @@ export const CheckoutProduct = () => {
     if (currentUser) {
       fetchCartFromDB()
     }
+    console.log("current user: ", currentUser)
   }, [currentUser, dispatch])
   if (!currentUser) {
     return (
