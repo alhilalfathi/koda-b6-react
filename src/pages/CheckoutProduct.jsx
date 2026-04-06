@@ -69,7 +69,7 @@ export const CheckoutProduct = () => {
     }
 
     const payload = {
-      trx_id: 'TRX' + Date.now.toString(),
+      trx_id: 'TRX' + Date.now().toString(),
       fullname: data.fullName,
       email: data.email,
       address: data.address,
