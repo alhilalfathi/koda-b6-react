@@ -18,17 +18,16 @@ export const HomePage = () => {
     useEffect(() => {
         const fetchRecom = async () => {
             try {
-                const data = await http("/recommended-products");
-                console.log(data)
-                setProducts(data.results);
+                const data = await http("/recommended-products")
+                setProducts(data.results)
             } catch (err) {
-                console.log(err);
+                console.log(err)
             } finally {
                 setLoading(false)
             }
-        };
+        }
 
-        fetchRecom();
+        fetchRecom()
     }, [])
 
     useEffect(() => {
