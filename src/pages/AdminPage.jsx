@@ -25,7 +25,7 @@ export const AdminPage = () => {
         <nav className="flex items-center justify-between px-20 py-5 border border-white border-b-[#E8E8E8]">
             <Link to="/"><img src={coffeeShopLogo} alt="logo coffee shop"/></Link>
             <div className="flex items-center gap-6">
-                <span className="text-gray-600 border rounded-lg px-3 py-1">{user.name}</span>
+                <span className="text-gray-600 border rounded-lg px-3 py-1">{user.fullname}</span>
                 <div>
                     <img src={profilPictures} alt="profile pictures" className="w-8 h-8"/>
                 </div>
