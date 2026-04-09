@@ -28,11 +28,11 @@ export const Profile = () => {
                 const res = await http("/admin/users/profile")
 
                 setForm({
-                    fullname: res.fullname || "",
-                    email: res.email || "",
-                    password: res.password || "",
-                    phone: res.phone || "",
-                    address: res.address || ""
+                    fullname: res.fullname ?? "",
+                    email: res.email ?? "",
+                    password:  "",
+                    phone: res.phone ?? "",
+                    address: res.address ?? ""
                 })
             }catch(err){
                 console.log(err)
@@ -98,7 +98,7 @@ export const Profile = () => {
                         value={form.fullname}
                         onChange={handleChange}
                         icon={<IoPersonOutline />}
-                        placeholder={"Ghaluh Wizard"}
+                        placeholder={"Fullname"}
                     >
                         Full Name
                     </InputDiv>
@@ -110,7 +110,7 @@ export const Profile = () => {
                         value={form.email}
                         onChange={handleChange}
                         icon={<HiOutlineMail />}
-                        placeholder={"ghaluhwizz@gmail.com"}
+                        placeholder={"Email"}
                     >
                         Email
                     </InputDiv>
@@ -122,7 +122,7 @@ export const Profile = () => {
                         value={form.phone}
                         onChange={handleChange}
                         icon={<CiPhone />}
-                        placeholder={"082116304338"}
+                        placeholder={"Phone"}
                     >
                         Phone
                     </InputDiv>
@@ -134,7 +134,7 @@ export const Profile = () => {
                         value={form.password}
                         onChange={handleChange}
                         icon={<GoKey />} 
-                        placeholder={"********"} 
+                        placeholder={"Password"} 
                         eye={<FiEye />}
                     >
                         Password
@@ -147,7 +147,7 @@ export const Profile = () => {
                         value={form.address}
                         onChange={handleChange}
                         icon={<GoLocation />}
-                        placeholder={"Griya Bandung Indah"}
+                        placeholder={"Address"}
                     >
                         Address
                     </InputDiv>
