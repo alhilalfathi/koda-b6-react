@@ -1,4 +1,6 @@
 export const InputDiv = (input)=>{
+    const isHookForm = !!input.register
+
     return(
         <div className="flex flex-col">
             <label htmlFor={input.id} className="font-bold my-2 text-lg">
@@ -13,10 +15,14 @@ export const InputDiv = (input)=>{
                     type={input.type} 
                     id={input.id} 
                     name={input.name}
-                    value={input.value || ""}
-                    onChange={input.onChange}
                     placeholder={input.placeholder}
-                    {...(input.register ? input.register(input.name) : {})}
+
+                    {...(isHookForm ? input.register(input.name) : {})}
+
+                    {...(!isHookForm ? {
+                        value: input.value || "",
+                        onChange: input.onChange
+                    } : {})}
                 />
 
                 {input.eye}
