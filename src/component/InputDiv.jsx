@@ -9,7 +9,7 @@ export const InputDiv = (input)=>{
                 type={input.type} 
                 id={input.id} 
                 placeholder={input.placeholder}
-                {...input.register(input.name)}
+                {...(input.register? input.register(input.name) : {})}
                 />
                 {input.eye}
             </div>
