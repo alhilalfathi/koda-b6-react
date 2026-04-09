@@ -22,18 +22,31 @@ export const Profile = () => {
         address: ""
     })
 
+    const [passwordForm, setPasswordForm] = useState({
+        old_password: "",
+        new_password: ""
+    })
+
     useEffect(()=>{
         const fetchProfile = async () => {
             try{
                 const res = await http("/admin/users/profile")
 
+                if(!res.success){
+                    alert(res.message)
+                    return
+                }
+
+                const data = res.results
+
                 setForm({
-                    fullname: res.fullname ?? "",
-                    email: res.email ?? "",
-                    password:  "",
-                    phone: res.phone ?? "",
-                    address: res.address ?? ""
+                    fullname: data.fullname || "",
+                    email: data.email || "",
+                    password: "",
+                    phone: data.phone || "",
+                    address: data.address || ""
                 })
+
             }catch(err){
                 console.log(err)
             }
@@ -42,6 +55,7 @@ export const Profile = () => {
         fetchProfile()
     },[])
 
+    //  handle input profile
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -49,11 +63,22 @@ export const Profile = () => {
         })
     }
 
+    //  handle input password
+    const handlePasswordChange = (e) => {
+        setPasswordForm({
+            ...passwordForm,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    //  update profile
     const handleSubmit = async () => {
         try{
             const body = {
                 fullname: form.fullname,
-                email: form.email
+                email: form.email,
+                phone: form.phone,
+                address: form.address
             }
 
             if(form.password){
@@ -65,10 +90,40 @@ export const Profile = () => {
                 body: body
             })
 
+            if(!res.success){
+                alert(res.message)
+                return
+            }
+
             alert("Update success")
+
         }catch(err){
             console.log(err)
-            alert("Update failed")
+        }
+    }
+
+    //  change password
+    const handleChangePassword = async () => {
+        try{
+            const res = await http("/admin/users/profile/password", {
+                method: "PATCH",
+                body: passwordForm
+            })
+
+            if(!res.success){
+                alert(res.message)
+                return
+            }
+
+            alert("Password change successfully")
+
+            setPasswordForm({
+                old_password: "",
+                new_password: ""
+            })
+
+        }catch(err){
+            console.log(err)
         }
     }
 
@@ -78,13 +133,16 @@ export const Profile = () => {
         <div className="mx-20 my-10">
             <h1 className="text-3xl py-5">Profile</h1>
             <div className="flex gap-3">
+
                 <aside className="w-1/5 flex flex-col justify-between items-center border border-[#E8E8E8] h-70 px-2 py-3">
                     <div className="flex flex-col items-center">
                         <h2>{form.fullname}</h2>
                         <p>{form.email}</p>
                     </div>
                     <div className="flex flex-col items-center">
-                        <button className="bg-[#FF8906] w-full py-2 rounded ">Upload New Photo</button>
+                        <button className="bg-[#FF8906] w-full py-2 rounded ">
+                            Upload New Photo
+                        </button>
                         <p>Since <span className="font-bold">20 January 2022</span></p>
                     </div>
                 </aside>
@@ -92,62 +150,52 @@ export const Profile = () => {
                 <div className="w-4/5 border border-[#E8E8E8] px-5 py-3">
 
                     <InputDiv 
-                        type={"text"} 
-                        id={"name"} 
-                        name={"fullname"} 
+                        type="text"
+                        name="fullname"
                         value={form.fullname}
                         onChange={handleChange}
                         icon={<IoPersonOutline />}
-                        placeholder={"Fullname"}
                     >
                         Full Name
                     </InputDiv>
 
                     <InputDiv 
-                        type={"email"} 
-                        id={"email"} 
-                        name={"email"} 
+                        type="email"
+                        name="email"
                         value={form.email}
                         onChange={handleChange}
                         icon={<HiOutlineMail />}
-                        placeholder={"Email"}
                     >
                         Email
                     </InputDiv>
 
                     <InputDiv 
-                        type={"text"} 
-                        id={"phone"} 
-                        name={"phone"} 
+                        type="text"
+                        name="phone"
                         value={form.phone}
                         onChange={handleChange}
                         icon={<CiPhone />}
-                        placeholder={"Phone"}
                     >
                         Phone
                     </InputDiv>
 
                     <InputDiv 
-                        type={"password"} 
-                        id={"password"} 
-                        name={"password"} 
+                        type="password"
+                        name="password"
                         value={form.password}
                         onChange={handleChange}
-                        icon={<GoKey />} 
-                        placeholder={"Password"} 
+                        icon={<GoKey />}
                         eye={<FiEye />}
                     >
                         Password
                     </InputDiv>
 
                     <InputDiv 
-                        type={"text"} 
-                        id={"address"} 
-                        name={"address"} 
+                        type="text"
+                        name="address"
                         value={form.address}
                         onChange={handleChange}
                         icon={<GoLocation />}
-                        placeholder={"Address"}
                     >
                         Address
                     </InputDiv>
@@ -158,6 +206,37 @@ export const Profile = () => {
                     >
                         Submit
                     </button>
+
+                    <h2 className="text-xl font-bold mt-5">Change Password</h2>
+
+                    <InputDiv
+                        type="password"
+                        name="old_password"
+                        value={passwordForm.old_password}
+                        onChange={handlePasswordChange}
+                        icon={<GoKey />}
+                    >
+                        Old Password
+                    </InputDiv>
+
+                    <InputDiv
+                        type="password"
+                        name="new_password"
+                        value={passwordForm.new_password}
+                        onChange={handlePasswordChange}
+                        icon={<GoKey />}
+                    >
+                        New Password
+                    </InputDiv>
+
+                    <button
+                        onClick={handleChangePassword}
+                        disabled={!passwordForm.old_password || !passwordForm.new_password}
+                        className="bg-black text-white w-full py-2 rounded my-2 disabled:opacity-50"
+                    >
+                        Change Password
+                    </button>
+
                 </div>
             </div>
         </div>
