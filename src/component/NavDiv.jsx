@@ -38,7 +38,7 @@ export const NavDiv = () => {
                     </>
                 ) : (
                     <>
-                        <span className="text-sm">Hi, {user.fullname}</span>
+                        <span className="text-sm"><Link to="/profile">Hi, {user.fullname}</Link></span>
                         <button
                             onClick={onLogout}
                             className="w-24 h-10 border flex items-center justify-center rounded cursor-pointer"
