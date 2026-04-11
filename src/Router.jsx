@@ -16,6 +16,7 @@ import { AdminProduct } from "./pages/AdminProduct";
 import { AdminOrder } from "./pages/AdminOrder";
 import { AdminUser } from "./pages/AdminUser";
 import { ResetPassword } from "./pages/ResetPassword";
+import { ProtectedRoute } from "./component/ProtectedRoute";
 
 
 
@@ -54,19 +55,35 @@ const router = createBrowserRouter([
     },
     {
         path: "/history-order",
-        element: <HistoryOrder />
+        element: (
+            <ProtectedRoute>
+                <HistoryOrder />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/checkout",
-        element: <CheckoutProduct />
+        element: (
+            <ProtectedRoute>
+                <CheckoutProduct />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/detail-order/:orderId",
-        element: <DetailOrder />
+        element: (
+            <ProtectedRoute>
+                <DetailOrder />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/profile",
-        element: <Profile />
+        element: (
+            <ProtectedRoute>
+                <Profile />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/admin",
