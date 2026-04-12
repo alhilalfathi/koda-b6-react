@@ -144,7 +144,7 @@ export const Profile = () => {
                         <p>{form.email}</p>
                     </div>
                     <div className="flex flex-col items-center">
-                        <img src={picture} alt="profile picture" className="w-30 h-30"/>
+                        <img src={picture} alt="profile picture" className="w-40 h-40 mb-3"/>
                         <button className="bg-[#FF8906] w-full py-2 rounded cursor-pointer">
                             Upload New Photo
                         </button>
