@@ -27,6 +27,8 @@ export const Profile = () => {
         new_password: ""
     })
 
+    const [picture, setPicture] = useState("")
+
     useEffect(()=>{
         const fetchProfile = async () => {
             try{
@@ -46,6 +48,8 @@ export const Profile = () => {
                     phone: data.phone || "",
                     address: data.address || ""
                 })
+
+                setPicture(data.picture || "https://images.pexels.com/photos/32703420/pexels-photo-32703420.jpeg")
 
             }catch(err){
                 console.log(err)
@@ -140,7 +144,8 @@ export const Profile = () => {
                         <p>{form.email}</p>
                     </div>
                     <div className="flex flex-col items-center">
-                        <button className="bg-[#FF8906] w-full py-2 rounded ">
+                        <img src={picture} alt="profile picture" />
+                        <button className="bg-[#FF8906] w-full py-2 rounded cursor-pointer">
                             Upload New Photo
                         </button>
                         <p>Since <span className="font-bold">20 January 2022</span></p>
