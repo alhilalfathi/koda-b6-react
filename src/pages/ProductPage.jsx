@@ -50,8 +50,10 @@ export const ProductPage = () => {
         setSort("")
     }
     let filteredProducts = products.filter(product => {
-        const matchSearch = product.product_name.toLowerCase().includes(search.toLowerCase())
-        const matchCategory = categories.length === 0 || categories.includes(product.category)
+        const matchSearch = product.product_name?.toLowerCase().includes(search.toLowerCase())
+        const matchCategory =
+            categories.length === 0 ||
+            categories.some(cat => product.category?.includes(cat))
         // const matchFavorite = !favorite || product.favorite === true
         return matchSearch && matchCategory //&& matchFavorite
     })
@@ -128,8 +130,8 @@ export const ProductPage = () => {
                                 <li className="flex gap-3">
                                     <input
                                         type="checkbox"
-                                        // checked={favorite}
-                                        // onChange={() => setFavorite(!favorite)}
+                                    // checked={favorite}
+                                    // onChange={() => setFavorite(!favorite)}
                                     /> Favorite Product
                                 </li>
                                 <li className="flex gap-3">
@@ -165,8 +167,8 @@ export const ProductPage = () => {
                                     <input
                                         type="radio"
                                         name="sort"
-                                        // checked={sort === "flashSale"}
-                                        // onChange={() => setSort("flashSale")}
+                                    // checked={sort === "flashSale"}
+                                    // onChange={() => setSort("flashSale")}
                                     /> Flash Sale
                                 </li>
                                 <li className="flex gap-3"><input type="radio" name="sort" /> Birthday Package</li>
