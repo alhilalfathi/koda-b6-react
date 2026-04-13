@@ -4,7 +4,7 @@ import { NavDiv } from "../component/NavDiv"
 import { InputDiv } from "../component/InputDiv"
 import http from "../lib/http"
 
-//icons
+// icons
 import { HiOutlineMail } from "react-icons/hi";
 import { GoKey } from "react-icons/go";
 import { FiEye } from "react-icons/fi";
@@ -28,13 +28,15 @@ export const Profile = () => {
     })
 
     const [picture, setPicture] = useState("")
+    const [pictureFile, setPictureFile] = useState(null)
 
-    useEffect(()=>{
+    // ================= FETCH PROFILE =================
+    useEffect(() => {
         const fetchProfile = async () => {
-            try{
+            try {
                 const res = await http("/admin/users/profile")
 
-                if(!res.success){
+                if (!res.success) {
                     alert(res.message)
                     return
                 }
@@ -49,17 +51,30 @@ export const Profile = () => {
                     address: data.address || ""
                 })
 
-                setPicture(data.picture || "https://images.pexels.com/photos/32703420/pexels-photo-32703420.jpeg")
 
-            }catch(err){
+                setPicture(
+                    data.picture
+                        ? `https://hilal-backend.camps.fahrul.id/${data.picture}`
+                        : "https://images.pexels.com/photos/32703420/pexels-photo-32703420.jpeg"
+                )
+
+            } catch (err) {
                 console.log(err)
             }
         }
 
         fetchProfile()
-    },[])
+    }, [])
 
-    //  handle input profile
+    // ================= PREVIEW IMAGE =================
+    useEffect(() => {
+        if (pictureFile) {
+            const preview = URL.createObjectURL(pictureFile)
+            setPicture(preview)
+        }
+    }, [pictureFile])
+
+    // ================= HANDLE INPUT =================
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -67,7 +82,6 @@ export const Profile = () => {
         })
     }
 
-    //  handle input password
     const handlePasswordChange = (e) => {
         setPasswordForm({
             ...passwordForm,
@@ -75,9 +89,9 @@ export const Profile = () => {
         })
     }
 
-    //  update profile
+    // ================= UPDATE PROFILE =================
     const handleSubmit = async () => {
-        try{
+        try {
             const body = {
                 fullname: form.fullname,
                 email: form.email,
@@ -85,7 +99,7 @@ export const Profile = () => {
                 address: form.address
             }
 
-            if(form.password){
+            if (form.password) {
                 body.password = form.password
             }
 
@@ -94,27 +108,27 @@ export const Profile = () => {
                 body: body
             })
 
-            if(!res.success){
+            if (!res.success) {
                 alert(res.message)
                 return
             }
 
             alert("Update success")
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
 
-    //  change password
+    // ================= CHANGE PASSWORD =================
     const handleChangePassword = async () => {
-        try{
+        try {
             const res = await http("/admin/users/profile/password", {
                 method: "PATCH",
                 body: passwordForm
             })
 
-            if(!res.success){
+            if (!res.success) {
                 alert(res.message)
                 return
             }
@@ -126,126 +140,202 @@ export const Profile = () => {
                 new_password: ""
             })
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
 
-  return (
-    <div>
-        <NavDiv />
-        <div className="mx-20 my-10">
-            <h1 className="text-3xl py-5">Profile</h1>
-            <div className="flex gap-3">
+    // ================= UPLOAD PHOTO =================
+    const handleUploadPhoto = async () => {
+        if (!pictureFile) {
+            alert("Please select image")
+            return
+        }
 
-                <aside className="w-1/5 flex flex-col justify-between items-center border border-[#E8E8E8] h-70 px-2 py-3">
-                    <div className="flex flex-col items-center">
-                        <h2>{form.fullname}</h2>
-                        <p>{form.email}</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <img src={picture} alt="profile picture" className="w-40 h-40 mb-3"/>
-                        <button className="bg-[#FF8906] w-full py-2 rounded cursor-pointer">
-                            Upload New Photo
+        if (!pictureFile.type.startsWith("image/")) {
+            alert("File must be image")
+            return
+        }
+
+        if (pictureFile.size > 2 * 1024 * 1024) {
+            alert("Max size 2MB")
+            return
+        }
+
+        const formData = new FormData()
+        formData.append("picture", pictureFile)
+
+        try {
+            const token = localStorage.getItem("token")
+
+            const res = await fetch(
+                "https://hilal-backend.camps.fahrul.id/admin/users/profile/photo",
+                {
+                    method: "PATCH",
+                    headers: {
+                        Authorization: "Bearer " + token
+                    },
+                    body: formData
+                }
+            )
+
+            const data = await res.json()
+
+            if (!data.success) {
+                alert(data.message)
+                return
+            }
+
+            alert("Upload success")
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return (
+        <div>
+            <NavDiv />
+            <div className="mx-20 my-10">
+                <h1 className="text-3xl py-5">Profile</h1>
+                <div className="flex gap-3">
+
+                    {/* ================= SIDEBAR ================= */}
+                    <aside className="w-1/5 flex flex-col justify-between items-center border border-[#E8E8E8] h-70 px-2 py-3">
+                        <div className="flex flex-col items-center">
+                            <h2>{form.fullname}</h2>
+                            <p>{form.email}</p>
+                        </div>
+
+                        <div className="flex flex-col items-center w-full">
+                            <img
+                                src={picture}
+                                alt="profile"
+                                className="w-40 h-40 mb-3 object-cover rounded-full"
+                            />
+
+                            {/* INPUT FILE */}
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => setPictureFile(e.target.files[0])}
+                                className="hidden"
+                                id="upload"
+                            />
+
+                            <label
+                                htmlFor="upload"
+                                className="bg-[#FF8906] w-full py-2 rounded cursor-pointer text-center"
+                            >
+                                Upload New Photo
+                            </label>
+
+                            <button
+                                onClick={handleUploadPhoto}
+                                className="bg-black text-white w-full py-2 rounded mt-2"
+                            >
+                                Save Photo
+                            </button>
+
+                            <p>Since <span className="font-bold">20 January 2022</span></p>
+                        </div>
+                    </aside>
+
+                    {/* ================= FORM ================= */}
+                    <div className="w-4/5 border border-[#E8E8E8] px-5 py-3">
+
+                        <InputDiv
+                            type="text"
+                            name="fullname"
+                            value={form.fullname}
+                            onChange={handleChange}
+                            icon={<IoPersonOutline />}
+                        >
+                            Full Name
+                        </InputDiv>
+
+                        <InputDiv
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            icon={<HiOutlineMail />}
+                        >
+                            Email
+                        </InputDiv>
+
+                        <InputDiv
+                            type="text"
+                            name="phone"
+                            value={form.phone}
+                            onChange={handleChange}
+                            icon={<CiPhone />}
+                        >
+                            Phone
+                        </InputDiv>
+
+                        <InputDiv
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={handleChange}
+                            icon={<GoKey />}
+                            eye={<FiEye />}
+                        >
+                            Password
+                        </InputDiv>
+
+                        <InputDiv
+                            type="text"
+                            name="address"
+                            value={form.address}
+                            onChange={handleChange}
+                            icon={<GoLocation />}
+                        >
+                            Address
+                        </InputDiv>
+
+                        <button
+                            onClick={handleSubmit}
+                            className="bg-[#FF8906] w-full py-3 rounded my-3 font-bold"
+                        >
+                            Submit
                         </button>
-                        <p>Since <span className="font-bold">20 January 2022</span></p>
+
+                        <h2 className="text-xl font-bold mt-5">Change Password</h2>
+
+                        <InputDiv
+                            type="password"
+                            name="old_password"
+                            value={passwordForm.old_password}
+                            onChange={handlePasswordChange}
+                            icon={<GoKey />}
+                        >
+                            Old Password
+                        </InputDiv>
+
+                        <InputDiv
+                            type="password"
+                            name="new_password"
+                            value={passwordForm.new_password}
+                            onChange={handlePasswordChange}
+                            icon={<GoKey />}
+                        >
+                            New Password
+                        </InputDiv>
+
+                        <button
+                            onClick={handleChangePassword}
+                            disabled={!passwordForm.old_password || !passwordForm.new_password}
+                            className="bg-black text-white w-full py-2 rounded my-2 disabled:opacity-50"
+                        >
+                            Change Password
+                        </button>
+
                     </div>
-                </aside>
-
-                <div className="w-4/5 border border-[#E8E8E8] px-5 py-3">
-
-                    <InputDiv 
-                        type="text"
-                        name="fullname"
-                        value={form.fullname}
-                        onChange={handleChange}
-                        icon={<IoPersonOutline />}
-                    >
-                        Full Name
-                    </InputDiv>
-
-                    <InputDiv 
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        icon={<HiOutlineMail />}
-                    >
-                        Email
-                    </InputDiv>
-
-                    <InputDiv 
-                        type="text"
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        icon={<CiPhone />}
-                    >
-                        Phone
-                    </InputDiv>
-
-                    <InputDiv 
-                        type="password"
-                        name="password"
-                        value={form.password}
-                        onChange={handleChange}
-                        icon={<GoKey />}
-                        eye={<FiEye />}
-                    >
-                        Password
-                    </InputDiv>
-
-                    <InputDiv 
-                        type="text"
-                        name="address"
-                        value={form.address}
-                        onChange={handleChange}
-                        icon={<GoLocation />}
-                    >
-                        Address
-                    </InputDiv>
-
-                    <button 
-                        onClick={handleSubmit}
-                        className="bg-[#FF8906] w-full py-3 rounded my-3 font-bold"
-                    >
-                        Submit
-                    </button>
-
-                    <h2 className="text-xl font-bold mt-5">Change Password</h2>
-
-                    <InputDiv
-                        type="password"
-                        name="old_password"
-                        value={passwordForm.old_password}
-                        onChange={handlePasswordChange}
-                        icon={<GoKey />}
-                    >
-                        Old Password
-                    </InputDiv>
-
-                    <InputDiv
-                        type="password"
-                        name="new_password"
-                        value={passwordForm.new_password}
-                        onChange={handlePasswordChange}
-                        icon={<GoKey />}
-                    >
-                        New Password
-                    </InputDiv>
-
-                    <button
-                        onClick={handleChangePassword}
-                        disabled={!passwordForm.old_password || !passwordForm.new_password}
-                        className="bg-black text-white w-full py-2 rounded my-2 disabled:opacity-50"
-                    >
-                        Change Password
-                    </button>
-
                 </div>
             </div>
+            <Footer />
         </div>
-        <Footer/>
-    </div>
-  )
+    )
 }
