@@ -30,6 +30,9 @@ export const Profile = () => {
     const [picture, setPicture] = useState("")
     const [pictureFile, setPictureFile] = useState(null)
 
+    const [showOldPassword, setShowOldPassword] = useState(false)
+    const [showNewPassword, setShowNewPassword] = useState(false)
+
     // ================= FETCH PROFILE =================
     useEffect(() => {
         const fetchProfile = async () => {
@@ -275,17 +278,6 @@ export const Profile = () => {
                         </InputDiv>
 
                         <InputDiv
-                            type="password"
-                            name="password"
-                            value={form.password}
-                            onChange={handleChange}
-                            icon={<GoKey />}
-                            eye={<FiEye />}
-                        >
-                            Password
-                        </InputDiv>
-
-                        <InputDiv
                             type="text"
                             name="address"
                             value={form.address}
@@ -305,21 +297,23 @@ export const Profile = () => {
                         <h2 className="text-xl font-bold mt-5">Change Password</h2>
 
                         <InputDiv
-                            type="password"
+                            type={showOldPassword ? "text" : "password"}
                             name="old_password"
                             value={passwordForm.old_password}
                             onChange={handlePasswordChange}
                             icon={<GoKey />}
+                            eye={<FiEye className="cursor-pointer" onClick={() => { setShowOldPassword(prev => !prev) }}  />}
                         >
                             Old Password
                         </InputDiv>
 
                         <InputDiv
-                            type="password"
+                            type={showNewPassword ? "text" : "password"}
                             name="new_password"
                             value={passwordForm.new_password}
                             onChange={handlePasswordChange}
                             icon={<GoKey />}
+                            eye={<FiEye className="cursor-pointer" onClick={() => { setShowNewPassword(prev => !prev) }}  />}
                         >
                             New Password
                         </InputDiv>
