@@ -20,7 +20,7 @@ export const Dashboard = () => {
     const fetchDashboard = async () => {
         try {
             // ambil transaksi
-            const trxRes = await http("/admin/transaction")
+            const trxRes = await http("/admin/transaction/")
 
             if (trxRes.success) {
                 const trx = trxRes.results || []
