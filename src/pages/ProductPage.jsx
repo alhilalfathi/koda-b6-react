@@ -244,7 +244,7 @@ export const ProductPage = () => {
                             ))}
                         </div>
 
-                        <div className="flex justify-center md:justify-end my-5">
+                        <div className="flex justify-center md:justify-center my-5">
                             <Pagination
                                 currentPage={currentPage}
                                 totalPages={totalPages}
