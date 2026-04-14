@@ -101,25 +101,46 @@ export const HomePage = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="flex overflow-x-auto gap-8 pb-10 scrollbar-hide snap-x">
                         {loading ? (
-                            <div className="col-span-full text-center py-10 text-xl font-medium text-gray-400">Loading favorite products...</div>
+                            <div className="w-full text-center py-10 text-xl font-medium text-gray-400">
+                                Loading favorite products...
+                            </div>
                         ) : (
                             products?.map((product) => (
-                                <div key={product.product_id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                <div
+                                    key={product.product_id}
+                                    className="min-w-75 md:min-w-87.5 snap-center group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
+                                >
                                     <div className="relative h-64 overflow-hidden">
-                                        <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={product.path} alt={product.product_name} />
+                                        <img
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            src={product.path}
+                                            alt={product.product_name}
+                                        />
                                     </div>
                                     <div className="p-6">
-                                        <h3 className="text-2xl font-bold text-gray-800 mb-2">{product.product_name}</h3>
-                                        <p className="text-sm text-gray-500 mb-4 line-clamp-2">{product.product_desc}</p>
+                                        <h3 className="text-2xl font-bold text-gray-800 mb-2 truncate">
+                                            {product.product_name}
+                                        </h3>
+                                        <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                                            {product.product_desc}
+                                        </p>
                                         <div className="flex items-center justify-between mt-6">
-                                            <h3 className="text-xl font-bold text-[#FF8906]">IDR {product.price.toLocaleString("id")}</h3>
+                                            <h3 className="text-xl font-bold text-[#FF8906]">
+                                                IDR {product.price.toLocaleString("id")}
+                                            </h3>
                                             <div className="flex gap-2">
-                                                <Link to={`/detail-product/${product.product_id}`} className="px-6 py-2.5 bg-[#FF8906] text-white rounded-xl font-bold shadow-md hover:bg-[#e67a05] transition-colors">
+                                                <Link
+                                                    to={`/detail-product/${product.product_id}`}
+                                                    className="px-6 py-2.5 bg-[#FF8906] text-white rounded-xl font-bold shadow-md hover:bg-[#e67a05] transition-colors whitespace-nowrap"
+                                                >
                                                     Buy
                                                 </Link>
-                                                <Link to="/checkout" className="p-2.5 border-2 border-[#FF8906] text-[#FF8906] rounded-xl hover:bg-orange-50 transition-colors">
+                                                <Link
+                                                    to="/checkout"
+                                                    className="p-2.5 border-2 border-[#FF8906] text-[#FF8906] rounded-xl hover:bg-orange-50 transition-colors"
+                                                >
                                                     <BsCart2 size={22} />
                                                 </Link>
                                             </div>
@@ -148,7 +169,7 @@ export const HomePage = () => {
                     </div>
                 </div>
             </section>
-            
+
             {/* SECTION: TESTIMONIAL */}
             <section className="bg-black py-20 px-6 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
