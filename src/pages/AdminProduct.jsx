@@ -4,67 +4,42 @@ import filterIcon from "/assets/img/Filter3.png"
 import editIcon from "/assets/img/Group-1707.png"
 import deleteIcon from "/assets/img/Group-1706.png"
 import { IoCloseCircleSharp } from "react-icons/io5";
-import { useRef, useEffect, useState, useMemo } from "react"
+import { useRef, useContext, useState, useMemo } from "react"
+import { DataContext } from "../component/context/DataContext"
 import http from "../lib/http"
 
 export const AdminProduct = () => {
 
-    // ================= STATE =================
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
+    const { products, loading } = useContext(DataContext)
 
+    // ================= SEARCH =================
     const [search, setSearch] = useState("")
     const [searchInput, setSearchInput] = useState("")
 
+    // ================= PAGINATION =================
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 4
 
-    // ================= FETCH DATA =================
-    useEffect(() => {
-        fetchProducts()
-    }, [])
+    // ================= FORM STATE (CREATE PRODUCT) =================
+    const [form, setForm] = useState({
+        product_name: "",
+        product_desc: "",
+        price: "",
+        stock: ""
+    })
 
-    const fetchProducts = async () => {
-        try {
-            setLoading(true)
+    const [imageFile, setImageFile] = useState(null)
 
-            const res = await http("/admin/products/")
-
-            if (!res.success) return
-
-            // mapping backend → frontend
-            const mapped = res.results.map(p => ({
-                id: p.product_id,
-                name: p.product_name,
-                tag: p.product_desc,
-                price: p.price,
-                stock: p.stock,
-                img: p.path
-                    ? p.path
-                    : productImage
-            }))
-
-            setProducts(mapped)
-
-        } catch (err) {
-            console.log(err)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    // ================= SEARCH =================
+    // ================= FILTER =================
     const filteredProducts = useMemo(() => {
         return products.filter(product =>
-            product.name.toLowerCase().includes(search.toLowerCase())
+            product.product_name?.toLowerCase().includes(search.toLowerCase())
         )
     }, [products, search])
 
-    // ================= PAGINATION =================
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    const currentProducts = filteredProducts.slice(startIndex, endIndex)
+    const currentProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage)
 
     // ================= MODAL =================
     const insertRef = useRef()
@@ -77,18 +52,38 @@ export const AdminProduct = () => {
         insertRef.current.classList.add("hidden")
     }
 
+    // ================= HANDLE INPUT =================
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.id]: e.target.value
+        })
+    }
+
+    // ================= FILTER BUTTON =================
     const filterButton = () => {
         setSearch(searchInput)
         setCurrentPage(1)
     }
 
-    // ================= DELETE =================
-    const handleDelete = async (id) => {
-        if (!confirm("Delete this product?")) return
-
+    // ================= CREATE PRODUCT =================
+    const handleCreateProduct = async () => {
         try {
-            const res = await http(`/admin/products/${id}`, {
-                method: "DELETE"
+            // VALIDASI
+            if (!form.product_name || !form.price) {
+                alert("Product name & price required")
+                return
+            }
+
+            // === CREATE PRODUCT ===
+            const res = await http("/admin/products", {
+                method: "POST",
+                body: {
+                    product_name: form.product_name,
+                    product_desc: form.product_desc,
+                    price: Number(form.price),
+                    stock: Number(form.stock)
+                }
             })
 
             if (!res.success) {
@@ -96,8 +91,42 @@ export const AdminProduct = () => {
                 return
             }
 
-            alert("Delete success")
-            fetchProducts()
+            const productId = res.results?.product_id
+
+            // === UPLOAD IMAGE ===
+            if (imageFile) {
+                const formData = new FormData()
+                formData.append("image", imageFile)
+
+                const token = localStorage.getItem("token")
+
+                await fetch(
+                    `https://hilal-backend.camps.fahrul.id/admin/products/${productId}/image`,
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + token
+                        },
+                        body: formData
+                    }
+                )
+            }
+
+            alert("Product created")
+
+            // reset form
+            setForm({
+                product_name: "",
+                product_desc: "",
+                price: "",
+                stock: ""
+            })
+            setImageFile(null)
+
+            closeInsert()
+
+            // reload data
+            window.location.reload()
 
         } catch (err) {
             console.log(err)
@@ -107,9 +136,8 @@ export const AdminProduct = () => {
     return (
         <div className="py-10 relative">
 
+            {/* ================= HEADER ================= */}
             <div className="mr-15">
-
-                {/* ================= HEADER ================= */}
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-2xl font-semibold">Product List</h1>
@@ -123,14 +151,15 @@ export const AdminProduct = () => {
                         </button>
                     </div>
 
+                    {/* SEARCH */}
                     <div className="flex items-center gap-3">
-                        <div>
+                        <div className="flex flex-col">
                             <label>Search Product</label>
                             <input
                                 type="text"
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
-                                className="border rounded-lg px-4 py-2 w-64 text-sm"
+                                className="border rounded-lg pl-4 pr-4 py-2 w-64 text-sm"
                             />
                         </div>
 
@@ -149,7 +178,6 @@ export const AdminProduct = () => {
                     <table className="w-full text-sm">
                         <thead className="bg-gray-100 text-gray-600">
                             <tr>
-                                <th className="p-4"></th>
                                 <th className="p-4">Image</th>
                                 <th className="p-4 text-left">Product Name</th>
                                 <th className="p-4">Price</th>
@@ -162,53 +190,50 @@ export const AdminProduct = () => {
                         <tbody className="divide-y">
                             {loading ? (
                                 <tr>
-                                    <td colSpan="7" className="text-center p-5">
+                                    <td colSpan="6" className="text-center p-5">
                                         Loading...
                                     </td>
                                 </tr>
                             ) : currentProducts.length === 0 ? (
                                 <tr>
-                                    <td colSpan="7" className="text-center p-5">
+                                    <td colSpan="6" className="text-center p-5">
                                         No Product Found
                                     </td>
                                 </tr>
                             ) : (
                                 currentProducts.map(product => (
-                                    <tr key={product.id}>
-                                        <td className="p-4"></td>
-
+                                    <tr key={product.product_id}>
                                         <td className="p-4">
                                             <img
-                                                src={product.img}
+                                                src={
+                                                    product.path
+                                                        ? `https://hilal-backend.camps.fahrul.id/${product.path}`
+                                                        : productImage
+                                                }
                                                 className="w-12 h-12 rounded object-cover"
                                             />
                                         </td>
 
-                                        <td className="p-4">{product.name}</td>
+                                        <td className="p-4">{product.product_name}</td>
 
                                         <td className="p-4">
                                             IDR {product.price?.toLocaleString()}
                                         </td>
 
                                         <td className="p-4 text-gray-500">
-                                            {product.tag}
+                                            {product.product_desc}
                                         </td>
 
                                         <td className="p-4">{product.stock}</td>
 
                                         <td className="p-4">
                                             <div className="flex gap-2 justify-center">
-
-                                                {/* EDIT */}
                                                 <button>
                                                     <img src={editIcon} />
                                                 </button>
-
-                                                {/* DELETE */}
-                                                <button onClick={() => handleDelete(product.id)}>
+                                                <button>
                                                     <img src={deleteIcon} />
                                                 </button>
-
                                             </div>
                                         </td>
                                     </tr>
@@ -219,16 +244,14 @@ export const AdminProduct = () => {
 
                     {/* ================= PAGINATION ================= */}
                     <div className="flex justify-between items-center p-4 text-sm text-gray-500">
-
                         <span>
                             Show {currentProducts.length} of {filteredProducts.length}
                         </span>
 
                         <div className="flex gap-2">
-
                             <button
                                 disabled={currentPage === 1}
-                                onClick={() => setCurrentPage(p => p - 1)}
+                                onClick={() => setCurrentPage(prev => prev - 1)}
                             >
                                 Prev
                             </button>
@@ -237,7 +260,7 @@ export const AdminProduct = () => {
                                 <button
                                     key={i}
                                     onClick={() => setCurrentPage(i + 1)}
-                                    className={currentPage === i + 1 ? "text-orange-500" : ""}
+                                    className={currentPage === i + 1 ? "text-orange-500 font-bold" : ""}
                                 >
                                     {i + 1}
                                 </button>
@@ -245,30 +268,75 @@ export const AdminProduct = () => {
 
                             <button
                                 disabled={currentPage === totalPages}
-                                onClick={() => setCurrentPage(p => p + 1)}
+                                onClick={() => setCurrentPage(prev => prev + 1)}
                             >
                                 Next
                             </button>
-
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* ================= MODAL ================= */}
-            <div ref={insertRef} className="hidden absolute top-0 right-0 w-full bg-black/40 min-h-screen">
+            {/* ================= MODAL ADD PRODUCT ================= */}
+            <div ref={insertRef} className="absolute top-0 right-0 w-full bg-black/40 min-h-screen hidden">
+                <div className="absolute top-0 right-0 w-96 min-h-screen bg-white p-5">
 
-                <div className="absolute top-0 right-0 w-96 min-h-screen p-5 bg-white">
-
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center mb-4">
                         <h1 className="text-xl font-bold">Add Product</h1>
-                        <IoCloseCircleSharp onClick={closeInsert} />
+                        <IoCloseCircleSharp onClick={closeInsert} className="cursor-pointer" />
                     </div>
 
-                    <p className="text-sm mt-4 text-gray-500">
-                        Form create product belum di-integrasikan
-                    </p>
+                    {/* IMAGE */}
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImageFile(e.target.files[0])}
+                        className="mb-4"
+                    />
 
+                    {/* NAME */}
+                    <input
+                        id="product_name"
+                        value={form.product_name}
+                        onChange={handleChange}
+                        placeholder="Product Name"
+                        className="w-full border rounded-lg px-4 py-2 mb-4"
+                    />
+
+                    {/* PRICE */}
+                    <input
+                        id="price"
+                        value={form.price}
+                        onChange={handleChange}
+                        placeholder="Price"
+                        className="w-full border rounded-lg px-4 py-2 mb-4"
+                    />
+
+                    {/* DESC */}
+                    <textarea
+                        id="product_desc"
+                        value={form.product_desc}
+                        onChange={handleChange}
+                        placeholder="Description"
+                        className="w-full border rounded-lg px-4 py-2 h-24 mb-4"
+                    />
+
+                    {/* STOCK */}
+                    <input
+                        id="stock"
+                        value={form.stock}
+                        onChange={handleChange}
+                        placeholder="Stock"
+                        className="w-full border rounded-lg px-4 py-2 mb-4"
+                    />
+
+                    {/* SAVE */}
+                    <button
+                        onClick={handleCreateProduct}
+                        className="w-full bg-orange-500 text-white py-3 rounded-lg"
+                    >
+                        Save Product
+                    </button>
                 </div>
             </div>
         </div>
