@@ -54,7 +54,7 @@ export const LoginPage = () => {
 
                 alert("Login Success")
 
-                if (userData.role === "admin") {
+                if (userData.fullname === "admin") {
                     navigate("/admin")
                 } else {
                     navigate("/")
