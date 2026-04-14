@@ -1,17 +1,15 @@
 import { Footer } from "../component/Footer"
 import { NavDiv } from "../component/NavDiv"
-import { AiFillLike } from "react-icons/ai";
+import { AiFillLike, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { Product } from "../component/ProductDiv";
 import cartIcon from "/assets/img/ShoppingCart-yellow.png"
 import { Pagination } from "../component/Pagination";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../component/context/DataContext";
 import { useSelector, useDispatch } from "react-redux"
 import { addToCart } from "../redux/reducers/cartReducer";
 import http from "../lib/http.js";
-
 
 export const DetailProduct = () => {
     const navigate = useNavigate()
@@ -24,7 +22,6 @@ export const DetailProduct = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.user)
 
-
     const [quantity, setQuantity] = useState(1)
     const [size, setSize] = useState("Regular")
     const [temp, setTemp] = useState("Ice")
@@ -32,23 +29,20 @@ export const DetailProduct = () => {
     const sizes = ["Regular", "Medium", "Large"]
     const temps = ["Ice", "Hot"]
 
-    const activeClass = "border border-[#FF8906]"
-    const inactiveClass = "border border-[#E8E8E8]  "
+    // Styling dinamis
+    const activeClass = "border-2 border-[#FF8906] bg-orange-50 text-[#FF8906] font-bold shadow-sm"
+    const inactiveClass = "border border-gray-200 text-gray-500 hover:bg-gray-50"
 
     useEffect(() => {
         if (products.length === 0) return
 
-        const selected = products.find(
-            (item) => item.product_id === Number(id)
-        )
-
+        const selected = products.find((item) => item.product_id === Number(id))
         const recommendation = products
             .filter((item) => item.product_id !== Number(id))
             .slice(0, 3)
 
         setProduct(selected)
         setRecom(recommendation)
-
         setQuantity(1)
         setSize("Regular")
         setTemp("Ice")
@@ -56,8 +50,11 @@ export const DetailProduct = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <p className="text-xl">Loading product...</p>
+            <div className="flex justify-center items-center h-screen bg-white text-gray-400">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="w-12 h-12 border-4 border-[#FF8906] border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-xl">Loading deliciousness...</p>
+                </div>
             </div>
         )
     }
@@ -65,23 +62,17 @@ export const DetailProduct = () => {
     if (!product) {
         return (
             <div className="flex justify-center items-center h-screen">
-                <p className="text-xl">Product not found</p>
+                <p className="text-xl text-gray-400 font-medium">Product not found</p>
             </div>
         )
     }
 
-    const handleIncrease = () => {
-        setQuantity((prev) => prev + 1)
-    }
-    const handleDecrease = () => {
-        setQuantity((prev) => prev > 1 ? prev - 1 : 1)
-    }
+    const handleIncrease = () => setQuantity((prev) => prev + 1)
+    const handleDecrease = () => setQuantity((prev) => prev > 1 ? prev - 1 : 1)
+
     // cart 
     const handleAddToCart = async (redirect = false) => {
-
-        if (!user) {
-            return alert("You need to login")
-        }
+        if (!user) return alert("You need to login")
 
         const payload = {
             product_id: product.product_id,
@@ -107,16 +98,9 @@ export const DetailProduct = () => {
                     img: product.path
                 }
 
-                dispatch(addToCart({
-                    email: user.email,
-                    item: reduxItem
-                }))
-
-                if (redirect) {
-                    navigate("/checkout")
-                } else {
-                    alert("Item added to cart!")
-                }
+                dispatch(addToCart({ email: user.email, item: reduxItem }))
+                if (redirect) navigate("/checkout")
+                else alert("Item added to cart!")
             } else {
                 alert(response.message || "Failed to add to cart")
             }
@@ -124,78 +108,145 @@ export const DetailProduct = () => {
             console.error("Add to Cart Error:", error)
             alert("Connection error to server")
         }
-
     }
 
     return (
-        <div>
+        <div className="bg-white">
             <NavDiv />
-            <div className="flex md:flex-row flex-col mx-20 my-10 gap-4">
-                {/* side image  */}
-                <div className="flex flex-col w-1/2 gap-4 ">
-                    <img className=" w-160 h-160 " src={product.path} alt={product.product_name} />
-                    <div className="md:flex gap-3 hidden md:items-center md:justify-center">
-                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
-                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
-                        <img className="md:w-[32%] w-15 h-15 md:h-full" src={product.path} alt="product image" />
+
+            <div className="max-w-7xl mx-auto px-6 md:px-10 py-10">
+                <div className="flex flex-col lg:flex-row gap-12">
+                    
+                    {/* LEFT SIDE: IMAGE GALLERY */}
+                    <div className="w-full lg:w-1/2 flex flex-col gap-6">
+                        <div className="relative group overflow-hidden rounded-3xl shadow-lg">
+                            <img className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105" src={product.path} alt={product.product_name} />
+                            <span className="absolute top-6 left-6 bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                                FLASH SALE!
+                            </span>
+                        </div>
+                        
+                        <div className="grid grid-cols-3 gap-4">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#FF8906] transition-all cursor-pointer shadow-sm">
+                                    <img className="w-full aspect-square object-cover opacity-80 hover:opacity-100 transition-opacity" src={product.path} alt="thumbnail" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* RIGHT SIDE: PRODUCT INFO */}
+                    <div className="w-full lg:w-1/2 flex flex-col">
+                        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                            {product.product_name}
+                        </h1>
+                        
+                        <div className="flex items-center gap-4 my-6">
+                            <h3 className="text-3xl font-bold text-[#FF8906]">
+                                IDR {product.price.toLocaleString("id")}
+                            </h3>
+                            <del className="text-red-400 font-medium text-lg italic">
+                                IDR {(product.price * 1.2).toLocaleString("id")}
+                            </del>
+                        </div>
+
+                        <div className="flex items-center gap-6 mb-8 text-gray-500">
+                            <div className="flex items-center gap-2">
+                                <img src="/assets/img/Frame41-gray.png" alt="stars" className="h-4" />
+                                <span className="text-sm font-semibold">4.8 (200+ Reviews)</span>
+                            </div>
+                            <div className="flex items-center gap-1 text-[#FF8906]">
+                                <AiFillLike size={20} />
+                                <span className="text-sm font-bold">Recommended</span>
+                            </div>
+                        </div>
+
+                        <p className="text-gray-600 leading-relaxed text-lg mb-8 max-w-lg">
+                            {product.product_desc || "Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is steeped for as long as 48 hours."}
+                        </p>
+
+                        {/* Quantity Selector */}
+                        <div className="flex items-center gap-4 mb-8">
+                            <span className="font-bold text-gray-800">Quantity</span>
+                            <div className="flex items-center bg-gray-50 rounded-xl p-1 border border-gray-100 shadow-inner">
+                                <button onClick={handleDecrease} className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-lg transition-colors text-gray-600">
+                                    <AiOutlineMinus />
+                                </button>
+                                <span className="w-12 text-center font-bold text-gray-800">{quantity}</span>
+                                <button onClick={handleIncrease} className="w-10 h-10 flex items-center justify-center bg-[#FF8906] text-white rounded-lg shadow-md">
+                                    <AiOutlinePlus />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Size Selector */}
+                        <div className="mb-8">
+                            <h3 className="font-bold text-gray-800 mb-4">Choose Size</h3>
+                            <div className="flex gap-3">
+                                {sizes.map((item) => (
+                                    <button 
+                                        key={item} 
+                                        onClick={() => setSize(item)} 
+                                        className={`flex-1 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${size === item ? activeClass : inactiveClass}`}
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Temp Selector */}
+                        <div className="mb-10">
+                            <h3 className="font-bold text-gray-800 mb-4">Variation</h3>
+                            <div className="flex gap-3">
+                                {temps.map((item) => (
+                                    <button 
+                                        key={item} 
+                                        onClick={() => setTemp(item)} 
+                                        className={`flex-1 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${temp === item ? activeClass : inactiveClass}`}
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                            <button 
+                                onClick={() => handleAddToCart(true)} 
+                                className="flex-1 bg-[#FF8906] hover:bg-orange-600 text-white font-extrabold py-5 rounded-2xl shadow-lg shadow-orange-100 transition-all active:scale-95"
+                            >
+                                Buy Now
+                            </button>
+                            <button 
+                                onClick={() => handleAddToCart(false)} 
+                                className="flex-1 flex items-center justify-center gap-3 border-2 border-[#FF8906] text-[#FF8906] font-extrabold py-5 rounded-2xl hover:bg-orange-50 transition-all active:scale-95"
+                            >
+                                <img src={cartIcon} alt="cart" className="w-6 h-6" />
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
-                {/* content  */}
-                <div className="w-1/2">
-                    <span className="bg-red-600 text-white rounded-xl w-26  flex items-center justify-center">FLASH SALE!</span>
-                    <h1 className="md:text-4xl text-xl py-3">{product.product_name}</h1>
-                    <div className="flex gap-2 items-center">
-                        <del className="text-red-600 ">IDR {product.price.toLocaleString("id")}</del>
-                        <h3 className="text-xl text-[#FF8906] mb-2 pt-2">IDR {product.price.toLocaleString("id")}</h3>
-                    </div>
-                    <img src="/assets/img/Frame41-gray.png" alt="stars icon" />
-                    <div className="flex text-[#4F5665] gap-3 py-2 text-xl">
-                        <p>200+Review</p>
-                        <p>Recommendation</p>
-                        <AiFillLike />
-                    </div>
-                    {/* Quantity  */}
-                    <p className="text-[#4F5665] w-80 md:w-148">Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48 hours.</p>
-                    <div className="flex py-3">
-                        <button onClick={handleDecrease} className="border border-[#FF8906] w-8 h-8">-</button>
-                        <span className="w-8 text-center border border-white border-y-zinc-300">{quantity}</span>
-                        <button onClick={handleIncrease} className="bg-[#FF8906] w-8 h-8">+</button>
-                    </div>
-                    {/* Size  */}
-                    <h3 className="font-bold text-xl">Choose Size</h3>
-                    <div className="flex gap-5 py-3">
-                        {sizes.map((item) => (
-                            <button key={item} onClick={() => setSize(item)} className={`w-1/3 h-8 border transition ${size === item ? activeClass : inactiveClass}`} >{item}</button>
+
+                {/* Recommendation SECTION */}
+                <div className="mt-32">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12">
+                        Recommendation <span className="text-[#FF8906]">For You</span>
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-32 gap-x-10 mb-20">
+                        {recom && recom.map((item) => (
+                            <Product key={item.product_id} product={item} />
                         ))}
                     </div>
-                    {/* Temp  */}
-                    <h3 className="font-bold text-xl">Hot/Ice?</h3>
-                    <div className="flex gap-5 py-3">
-                        {temps.map((item) => (
-                            <button key={item} onClick={() => setTemp(item)} className={`w-1/2 h-8 border rounded transition ${temp === item ? activeClass : inactiveClass}`} >{item}</button>
-                        ))}
-                    </div>
-                    <div className="flex gap-5 my-5">
-                        <button onClick={() => handleAddToCart(true)} className="bg-[#FF8906] w-1/2 p-3 rounded cursor-pointer">Buy</button>
-                        <span className="flex gap-3 w-1/2 border border-[#FF8906] p-3 justify-center rounded cursor-pointer">
-                            <img src={cartIcon} alt="cart" />
-                            <button onClick={() => handleAddToCart(false)} className="cursor-pointer">Add to cart</button>
-                        </span>
+
+                    <div className="mt-40 w-full flex justify-center">
+                        <Pagination />
                     </div>
                 </div>
             </div>
-            {/* Recommendation  */}
-            <div>
-                <h2 className="text-4xl mb-8 mx-20 font-bold">Recommendation <span className="text-orange-900">For You</span></h2>
-                <div className="flex flex-col md:flex-row gap-4 mb-20 md:mb-45 justify-center items-center">
-                    {recom && recom.map((item) => (
-                        <Product key={item.product_id} product={item} />
-                    ))}
-                </div>
-            </div>
-            <div className="my-15 w-full flex justify-center">
-                <Pagination />
-            </div>
+
             <Footer />
         </div>
     )
