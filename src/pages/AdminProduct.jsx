@@ -207,7 +207,7 @@ export const AdminProduct = () => {
                                             <img
                                                 src={
                                                     product.path
-                                                        ? `https://hilal-backend.camps.fahrul.id/${product.path}`
+                                                        ? product.path
                                                         : productImage
                                                 }
                                                 className="w-12 h-12 rounded object-cover"
