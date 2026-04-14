@@ -19,7 +19,7 @@ export const Dashboard = () => {
 
     const fetchDashboard = async () => {
         try {
-            // ambil transaksi
+            // GET TRANSACTION DATA
             const trxRes = await http("/admin/transaction/")
 
             if (trxRes.success) {
@@ -40,7 +40,7 @@ export const Dashboard = () => {
                 setSummary({ progress, shipping, done })
             }
 
-            // ambil produk terlaris
+            // GET MOST SELLED PRODUCT
             const productRes = await http("/recommended-products")
 
             if (productRes.success) {
@@ -53,10 +53,10 @@ export const Dashboard = () => {
     }
 
     return (
-        <div className="p-10">
+        <div className="p-6 max-w-7xl mx-auto">
 
             {/* SUMMARY */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
 
                 <Card
                     color="bg-green-500"
@@ -86,7 +86,12 @@ export const Dashboard = () => {
                 <h3 className="font-semibold text-gray-700 mb-2">
                     Total Penjualan
                 </h3>
-                <img src={graphImage} alt="chart" className="w-full h-64 object-contain" />
+
+                <img 
+                    src={graphImage} 
+                    alt="chart" 
+                    className="w-full h-64 object-cover" 
+                />
             </div>
 
             {/* TOP PRODUCT */}
@@ -95,29 +100,32 @@ export const Dashboard = () => {
                     Produk Terlaris
                 </h3>
 
-                <table className="w-full text-sm">
-                    <thead className="text-gray-500 border-b">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Produk</th>
-                            <th>Stock</th>
-                            <th>Harga</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {topProducts.map((p, i) => (
-                            <tr key={p.product_id}>
-                                <td>{i + 1}</td>
-                                <td>{p.product_name}</td>
-                                <td>{p.stock}</td>
-                                <td className="text-green-500">
-                                    IDR {p.price.toLocaleString()}
-                                </td>
+                <div className="overflow-x-auto">
+                    <table className="w-full min-w-150 text-sm">
+                        <thead className="text-gray-500 border-b">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Produk</th>
+                                <th>Stock</th>
+                                <th>Harga</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                            {topProducts.map((p, i) => (
+                                <tr key={p.product_id}>
+                                    <td>{i + 1}</td>
+                                    <td>{p.product_name}</td>
+                                    <td>{p.stock}</td>
+                                    <td className="text-green-500">
+                                        IDR {p.price.toLocaleString()}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
         </div>
@@ -128,7 +136,7 @@ export const Dashboard = () => {
 // CARD COMPONENT
 const Card = ({ color, title, value, icon }) => {
     return (
-        <div className={`w-80 ${color} text-white rounded-xl p-5 flex flex-col gap-2`}>
+        <div className={`w-full ${color} text-white rounded-xl p-5 flex flex-col gap-2 shadow-md`}>
             <div className="flex items-center gap-4">
                 <img src={icon} className="w-12 h-12" />
                 <p className="text-sm opacity-80">{title}</p>
