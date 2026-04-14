@@ -32,7 +32,7 @@ export const AdminProduct = () => {
 
             if (!res.success) return
 
-            // ✅ mapping backend → frontend
+            // mapping backend → frontend
             const mapped = res.results.map(p => ({
                 id: p.product_id,
                 name: p.product_name,
