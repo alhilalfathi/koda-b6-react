@@ -7,12 +7,12 @@ import { DataContext } from "../component/context/DataContext"
 
 const PromoCard = (promo) => {
     return (
-        <div className={`flex items-center ${promo.color} w-80 shrink-0 h-32 rounded-2xl px-2 pt-4 pb-0`}>
-            <img src={promo.icon} alt="promo-icon" />
-            <div className="flex flex-col w-50">
-                <h4>HAPPY MOTHER’S DAY!</h4>
-                <p>Get one of our favorite menu for free!</p>
-                <small className="text-white cursor-pointer">Klaim Kupon</small>
+        <div className={`flex items-center ${promo.color} w-80 shrink-0 h-32 rounded-2xl px-4 py-2 shadow-sm hover:scale-105 transition-transform duration-300`}>
+            <img src={promo.icon} alt="promo-icon" className="w-20 h-20 object-contain" />
+            <div className="flex flex-col ml-3">
+                <h4 className="font-bold text-sm text-gray-800 uppercase leading-tight">HAPPY MOTHER’S DAY!</h4>
+                <p className="text-xs text-gray-700 my-1">Get one of our favorite menu for free!</p>
+                <small className="text-white font-bold cursor-pointer hover:underline">Klaim Kupon</small>
             </div>
         </div>
     )
@@ -31,13 +31,14 @@ export const ProductPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
 
     const scrollButtonRight = () => {
-        promoRef.current.scrollLeft += 150
+        promoRef.current.scrollLeft += 200
     }
     const scrollButtonLeft = () => {
-        promoRef.current.scrollLeft -= 150
+        promoRef.current.scrollLeft -= 200
     }
     const handleApplyFilter = () => {
         setSearch(searchInput)
+        setCurrentPage(1)
     }
     const handleCategoryChange = (value) => {
         setCategories(prev => prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value])
@@ -53,7 +54,7 @@ export const ProductPage = () => {
         const matchSearch = product.product_name?.toLowerCase().includes(search.toLowerCase())
         const matchCategory =
             categories.length === 0 ||
-            categories.some(cat => product.category?.includes(cat))
+            categories.some(cat => product.category?.toLowerCase().includes(cat.toLowerCase()))
         // const matchFavorite = !favorite || product.favorite === true
         return matchSearch && matchCategory //&& matchFavorite
     })
@@ -69,136 +70,188 @@ export const ProductPage = () => {
     }
 
     // Pagination
-    const itemsPerPage = 4  //limit
+    const itemsPerPage = 6  //limit
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage  //offset
     const endIndex = startIndex + itemsPerPage
     const currentProducts = filteredProducts.slice(startIndex, endIndex)
 
     return (
-        <div>
+        <div className="bg-white">
             <NavDiv />
             {/* header  */}
-            <div className="bg-[url('/assets/img/Rectangle299.png')] bg-cover bg-center h-68 w-full flex items-center justify-center px-4 md:px-20 ">
-                <h1 className="text-white font-bold text-5xl w-220">We Provide Good Coffee and Healthy Meals</h1>
+            <div className="bg-[url('/assets/img/Rectangle299.png')] bg-cover bg-center h-80 w-full flex items-center px-6 md:px-20">
+                <h1 className="text-white font-bold text-4xl md:text-5xl max-w-3xl leading-tight">
+                    We Provide Good Coffee and Healthy Meals
+                </h1>
             </div>
 
-            <div className="flex justify-between items-center px-20">
-                <h2 className="text-4xl font-bold">Today <span className="text-orange-900">Promo</span></h2>
-                <div className="flex gap-4 py-6">
-                    {/* promo button  */}
-                    <button onClick={scrollButtonLeft} className="w-12 h-12 bg-zinc-400 rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer">&#8592;</button>
-                    <button onClick={scrollButtonRight} className="w-12 h-12 bg-[#FF8906] rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer">&#8594;</button>
+            <div className="max-w-7xl mx-auto px-6 md:px-10 mt-10">
+                <div className="flex justify-between items-center">
+                    <h2 className="text-3xl md:text-4xl font-bold">Today <span className="text-orange-900">Promo</span></h2>
+                    <div className="flex gap-4 py-6">
+                        {/* promo button  */}
+                        <button onClick={scrollButtonLeft} className="w-12 h-12 bg-zinc-200 hover:bg-zinc-300 rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer transition-all">&#8592;</button>
+                        <button onClick={scrollButtonRight} className="w-12 h-12 bg-[#FF8906] hover:bg-orange-600 rounded-full text-black flex justify-center items-center text-3xl font-bold cursor-pointer transition-all">&#8594;</button>
+                    </div>
                 </div>
             </div>
+
             {/* promo-card  */}
-            <div ref={promoRef} className="scroll-bar flex gap-4 p-4 overflow-x-auto overflow-y-hidden">
-                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
-                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
-                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
-                <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
-                <PromoCard icon={"/assets/img/image43.png"} color={"bg-[#F5C361]"} />
-            </div>
-            {/* content  */}
-            <div>
-                <div className="mx-20">
-                    <h2 className="text-4xl mb-8 font-bold">Our <span className="text-orange-900">Product</span></h2>
-                    <button className="bg-black text-white p-2 mb-10 w-full md:hidden">Filter</button>
+            <div className="max-w-7xl mx-auto px-6 md:px-10">
+                <div ref={promoRef} className="scroll-bar flex gap-6 p-4 overflow-x-auto overflow-y-hidden no-scrollbar scroll-smooth">
+                    <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                    <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                    <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                    <PromoCard icon={"/assets/img/image46.png"} color={"bg-[#88B788]"} />
+                    <PromoCard icon={"/assets/img/image43.png"} color={"bg-[#F5C361]"} />
                 </div>
-                <div className="flex mx-20 gap-15">
+            </div>
+
+            {/* content  */}
+            <div className="max-w-7xl mx-auto px-6 md:px-10 mt-16 pb-20">
+                <div className="mb-10">
+                    <h2 className="text-4xl mb-4 font-bold">Our <span className="text-orange-900">Product</span></h2>
+                    <button className="bg-black text-white p-3 rounded-xl w-full md:hidden font-bold">Show Filter</button>
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-12">
                     {/* filter product  */}
-                    <aside className="w-[25%] h-140 bg-black text-white p-5 rounded-xl flex-col hidden md:block gap-3">
-                        <div className="flex justify-between">
-                            <h2>Filter</h2>
+                    <aside className="w-full md:w-[320px] bg-black text-white p-8 rounded-3xl h-fit sticky top-10 flex flex-col gap-6">
+                        <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                            <h2 className="text-xl font-bold tracking-wide">Filter</h2>
                             <button
                                 onClick={handleReset}
-                                className="cursor-pointer">Reset Filter</button>
+                                className="text-xs text-orange-400 hover:text-orange-300 transition-colors cursor-pointer">Reset Filter</button>
                         </div>
-                        <div className="flex flex-col items-start my-3">
-                            <label htmlFor="search">Search</label>
+
+                        <div className="flex flex-col items-start">
+                            <label htmlFor="search" className="text-sm font-semibold text-gray-400 mb-2">Search</label>
                             <input
                                 type="text"
                                 id="search"
                                 placeholder="Search Your Product"
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
-                                className="bg-white text-zinc-600 h-8 px-3 rounded w-full"></input>
+                                className="bg-white/10 text-white placeholder:text-gray-500 h-11 px-4 rounded-xl w-full border border-white/5 outline-none focus:ring-2 focus:ring-orange-500" />
                         </div>
-                        <div >
-                            <label>Category</label>
-                            <ul>
-                                <li className="flex gap-3">
+
+                        <div>
+                            <label className="text-sm font-semibold text-gray-400 mb-4 block">Category</label>
+                            <ul className="space-y-4">
+                                <li className="flex items-center gap-3">
                                     <input
                                         type="checkbox"
-                                    // checked={favorite}
-                                    // onChange={() => setFavorite(!favorite)}
-                                    /> Favorite Product
+                                        id="fav"
+                                        className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
+                                        // checked={favorite}
+                                        // onChange={() => setFavorite(!favorite)}
+                                    /> 
+                                    <label htmlFor="fav" className="text-gray-300 cursor-pointer">Favorite Product</label>
                                 </li>
-                                <li className="flex gap-3">
+                                <li className="flex items-center gap-3">
                                     <input
                                         type="checkbox"
+                                        id="coffee"
                                         checked={categories.includes("coffee")}
                                         onChange={() => handleCategoryChange("coffee")}
-                                    /> Coffee
+                                        className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
+                                    /> 
+                                    <label htmlFor="coffee" className="text-gray-300 cursor-pointer">Coffee</label>
                                 </li>
-                                <li className="flex gap-3">
+                                <li className="flex items-center gap-3">
                                     <input
                                         type="checkbox"
+                                        id="noncoffee"
                                         checked={categories.includes("non coffee")}
                                         onChange={() => handleCategoryChange("non coffee")}
-                                    /> Non Coffee
+                                        className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
+                                    /> 
+                                    <label htmlFor="noncoffee" className="text-gray-300 cursor-pointer">Non Coffee</label>
                                 </li>
-                                <li className="flex gap-3">
+                                <li className="flex items-center gap-3">
                                     <input
                                         type="checkbox"
+                                        id="foods"
                                         checked={categories.includes("food")}
                                         onChange={() => handleCategoryChange("food")}
-                                    /> Foods
+                                        className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
+                                    /> 
+                                    <label htmlFor="foods" className="text-gray-300 cursor-pointer">Foods</label>
                                 </li>
-                                <li className="flex gap-3"><input type="checkbox" /> Add-On</li>
+                                <li className="flex items-center gap-3">
+                                    <input type="checkbox" id="addon" className="w-5 h-5 accent-orange-500 rounded cursor-pointer" /> 
+                                    <label htmlFor="addon" className="text-gray-300 cursor-pointer">Add-On</label>
+                                </li>
                             </ul>
                         </div>
-                        <br />
-                        <div >
-                            <label>Sort By</label>
-                            <ul >
-                                <li className="flex gap-3"><input type="radio" name="sort" /> Buy 1 Get 1</li>
-                                <li className="flex gap-3">
+
+                        <div>
+                            <label className="text-sm font-semibold text-gray-400 mb-4 block">Sort By</label>
+                            <ul className="space-y-4">
+                                <li className="flex items-center gap-3">
+                                    <input type="radio" name="sort" id="bogo" className="w-5 h-5 accent-orange-500 cursor-pointer" /> 
+                                    <label htmlFor="bogo" className="text-gray-300 cursor-pointer">Buy 1 Get 1</label>
+                                </li>
+                                <li className="flex items-center gap-3">
                                     <input
                                         type="radio"
                                         name="sort"
-                                    // checked={sort === "flashSale"}
-                                    // onChange={() => setSort("flashSale")}
-                                    /> Flash Sale
+                                        id="flash"
+                                        className="w-5 h-5 accent-orange-500 cursor-pointer"
+                                        // checked={sort === "flashSale"}
+                                        // onChange={() => setSort("flashSale")}
+                                    /> 
+                                    <label htmlFor="flash" className="text-gray-300 cursor-pointer">Flash Sale</label>
                                 </li>
-                                <li className="flex gap-3"><input type="radio" name="sort" /> Birthday Package</li>
-                                <li className="flex gap-3"><input type="radio" name="sort" /> Cheap</li>
+                                <li className="flex items-center gap-3">
+                                    <input type="radio" name="sort" id="birthday" className="w-5 h-5 accent-orange-500 cursor-pointer" /> 
+                                    <label htmlFor="birthday" className="text-gray-300 cursor-pointer">Birthday Package</label>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <input 
+                                        type="radio" 
+                                        name="sort" 
+                                        id="cheap" 
+                                        checked={sort === "cheap"}
+                                        onChange={() => setSort("cheap")}
+                                        className="w-5 h-5 accent-orange-500 cursor-pointer" /> 
+                                    <label htmlFor="cheap" className="text-gray-300 cursor-pointer">Cheap</label>
+                                </li>
                             </ul>
                         </div>
-                        <div className="flex flex-col gap-2 my-2">
-                            <label>Range Price</label>
-                            <input type="range" min="0" max="100" />
+
+                        <div className="flex flex-col gap-3 my-2">
+                            <div className="flex justify-between text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                                <span>Range Price</span>
+                                <span>IDR 100k</span>
+                            </div>
+                            <input type="range" min="0" max="100" className="accent-orange-500" />
                         </div>
+
                         <button
                             onClick={handleApplyFilter}
-                            className="bg-[#FF8906] w-full h-10 text-black cursor-pointer"
+                            className="bg-[#FF8906] hover:bg-orange-600 transition-all w-full h-12 text-black font-bold rounded-xl mt-4 cursor-pointer active:scale-95 shadow-lg shadow-orange-500/20"
                         >
                             Apply Filter
                         </button>
                     </aside>
 
-                    <div className=" grid md:grid-cols-2 grid-cols-1 gap-y-50 gap-x-10 mb-40">
-                        {currentProducts.map((product) => (
-                            <Product key={product.product_id} product={product} />
-                        ))}
+                    <div className="flex-1">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-x-10 gap-y-32 mb-40">
+                            {currentProducts.map((product) => (
+                                <Product key={product.product_id} product={product} />
+                            ))}
+                        </div>
+
+                        <div className="flex justify-center md:justify-end my-5">
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                setCurrentPage={setCurrentPage}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="md:mx-110 flex justify-center md:justify-end my-5">
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        setCurrentPage={setCurrentPage}
-                    />
                 </div>
             </div>
             <Footer />
