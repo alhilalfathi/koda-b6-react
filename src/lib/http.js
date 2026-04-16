@@ -1,4 +1,5 @@
-const BASE_URL = "https://hilal-backend.camps.fahrul.id"
+const BASE_URL = "http://68.183.226.223:20402"
+// const BASE_URL = "http://localhost:8888"
 
 async function http(url, opts={}){ 
     const headers = {
